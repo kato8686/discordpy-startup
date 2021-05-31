@@ -44,7 +44,6 @@ async def slot(ctx):
             a,b,c = random.randint(1,9),random.randint(1,9),random.randint(1,9)
             if a == b == c:
                 await ctx.author.send(f'当選しました！')
-            time.sleep(1)
         await ctx.author.send(f'終了しました')
 
 bot.run(token)
