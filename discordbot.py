@@ -47,7 +47,7 @@ async def slot(ctx):
             if a == b == c:
                 await ctx.author.send(f'当選しました！')
                 tousen += 1
-            await message.edit(f'{msg.content}回実行中\n{i+1}回終了\n{tousen}回当選')
+            await message.edit(content=f'{msg.content}回実行中\n{i+1}回終了\n{tousen}回当選')
             time.sleep(1)
         await ctx.author.send(f'終了しました')
 
