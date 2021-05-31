@@ -27,10 +27,11 @@ async def help(ctx):
 async def pong(ctx):
     await ctx.channel.send('ぴんぐぽーんぐ♪')
 @bot.command()
-await def slot(ctx, arg):
-    a,b,c = random.randint(1,9),random.randint(1,9),random.randint(1,9)
-    await ctx.channel.send(f'{a} {b} {c}')
-    if a == b == c:
-        await ctx.author.send('当たったよ')
+async def slot(ctx, arg):
+    for i in range(int(arg)):
+        a,b,c = random.randint(1,9),random.randint(1,9),random.randint(1,9)
+        await ctx.channel.send(f'{a} {b} {c}')
+        if a == b == c:
+            await ctx.author.send('当たったよ')
 
 bot.run(token)
