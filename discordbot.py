@@ -17,6 +17,9 @@ async def on_command_error(ctx, error):
 async def hello(ctx):
     await ctx.send('good')
 async def ping(ctx):
-    await ctx.send('pngだよ！！！！！！！！！')
+    await ctx.send('pongだよ！！！！！！！！！')
+async def help(ctx):
+    embed = discord.Embed(title='Help', description='y.ping：応答速度を測ります（手動）\ny.hello：なんか返します')
+    await ctx.send(embed=embed)
 
 bot.run(token)
