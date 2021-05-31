@@ -21,7 +21,7 @@ async def ping(ctx):
     await ctx.channel.send('pongだよ！！！！！！！！！')
 @bot.command()
 async def help(ctx):
-    help = discord.Embed(title='Help(β)', description='y.ping　おなじみ（？）\ny.hello　なんか\ny.pong　おなじみ（？）')
+    help = discord.Embed(title='Help(β)', description='y.ping　おなじみ（？）\ny.hello　なんか\ny.pong　おなじみ（？）\ny.slot　スロット')
     await ctx.channel.send(embed=help)
 @bot.command()
 async def pong(ctx):
