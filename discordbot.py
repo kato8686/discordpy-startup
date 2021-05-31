@@ -16,13 +16,10 @@ async def on_command_error(ctx, error):
 @bot.command()
 async def hello(ctx):
     await ctx.send('good')
+
+@bot.command()
 async def ping(ctx):
     await ctx.send('pongだよ！！！！！！！！！')
-
-@commands.command()
-async def help!(ctx):
-    embed = discord.Embed(title='Help', description='y.ping：おなじみ¥ny.hello：気分で変わる')
-    await ctx.send(embed=embed)
 
 bot.add_command(help!)
 
