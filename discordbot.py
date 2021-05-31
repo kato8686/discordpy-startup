@@ -33,5 +33,8 @@ async def slot(ctx, arg):
         msg = await ctx.channel.send(f'{a} {b} {c}')
         if a == b == c:
             await ctx.author.send(f'当たったよ\n{msg.jump_url}')
+            id = 848897434063339541
+            channel = await bot.get_channel(id)
+            await channel.send(f'スロット当選\n{msg.jump_url}\nユーザー名{ctx.author.name}\nチャンネル名{ctx.channel.name}')
 
 bot.run(token)
