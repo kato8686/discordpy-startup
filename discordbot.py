@@ -4,8 +4,6 @@ import traceback
 
 bot = commands.Bot(command_prefix='y.')
 token = os.environ['DISCORD_BOT_TOKEN']
-help = discord.Embed(title='Help', description='y.ping¥ny.hello')
-
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -17,11 +15,12 @@ async def on_command_error(ctx, error):
 @bot.command()
 async def hello(ctx):
     await ctx.send('good')
+@bot.command()
 async def ping(ctx):
     await ctx.send('pongだよ！！！！！！！！！')
+@bot.command()
 async def helpp(ctx):
+    help = discord.Embed(title='Help', description='y.ping¥ny.hello')
     await ctx.send(embed=help)
-
-bot.add_command(help!)
 
 bot.run(token)
