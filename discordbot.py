@@ -30,8 +30,8 @@ async def pong(ctx):
 async def slot(ctx, arg):
     for i in range(int(arg)):
         a,b,c = random.randint(1,9),random.randint(1,9),random.randint(1,9)
-        await ctx.channel.send(f'{a} {b} {c}')
+        msg = await ctx.channel.send(f'{a} {b} {c}')
         if a == b == c:
-            await ctx.author.send('当たったよ')
+            await ctx.author.send(f'当たったよ\n{msg.jump_url}')
 
 bot.run(token)
