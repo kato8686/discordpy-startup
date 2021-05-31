@@ -2,6 +2,7 @@ from discord.ext import commands
 import os
 import traceback
 import discord
+import random
 
 bot = commands.Bot(command_prefix='y.', help_command=None)
 token = os.environ['DISCORD_BOT_TOKEN']
@@ -25,5 +26,11 @@ async def help(ctx):
 @bot.command()
 async def pong(ctx):
     await ctx.channel.send('ぴんぐぽーんぐ♪')
+@bot.command()
+await def slot(ctx, arg):
+    a,b,c = random.randint(1,9),random.randint(1,9),random.randint(1,9)
+    await ctx.channel.send(f'{a} {b} {c}')
+    if a == b == c:
+        await ctx.author.send('当たったよ')
 
 bot.run(token)
