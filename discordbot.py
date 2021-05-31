@@ -3,11 +3,11 @@ import os
 import traceback
 import discord
 import random
+import asyncio
+import time
 
 bot = commands.Bot(command_prefix='y.', help_command=None)
 token = os.environ['DISCORD_BOT_TOKEN']
-slotl = []
-slotbool = False
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -29,23 +29,22 @@ async def help(ctx):
 async def pong(ctx):
     await ctx.channel.send('ぴんぐぽーんぐ♪')
 @bot.command()
-async def slot(ctx, arg):
-    await ctx.channel.send(f'{arg}回スロットをします\n「y.stop」とそのチャンネルで発言すると止まります')
-    slotbool = True
-    slotl.append([ctx.author.id, ctx.channel.id])
-    for i in range(int(arg)):
-        if slotbool:
+async def slot(ctx):
+    await ctx.channel.send('何回実行しますか？\n（バックグラウンド実行のためログは出力されません）')
+    def slotcheck(m):
+        return m.author == ctx.author and m.channel == ctx.channel
+    msg = await bot.wait_for('message', check=slotcheck)
+    try:
+        num = int(msg.content)
+    except ValueError:
+        await ctx.channel.send('数値を指定してください')
+    else:
+        await ctx.channel.send(f'{int(msg.content)}回実行します\n所要時間：{int(msg.content) * 1 - 1}秒')
+        for i in range(int(msg.content)):
             a,b,c = random.randint(1,9),random.randint(1,9),random.randint(1,9)
-            msg = await ctx.channel.send(f'{a} {b} {c}')
             if a == b == c:
-                await ctx.author.send(f'当たったよ\n{msg.jump_url}')
-                id = 848897434063339541
-                channel = bot.get_channel(id)
-                await channel.send(f'スロット当選\n{msg.jump_url}\nユーザー名　{ctx.author.name}\nチャンネル名 {ctx.channel.name}\nギルド名　{ctx.guild.name}')
-@bot.command()
-async def stop(ctx):
-    for i in slotl:
-        if ctx.author.id in i and ctx.channel.id in i:
-            slotbool = False
+                await ctx.author.send(f'当選しました！')
+            time.sleep(1)
+        await ctx.author.send(f'終了しました')
 
 bot.run(token)
