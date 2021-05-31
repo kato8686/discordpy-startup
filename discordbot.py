@@ -30,6 +30,7 @@ async def pong(ctx):
     await ctx.channel.send('ぴんぐぽーんぐ♪')
 @bot.command()
 async def slot(ctx):
+    tousen = 0
     await ctx.channel.send('何回実行しますか？\n（バックグラウンド実行のためログは出力されません）')
     def slotcheck(m):
         return m.author == ctx.author and m.channel == ctx.channel
@@ -40,10 +41,14 @@ async def slot(ctx):
         await ctx.channel.send('数値を指定してください')
     else:
         await ctx.channel.send(f'{int(msg.content)}回実行します\n所要時間：{int(msg.content) * 1 - 1}秒')
+        message = await ctx.author.send(f'{msg.content}回実行中')
         for i in range(int(msg.content)):
             a,b,c = random.randint(1,9),random.randint(1,9),random.randint(1,9)
             if a == b == c:
                 await ctx.author.send(f'当選しました！')
+                tousen += 1
+            await message.edit(f'{msg.content}回実行中\n{i+1}回終了\n{tousen}回当選')
+            time.sleep(1)
         await ctx.author.send(f'終了しました')
 
 bot.run(token)
