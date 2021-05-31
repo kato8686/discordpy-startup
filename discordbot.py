@@ -6,7 +6,7 @@ import random
 
 bot = commands.Bot(command_prefix='y.', help_command=None)
 token = os.environ['DISCORD_BOT_TOKEN']
-slot = []
+slotl = []
 slotbool = False
 
 @bot.event
@@ -32,7 +32,7 @@ async def pong(ctx):
 async def slot(ctx, arg):
     await ctx.channel.send(f'{arg}回スロットをします\n「y.stop」とそのチャンネルで発言すると止まります')
     slotbool = True
-    slot.append([ctx.author.id, ctx.channel.id])
+    slotl.append([ctx.author.id, ctx.channel.id])
     for i in range(int(arg)):
         if slotbool:
             a,b,c = random.randint(1,9),random.randint(1,9),random.randint(1,9)
@@ -44,7 +44,7 @@ async def slot(ctx, arg):
                 await channel.send(f'スロット当選\n{msg.jump_url}\nユーザー名　{ctx.author.name}\nチャンネル名 {ctx.channel.name}\nギルド名　{ctx.guild.name}')
 @bot.command()
 async def stop(ctx):
-    for i in slot:
+    for i in slotl:
         if ctx.author.id in i and ctx.channel.id in i:
             slotbool = False
 
