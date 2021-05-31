@@ -14,13 +14,13 @@ async def on_command_error(ctx, error):
 
 @bot.command()
 async def hello(ctx):
-    await ctx.send('good')
+    await ctx.channel.send('good')
 @bot.command()
 async def ping(ctx):
-    await ctx.send('pongだよ！！！！！！！！！')
+    await ctx.channl.send('pongだよ！！！！！！！！！')
 @bot.command()
 async def helpp(ctx):
     help = discord.Embed(title='Help', description='y.ping¥ny.hello')
-    await ctx.send(embed=help)
+    await ctx.channel.send(embed=help)
 
 bot.run(token)
