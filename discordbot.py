@@ -8,7 +8,6 @@ bot = commands.Bot(command_prefix='y.', help_command=None)
 token = os.environ['DISCORD_BOT_TOKEN']
 slot = []
 slotbool = False
-global slotbool
 
 @bot.event
 async def on_command_error(ctx, error):
