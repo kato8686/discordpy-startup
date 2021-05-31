@@ -3,7 +3,7 @@ import os
 import traceback
 import discord
 
-bot = commands.Bot(command_prefix='y.')
+bot = commands.Bot(command_prefix='y.', help_command=None)
 token = os.environ['DISCORD_BOT_TOKEN']
 
 @bot.event
@@ -20,8 +20,8 @@ async def hello(ctx):
 async def ping(ctx):
     await ctx.channl.send('pongだよ！！！！！！！！！')
 @bot.command()
-async def helpp(ctx):
-    help = discord.Embed(title='Help', description='y.ping¥ny.hello')
+async def help(ctx):
+    help = discord.Embed(title='Help', description='y.ping\ny.hello')
     await ctx.channel.send(embed=help)
 
 bot.run(token)
