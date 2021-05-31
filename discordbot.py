@@ -48,6 +48,6 @@ async def slot(ctx):
                 tousen += 1
             await message.edit(content=f'{msg.content}回実行中\n{i+1}回終了\n{tousen}回当選\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
             time.sleep(1)
-        await ctx.author.send(f'終了しました\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
+        await ctx.author.send(f'終了しました\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
 
 bot.run(token)
