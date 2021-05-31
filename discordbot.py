@@ -14,7 +14,7 @@ async def on_command_error(ctx, error):
 
 
 @bot.command()
-async def hello(ctx, arg='good'):
-    await ctx.send(arg)
+async def hello(ctx):
+    await ctx.send('good')
 
 bot.run(token)
