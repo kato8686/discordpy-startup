@@ -5,9 +5,12 @@ import discord
 import random
 import asyncio
 import time
+from pathlib import Path
 
 bot = commands.Bot(command_prefix='y.', help_command=None)
 token = os.environ['DISCORD_BOT_TOKEN']
+admin = [790054604799868939, 802152878855684106]
+owner = [802152878855684106]
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -40,14 +43,26 @@ async def slot(ctx):
     except ValueError:
         await ctx.channel.send('数値を指定してください')
     else:
-        await ctx.channel.send(f'{int(msg.content)}回実行します\n所要時間：{int(msg.content) * 1 - 1}秒')
-        message = await ctx.author.send(f'{msg.content}回実行中\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
-        for i in range(int(msg.content)):
-            a,b,c = random.randint(1,9),random.randint(1,9),random.randint(1,9)
-            if a == b == c:
-                tousen += 1
-            await message.edit(content=f'{msg.content}回実行中\n{i+1}回終了\n{tousen}回当選\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
-            time.sleep(1)
-        await message.edit(content=f'終了しました\n当選回数{tousen}\n実行回数{msg.content}\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
+        if int(msg.content) <= 3600 or ctx.author.id in admin:
+            await ctx.channel.send(f'{int(msg.content)}回実行します\n所要時間：{int(msg.content) * 1 - 1}秒')
+            message = await ctx.author.send(f'{msg.content}回実行中\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
+            for i in range(int(msg.content)):
+                a,b,c = random.randint(1,9),random.randint(1,9),random.randint(1,9)
+                if a == b == c:
+                    tousen += 1
+                await message.edit(content=f'{msg.content}回実行中\n{i+1}回終了\n{tousen}回当選\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
+                time.sleep(1)
+            await message.edit(content=f'終了しました\n当選回数{tousen}\n実行回数{msg.content}\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
+        else:
+            await ctx.channel.send('長すぎます\nリミッターを外すにはADMINになる必要があります。\nADMIN申請しますか？？？')
+            def admincheck(m):
+                return m.author.id == ctx.author.id and m.channel.id == ctx.channel.id
+            message = await bot.wait_for('message', check=admincheck)
+            if message.content == 'yes':
+                id = owner[0]
+                user = await bot.fetch_user(id)
+                await user.send(f'ADMIN申請\n{ctx.author.name}\n{ctx.author.id}')
+            else:
+                await ctx.send('申請しませんでした')
 
 bot.run(token)
