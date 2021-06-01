@@ -50,7 +50,7 @@ async def slot(ctx):
                 a,b,c = random.randint(1,9),random.randint(1,9),random.randint(1,9)
                 if a == b == c:
                     tousen += 1
-                    await message.edit(content=f'{medsage.content}\n{a} {b} {c}')
+                    await message.edit(content=f'{message.content}\n{a} {b} {c}')
                 else:
                     await message.edit(content=f'{msg.content}回実行中\n{i+1}回終了\n{tousen}回当選\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
                 if ctx.author.id not in owner:
