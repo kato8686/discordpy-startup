@@ -11,6 +11,7 @@ bot = commands.Bot(command_prefix='y.', help_command=None)
 token = os.environ['DISCORD_BOT_TOKEN']
 admin = [790054604799868939, 802152878855684106]
 owner = [802152878855684106]
+s = ''
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -50,12 +51,11 @@ async def slot(ctx):
                 a,b,c = random.randint(1,9),random.randint(1,9),random.randint(1,9)
                 if a == b == c:
                     tousen += 1
-                    await message.edit(content=f'{message.content}\n{a} {b} {c}')
-                else:
-                    await message.edit(content=f'{msg.content}回実行中\n{i+1}回終了\n{tousen}回当選\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
+                    s += f'{a} {b} {c}\n'
+                await message.edit(content=f'{msg.content}回実行中\n{i+1}回終了\n{tousen}回当選\n{s}\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
                 if ctx.author.id not in owner:
                     time.sleep(1)
-            await message.edit(content=f'終了しました\n当選回数{tousen}\n実行回数{msg.content}\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜\n当選回数をスコアに換算しますか？')
+            await message.edit(content=f'終了しました\n当選回数{tousen}\n実行回数{msg.content}\n{s}\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜\n当選回数をスコアに換算しますか？')
             def admincheck(m):
                 return m.author.id == ctx.author.id
             message = await bot.wait_for('message', check=admincheck)
