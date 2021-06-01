@@ -11,7 +11,6 @@ bot = commands.Bot(command_prefix='y.', help_command=None)
 token = os.environ['DISCORD_BOT_TOKEN']
 admin = [790054604799868939, 802152878855684106]
 owner = [802152878855684106]
-s = ''
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -45,6 +44,7 @@ async def slot(ctx):
         await ctx.channel.send('数値を指定してください')
     else:
         if int(msg.content) <= 3600 or ctx.author.id in admin:
+            s = ''
             await ctx.channel.send(f'{int(msg.content)}回実行します\n所要時間：{int(msg.content) * 1 - 1}秒')
             message = await ctx.author.send(f'{msg.content}回実行中\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
             for i in range(int(msg.content)):
