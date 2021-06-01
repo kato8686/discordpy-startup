@@ -52,7 +52,14 @@ async def slot(ctx):
                     tousen += 1
                 await message.edit(content=f'{msg.content}回実行中\n{i+1}回終了\n{tousen}回当選\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
                 time.sleep(1)
-            await message.edit(content=f'終了しました\n当選回数{tousen}\n実行回数{msg.content}\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
+            await message.edit(content=f'終了しました\n当選回数{tousen}\n実行回数{msg.content}\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜\n当選回数をスコアに換算しますか？')
+            def admincheck(m):
+                return m.author.id == ctx.author.id and m.channel.id == ctx.channel.id
+            message = await bot.wait_for('message', check=admincheck)
+            if message.content == 'yes':
+                await message.author.send(f'{tousen*3}point取得しました！')
+            else:
+                await message.author.send('中止しました')
         else:
             await ctx.channel.send('長すぎます\nリミッターを外すにはADMINになる必要があります。\nADMIN申請しますか？？？')
             def admincheck(m):
