@@ -58,6 +58,11 @@ async def slot(ctx):
             message = await bot.wait_for('message', check=admincheck)
             if message.content == 'yes':
                 await message.author.send(f'{tousen*3}point取得しました！')
+                path = Path(f'u{ctx.author.id}.txt')
+                if not path.exists():
+                    f = open(path, 'w')
+                    f.write('test file')
+                    f.close()
             else:
                 await message.author.send('中止しました')
         else:
