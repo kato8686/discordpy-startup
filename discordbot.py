@@ -64,7 +64,7 @@ async def slot(ctx):
                     f.write('test file')
                     f.close()
                 else:
-                    await message.send('存在します')
+                    await message.channel.send('存在します')
             else:
                 await message.author.send('中止しました')
         else:
