@@ -54,7 +54,7 @@ async def slot(ctx):
                 time.sleep(1)
             await message.edit(content=f'終了しました\n当選回数{tousen}\n実行回数{msg.content}\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜\n当選回数をスコアに換算しますか？')
             def admincheck(m):
-                return m.author.id == ctx.author.id and m.channel == None
+                return m.author.id == ctx.author.id
             message = await bot.wait_for('message', check=admincheck)
             if message.content == 'yes':
                 await message.author.send(f'{tousen*3}point取得しました！')
