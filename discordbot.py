@@ -64,5 +64,8 @@ async def slot(ctx):
                 await user.send(f'ADMIN申請\n{ctx.author.name}\n{ctx.author.id}')
             else:
                 await ctx.send('申請しませんでした')
+@bot.command()
+async def fack(ctx):
+    await ctx.channel.send('は？？？')
 
 bot.run(token)
