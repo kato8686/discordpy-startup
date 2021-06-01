@@ -43,7 +43,7 @@ async def slot(ctx):
     except ValueError:
         await ctx.channel.send('数値を指定してください')
     else:
-        if int(msg.content) <= 3600 or ctx.author.id in admin:
+        if int(msg.content) <= 3600 or ctx.author.id in admin and ctx.author.id not in admin:
             await ctx.channel.send(f'{int(msg.content)}回実行します\n所要時間：{int(msg.content) * 1 - 1}秒')
             message = await ctx.author.send(f'{msg.content}回実行中\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
             for i in range(int(msg.content)):
