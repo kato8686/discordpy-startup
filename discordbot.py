@@ -23,7 +23,7 @@ async def hello(ctx):
     await ctx.channel.send('good')
 @bot.command()
 async def ping(ctx):
-    await ctx.channel.send('pongだよ！！！！！！')
+    await ctx.channel.send('pongだよ！！！！！')
 @bot.command()
 async def help(ctx):
     help = discord.Embed(title='Help(β)', description='y.ping　おなじみ（？）\ny.hello　なんか\ny.pong　おなじみ（？）\ny.slot　スロット')
