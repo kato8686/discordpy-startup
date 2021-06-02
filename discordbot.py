@@ -51,7 +51,7 @@ async def slot(ctx):
                 a,b,c = random.randint(1,9),random.randint(1,9),random.randint(1,9)
                 if a == b == c:
                     tousen += 1
-                    s += f'{a} {b} {c}\n'
+                    s += f'{a} {b} {c} （{i+1}回目）\n'
                 await message.edit(content=f'{msg.content}回実行中\n{i+1}回終了\n{tousen}回当選\n{s}\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
                 if ctx.author.id not in owner:
                     time.sleep(1)
