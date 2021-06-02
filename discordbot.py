@@ -46,16 +46,16 @@ async def slot(ctx):
         if int(msg.content) <= 3600 or ctx.author.id in admin:
             s = ''
             await ctx.channel.send(f'{int(msg.content)}回実行します\n所要時間：{int(msg.content) * 1 - 1}秒')
-            message = await ctx.author.send(f'{msg.content}回実行中\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
+            message = await ctx.author.send(f'```\n{msg.content}回実行中\n```')
             for i in range(int(msg.content)):
                 a,b,c = random.randint(1,9),random.randint(1,9),random.randint(1,9)
                 if a == b == c:
                     tousen += 1
                     s += f'{a} {b} {c} （{i+1}回目）\n'
-                await message.edit(content=f'{msg.content}回実行中\n{i+1}回終了\n{tousen}回当選\n{s}\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜')
+                await message.edit(content=f'```\n{msg.content}回実行中\n{i+1}回終了\n{tousen}回当選\n{s}\n```')
                 if ctx.author.id not in owner:
                     time.sleep(1)
-            await message.edit(content=f'終了しました\n当選回数{tousen}\n実行回数{msg.content}\n{s}\n〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜\n当選回数をスコアに換算しますか？')
+            await message.edit(content=f'```\n終了しました\n当選回数{tousen}\n実行回数{msg.content}\n{s}\n```\n当選回数をスコアに換算しますか？')
             def admincheck(m):
                 return m.author.id == ctx.author.id
             message = await bot.wait_for('message', check=admincheck)
