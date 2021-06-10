@@ -12,7 +12,7 @@ token = os.environ['DISCORD_BOT_TOKEN']
 admin = [790054604799868939, 802152878855684106, 695996824112332887, 594404458327310336]
 owner = [802152878855684106]
 
-@bot.event
+@bot.event()
 async def on_command_error(ctx):
     await ctx.channel.send(f'{ctx.content}は存在しません！')
 
