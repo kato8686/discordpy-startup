@@ -12,12 +12,6 @@ token = os.environ['DISCORD_BOT_TOKEN']
 admin = [790054604799868939, 802152878855684106, 695996824112332887, 594404458327310336]
 owner = [802152878855684106]
 
-@bot.event
-async def on_command_error(ctx, error):
-    orig_error = getattr(error, "original", error)
-    error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
-    await ctx.send(error_msg)
-
 @bot.command()
 async def hello(ctx):
     await ctx.channel.send('good')
