@@ -47,8 +47,7 @@ async def slot(ctx):
                     tousen += 1
                     s += f'{a} {b} {c} （{i+1}回目）\n'
                 await message.edit(content=f'```\n{msg.content}回実行中\n{i+1}回終了\n{tousen}回当選\n{s}\n```')
-                if ctx.author.id not in owner:
-                    time.sleep(1)
+                time.sleep(1)
             await message.edit(content=f'```\n終了しました\n当選回数{tousen}\n実行回数{msg.content}\n{s}\n```\n当選回数をスコアに換算しますか？')
             def admincheck(m):
                 return m.author.id == ctx.author.id
