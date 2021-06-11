@@ -32,7 +32,7 @@ async def pong(ctx):
 @bot.command()
 async def slot(ctx):
     tousen = 0
-    await ctx.channel.send('何回実行しますか？\n（バックグラウンド実行のためログは出力されません）')
+    await ctx.replay(content = '何回実行しますか？\n（バックグラウンド実行のためログは出力されません）')
     def slotcheck(m):
         return m.author == ctx.author and m.channel == ctx.channel
     msg = await bot.wait_for('message', check=slotcheck)
