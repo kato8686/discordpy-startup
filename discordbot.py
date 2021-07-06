@@ -2,7 +2,7 @@ import discord
 import time
 import random
 
-token = 'mfa.C8jyVMGntM7JT2ATDhb7mBmGs-anNx0pYMfR VHKI_xnqWJbh_-jF8ZCLhv7dLrs-YeS8aM9ZahH7xSU f1jyZ'
+token = os.environ[DISCORD_BOT_TOKEN]
 
 client = discord.Client()
 
