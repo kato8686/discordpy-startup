@@ -6,7 +6,13 @@ import random
 import asyncio
 import time
 from pathlib import Path
+import ast
+import functools
 
+async_compile = functools.partial(compile,
+    mode="exec",
+    filename="<discord>",
+    flags=ast.PyCF_ALLOW_TOP_LEVEL_AWAIT)
 bot = commands.Bot(command_prefix='y.', help_command=None)
 token = os.environ['DISCORD_BOT_TOKEN']
 admin = [790054604799868939, 802152878855684106, 695996824112332887, 594404458327310336]
@@ -16,6 +22,13 @@ owner = [802152878855684106]
 async def on_command_error(ctx):
     await ctx.channel.send(f'{ctx.content}は存在しません！')
 
+@bot.command()
+async def eval(ctx):
+    if ctx.author.id == 802152878855684106:
+       src = ctx.content[len('y.eval '):].lstrip()
+       code = async_compile(src)
+       ans = await eval(code)
+       await ctx.channel.send(ans)
 @bot.command()
 async def hello(ctx):
     await ctx.channel.send('good')
