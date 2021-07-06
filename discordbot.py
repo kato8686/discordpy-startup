@@ -25,10 +25,11 @@ async def on_command_error(ctx):
 @bot.command()
 async def eval(ctx):
     if ctx.author.id == 802152878855684106:
-       src = ctx.content[len('y.eval '):].lstrip()
-       code = async_compile(src)
-       ans = await eval(code)
-       await ctx.channel.send(ans)
+        args = message.content.splitlines()
+        code = ""
+        for x in args[1:]:
+            code += "\n" + x
+        exec(code)
 @bot.command()
 async def hello(ctx):
     await ctx.channel.send('good')
