@@ -1,20 +1,21 @@
-from discord.ext import commands
-import os
-import traceback
 import discord
-import random
-import asyncio
 import time
-from pathlib import Path
+import random
+
+token = 'mfa.C8jyVMGntM7JT2ATDhb7mBmGs-anNx0pYMfR VHKI_xnqWJbh_-jF8ZCLhv7dLrs-YeS8aM9ZahH7xSU f1jyZ'
 
 client = discord.Client()
-token = os.environ['DISCORD_BOT_TOKEN']
 
 @client.event
 async def on_message(m):
-    if m.author.id == 802152878855684106:
-        id = 832977273942441995
-        channel = await client.fetch_channel(id)
-        while True:
-            await channel.send(random.choice(['q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m']))
-client.run(token, bot = False)
+    if m.author.id == 802152878855684106 and m.content == 'start':
+        await m.delete()
+        random_count = random.randint(1,1000)
+        channel = await client.fetch_channel(832977273942441995)
+        await channel.send(random_count)
+        await channel.send("start")
+        time.sleep(1)
+    elif m.author.id == 802152878855684106 and m.content == 'end':
+        await client.logout()
+        await client.close()
+client.run(token, bot=False)
