@@ -104,7 +104,7 @@ async def start(ctx):
     id = 858555560831483914
     channel = await bot.fetch_channel(id)
     i = 1364
-    for i in range(1, 10000000):
+    for j in range(1, 10000000):
         await channel.send(str(i))
         i = int(i)
         i += 1
