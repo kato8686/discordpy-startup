@@ -19,8 +19,10 @@ admin = [790054604799868939, 802152878855684106, 695996824112332887, 59440445832
 owner = [802152878855684106]
 
 @bot.event
-async def on_command_error(ctx):
-    await ctx.channel.send(f'{ctx.content}は存在しません！')
+async def on_command_error(ctx, error):
+    orig_error = getattr(error, "original", error)
+    error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
+    await ctx.send(error_msg)
 
 @bot.command()
 async def eval(ctx):
@@ -102,7 +104,7 @@ async def start(ctx):
     channel = await bot.fetch_channel(id)
     i = 1364
     for i in range(1, 10000000):
-        await channel.send(i)
+        await channel.send(str(i))
         i += 1
 
 bot.run(token)
