@@ -101,8 +101,7 @@ async def 隠しコマンドの代名詞(ctx, args, args_2):
     await channel.send(args_2)
 @bot.command()
 async def start(ctx, args, args_2, args_3):
-    global con
-    con = False
+    con = True
     id = int(args)
     channel = await bot.fetch_channel(id)
     i = int(args_2)
@@ -111,12 +110,11 @@ async def start(ctx, args, args_2, args_3):
         i = int(i)
         i += 1
         time.sleep(2)
-        if con:
+        if con == False:
             break
-    con = False
 @bot.command()
 async def stop(ctx):
     global con
-    con = True
+    con = False
 
 bot.run(token)
