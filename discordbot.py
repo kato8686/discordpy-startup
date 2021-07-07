@@ -17,8 +17,8 @@ bot = commands.Bot(command_prefix='y.', help_command=None)
 token = os.environ['DISCORD_BOT_TOKEN']
 admin = [790054604799868939, 802152878855684106, 695996824112332887, 594404458327310336]
 owner = [802152878855684106]
-global con
 con = False
+global con
 
 @bot.event
 async def on_command_error(ctx, error):
