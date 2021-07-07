@@ -40,24 +40,8 @@ async def ping(ctx):
     await ctx.channel.send('pongだよ！！！！！')
 @bot.command()
 async def help(ctx):
-    help = discord.Embed(title='Help(β)', description='y.ping　おなじみ（？）\ny.hello　なんか\ny.pong　おなじみ（？）\ny.slot　スロット\ny.start　カウント\n y.stop　カウントをストップ\n\nコマンドの詳細を見るにはコマンドの名前を入力してください\n処理を止める場合はxを送信してください')
+    help = discord.Embed(title='Help(β)', description='y.ping　おなじみ（？）\ny.hello　なんか\ny.pong　おなじみ（？）\ny.slot　スロット\ny.start　カウント\n y.stop　カウントをストップ')
     await ctx.channel.send(embed=help)
-    def helpcheck(me):
-        return me.author == ctx.author and me.channel == ctx.channel
-    msg = await bot.wait_for('message', check=helpcheck)
-    if msg.content == 'x':
-        await ctx.channel.send('処理を中止しました')
-    elif msg.content == 'ping':
-        pinghelp = discord.Embed(title='y.ping', description='このコマンドは、一応pingを計るコマンドです。\n機能を果たしてはいませんが、可愛いからいいでしょう。'）
-        await ctx.channel.send(embed=pinghelp)
-    elif msg.content == 'hello':
-        hellohelp = discord.Embed(title='y.hello', description='このコマンドは、、、まぁかわいいでしょう？\nこれは最初に作られたコマンドなので、あまり見栄えはいいわけではありません。')
-        await ctx.channel.send(embed=hellohelp)
-    elif msg.content == 'pong':
-        ponghelp = discord.Embed(title='y.pong', description='これはネタです。\nめっちゃ可愛いと私は思います。')
-        await ctx.channel.send(embed=ponghelp)
-    else:
-        await ctx.channel.send('お探しのコマンドは見つかりませんでした。\n一覧には載っているのに詳細がないよーというコマンドがあればサポート用メールアドレスへご連絡ください。\nもしDiscordで連絡する場合は、「802152878855684106#0938」へご連絡ください\n\nヒント：検索はprefixを含まない方式となっています。y.を除いてもう一度検索してみましょう！')
 @bot.command()
 async def pong(ctx):
     await ctx.channel.send('ぴんぐぽーんぐ♪')
