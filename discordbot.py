@@ -114,7 +114,7 @@ async def start(ctx, args, args_2):
         if con:
             break
     con = False
-@bot.command
+@bot.command()
 async def stop(ctx):
     con = True
 
