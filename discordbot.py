@@ -108,5 +108,6 @@ async def start(ctx, args):
         await channel.send(str(i))
         i = int(i)
         i += 1
+        time.sleep(2)
 
 bot.run(token)
