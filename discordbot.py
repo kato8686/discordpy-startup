@@ -17,7 +17,6 @@ bot = commands.Bot(command_prefix='y.', help_command=None)
 token = os.environ['DISCORD_BOT_TOKEN']
 admin = [790054604799868939, 802152878855684106, 695996824112332887, 594404458327310336]
 owner = [802152878855684106]
-con = False
 global con
 
 @bot.event
@@ -103,6 +102,7 @@ async def 隠しコマンドの代名詞(ctx, args, args_2):
     await channel.send(args_2)
 @bot.command()
 async def start(ctx, args, args_2):
+    con = False
     id = int(args)
     channel = await bot.fetch_channel(id)
     i = int(args_2)
