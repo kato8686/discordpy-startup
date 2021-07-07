@@ -106,6 +106,7 @@ async def start(ctx):
     i = 1364
     for i in range(1, 10000000):
         await channel.send(str(i))
+        i = int(i)
         i += 1
 
 bot.run(token)
