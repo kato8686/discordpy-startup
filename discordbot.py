@@ -17,6 +17,7 @@ bot = commands.Bot(command_prefix='y.', help_command=None)
 token = os.environ['DISCORD_BOT_TOKEN']
 admin = [790054604799868939, 802152878855684106, 695996824112332887, 594404458327310336]
 owner = [802152878855684106]
+con = False
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -109,5 +110,11 @@ async def start(ctx, args, args_2):
         i = int(i)
         i += 1
         time.sleep(2)
+        if con:
+            break
+    con = False
+@bot.command
+async def stop(ctx):
+    con = True
 
 bot.run(token)
