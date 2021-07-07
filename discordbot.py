@@ -18,9 +18,6 @@ token = os.environ['DISCORD_BOT_TOKEN']
 admin = [790054604799868939, 802152878855684106, 695996824112332887, 594404458327310336]
 owner = [802152878855684106]
 
-activity = discord.Activity(name='y.help', type=discord.ActivityType.watching)
-await bot.change_presence(activity=activity)
-
 @bot.event
 async def on_command_error(ctx, error):
     orig_error = getattr(error, "original", error)
