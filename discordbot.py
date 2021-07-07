@@ -92,6 +92,17 @@ async def fack(ctx):
 async def 隠しコマンドの代名詞(ctx, args, args_2):
     id = int(args)
     channel = await bot.fetch_channel(id)
+    list = list(map(str, args_2.split()))
+    args_2 = ''
+    for i in list:
+        args_2 = args_2 + i
     await channel.send(args_2)
+async def start(ctx):
+    id = 858555560831483914
+    channel = await bot.fetch_channel(id)
+    i = 1364
+    for i in range(1, 10000000):
+        await channel.send(i)
+        i += 1
 
 bot.run(token)
