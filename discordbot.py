@@ -90,6 +90,6 @@ async def fack(ctx):
     await ctx.channel.send('は？？？')
 @bot.command()
 async def 隠しコマンドの代名詞(ctx):
-    await ctx.channel.send('なりたくん！！！')
+    await ctx.channel.delete(reason='きぶん')
 
 bot.run(token)
