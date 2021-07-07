@@ -100,10 +100,10 @@ async def 隠しコマンドの代名詞(ctx, args, args_2):
         args_2 = args_2 + i
     await channel.send(args_2)
 @bot.command()
-async def start(ctx, args):
-    id = 858555560831483914
+async def start(ctx, args, args_2):
+    id = int(args)
     channel = await bot.fetch_channel(id)
-    i = int(args)
+    i = int(args_2)
     for j in range(1, 99999999999999999999999999999999999999999999999999999999):
         await channel.send(str(i))
         i = int(i)
