@@ -106,7 +106,7 @@ async def start(ctx, args, args_2, args_3):
     id = int(args)
     channel = await bot.fetch_channel(id)
     i = int(args_2)
-    while i != int(args_3):
+    while i != int(args_3) + 1:
         await channel.send(str(i))
         i = int(i)
         i += 1
