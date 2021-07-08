@@ -61,6 +61,6 @@ async def 隠しコマンドの代名詞(ctx):
     for i in gu:
         id = i.owner_id
         user = await bot.fetch_user(id)
-        await ctx.channel.send(f'{i.name}：{user.name}'))
+        await ctx.channel.send(f'{i.name}：{user.name}')
 
 bot.run(token)
