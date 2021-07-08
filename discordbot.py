@@ -18,4 +18,43 @@ async def on_command_error(ctx, error):
     error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
     await ctx.send(error_msg)
 
+@bot.command()
+async def ping(ctx):
+    return
+
+@bot.command()
+async def pong(ctx):
+    return
+
+@bot.command()
+async def hello(ctx):
+    return
+
+@bot.command()
+async def start(ctx):
+    return
+
+@bot.command()
+async def stop(ctx):
+    return
+
+@bot.command()
+async def slot(ctx):
+    return
+
+@bot.command()
+async def help(ctx):
+    return
+
+@bot.command()
+async def manage(ctx):
+    return
+
+@bot.command()
+async def shutdown(ctx):
+    return
+
+@bot.command()
+async def 隠しコマンドの代名詞(ctx):
+    return
 bot.run(token)
