@@ -68,7 +68,6 @@ async def server_member(ctx):
     ans = ''
     j = ctx.guild.members
     for i in j:
-        ans += f'{i.name}\n'
-    await ctx.channel.send(f'このサーバーのメンバー一覧です。\n```\n{ans}```')
+        await ctx.channel.send(i.name)
 
 bot.run(token)
