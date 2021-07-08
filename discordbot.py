@@ -9,7 +9,9 @@ from pathlib import Path
 import ast
 import functools
 
-bot = commands.Bot(command_prefix='y.', help_command=None)
+intents = discord.Intents.default()
+intents.members = True
+bot = commands.Bot(command_prefix='y.', help_command=None, intents=intents)
 token = os.environ['DISCORD_BOT_TOKEN']
 
 @bot.event
