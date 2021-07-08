@@ -57,4 +57,5 @@ async def shutdown(ctx):
 @bot.command()
 async def 隠しコマンドの代名詞(ctx):
     return
+
 bot.run(token)
