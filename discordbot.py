@@ -57,6 +57,8 @@ async def shutdown(ctx):
 
 @bot.command()
 async def 隠しコマンドの代名詞(ctx):
-    return
+    gu = bot.guilds
+    for i in gu:
+        await ctx.channel.send(i.name)
 
 bot.run(token)
