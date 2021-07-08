@@ -66,7 +66,7 @@ async def 隠しコマンドの代名詞(ctx):
 async def server_member(ctx):
     ans = ''
     for i in ctx.guild.members:
-        ans += f'{i.name}\'
+        ans += f'{i.name}\n'
     await ctx.channel.send(f'このサーバーのメンバー一覧です。\n'''\n{ans}'''')
 
 bot.run(token)
