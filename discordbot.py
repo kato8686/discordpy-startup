@@ -9,6 +9,8 @@ from pathlib import Path
 import ast
 import functools
 
+#a
+
 intents = discord.Intents.default()
 intents.members = True
 bot = commands.Bot(command_prefix='y.', help_command=None, intents=intents)
