@@ -9,7 +9,7 @@ from pathlib import Path
 import ast
 import functools
 
-#a
+#a6
 
 intents = discord.Intents.default()
 intents.members = True
