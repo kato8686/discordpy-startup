@@ -70,4 +70,8 @@ async def 隠しコマンドの代名詞(ctx):
 async def ui(ctx):
     return
 
+@bot.command()
+async def contact(ctx):
+    return
+
 bot.run(token)
