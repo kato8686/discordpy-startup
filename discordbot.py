@@ -48,8 +48,7 @@ async def slot(ctx):
 
 @bot.command()
 async def help(ctx):
-    help = discord.Embed(title='Help(β)', description='y.ping　おなじみ（？）　動作中\ny.hello　なんか　動作中\ny.pong　おなじみ（？）　動作中\ny.slot　スロット　動作中\ny.start　カウント　動作中\ny.stop　カウントをストップ　動作中y.ping　おなじみ（？）　動作中\n\n以下は管理者のみ\ny.manage　コマンドの管理\ny.shutdown　そのまま\n\n不具合があればyuiyuinagaming864649@gmail.comへ')
-    await ctx.channel.send(embed=help)
+    return
 
 @bot.command()
 async def manage(ctx):
@@ -69,7 +68,6 @@ async def 隠しコマンドの代名詞(ctx):
 
 @bot.command()
 async def ui(ctx):
-    embed = discord.Embed(title='user information', description=f'User name ：{ctx.author.name}#{ctx.author.discriminator}\nUser id   ：{ctx.author.id}\nBot?      ：{ctx.author.bot}\n[avatar url]({ctx.author.avatar_url})')
-    await ctx.channel.send(embed=embed)
+    return
 
 bot.run(token)
