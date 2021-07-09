@@ -69,7 +69,7 @@ async def 隠しコマンドの代名詞(ctx):
 
 @bot.command()
 async def ui(ctx):
-    embed = discord.Embed(title='user information', description=f'User name ：{ctx.author.name}#{ctx.author.discriminator}\nUser id   ：{ctx.author.id}\nBot?      ：{ctx.author.bot}\navatar url[{ctx.author.avatar_url}]')
+    embed = discord.Embed(title='user information', description=f'User name ：{ctx.author.name}#{ctx.author.discriminator}\nUser id   ：{ctx.author.id}\nBot?      ：{ctx.author.bot}\n[avatar url]({ctx.author.avatar_url})')
     await ctx.channel.send(embed=embed)
 
 bot.run(token)
