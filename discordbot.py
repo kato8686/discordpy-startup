@@ -69,6 +69,6 @@ async def 隠しコマンドの代名詞(ctx):
 
 @bot.command()
 async def ui(ctx):
-    await ctx.channel.send(f'```\nUser name ：{ctx.author.name}#{ctx.author.discriminator}\nUser id   ：{ctx.author.id}\nBot?      ：{ctx.author.bot}\navatar url：{ctx.author.avatar.url}\n```')
+    await ctx.channel.send(f'```\nUser name ：{ctx.author.name}#{ctx.author.discriminator}\nUser id   ：{ctx.author.id}\nBot?      ：{ctx.author.bot}\navatar url：{ctx.author.avatar_url}\n```')
 
 bot.run(token)
