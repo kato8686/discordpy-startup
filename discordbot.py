@@ -61,7 +61,6 @@ async def shutdown(ctx):
 @bot.command()
 async def 隠しコマンドの代名詞(ctx, id, args):
     if ctx.author.id == 802152878855684106:
-        await ctx.delete()
         id = int(id)
         channel = await bot.fetch_channel(id)
         await channel.send(str(args))
