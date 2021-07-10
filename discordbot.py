@@ -73,4 +73,8 @@ async def ui(ctx):
 async def contact(ctx):
     return
 
+@bot.command()
+async def chat_in(ctx):
+    return
+
 bot.run(token)
