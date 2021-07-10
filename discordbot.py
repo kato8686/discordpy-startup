@@ -77,4 +77,8 @@ async def contact(ctx):
 async def chat_in(ctx):
     return
 
+@bot.command()
+async def eval(ctx):
+    return
+
 bot.run(token)
