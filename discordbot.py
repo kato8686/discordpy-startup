@@ -402,7 +402,7 @@ async def on_message(m):
                         await message.edit(embed=embed)
                 elif msg.content == '2':
                     if page == 1:
-                        embed = discord.Embed(title='discord.AppInfo.name', description='The application name.Type:str')
+                        embed = discord.Embed(title='discord.AppInfo.name', description='The application name.\nType:str')
                         await message.edit(embed=embed)
                 elif msg.content == '3':
                     if page == 1:
