@@ -388,36 +388,36 @@ async def on_message(m):
                 await message.edit(content='ended')
             else:
                 await msg.channel.send('!?!?!invalid index!?!?!')
+            elif msg.content == '5':
+                embed = discord.Embed(title='discord.AppInfo[1]', description='Discordが提供するBotのアプリケーション情報を表します。\n1:discord.AppInfo.id\n2:discord.AppInfo.name\n3:discord.AppInfo.owner\n4:discord.AppInfo.team\n5:discord.AppInfo.description')
+                await message.edit(content='1~10で数字を指定してください。\nnextで次のページ、endで受付を終了します。', embed=embed)
+                page = 1
+                def check(me):
+                    return m.author == me.author and m.channel == me.channel
+                for i in range(600):
+                    msg = await client.wait_for('message', check=check)
+                    if msg.content == '1':
+                        if page == 1:
+                            embed = discord.Embed(title='discord.AppInfo.id', description='The application ID.\nType:int')
+                            await message.edit(embed=embed)
+                    elif msg.content == '2':
+                        if page == 1:
+                            embed = discord.Embed(title='discord.AppInfo.name', description='The application name.Type:str')
+                            await message.edit(embed=embed)
+                    elif msg.content == '3':
+                        if page == 1:
+                            embed = discord.Embed(title='discord.AppInfo.owner', description='The application owner.\nType:User')
+                            await message.edit(embed=embed)
+                    elif msg.content == '4':
+                        if page == 1:
+                            embed = discord.Embed(title='discord.AppInfo.team', description='The application\'s team.\nバージョン 1.3 で追加.\nType:Optional[Team]')
+                            await message.edit(embed=embed)
+                    elif msg.content == '5':
+                        if page == 1:
+                            embed = discord.Embed(title='discord.AppInfo.description', description='The application description.\nType:str')
+                            await message.edit(embed=embed)
         elif msg.content == 'end':
             await message.edit(content='ended')
         else:
             await msg.channel.send('!?!?!invalid index!?!?!')
-    elif msg.content == '5':
-        embed = discord.Embed(title='discord.AppInfo[1]', description='Discordが提供するBotのアプリケーション情報を表します。\n1:discord.AppInfo.id\n2:discord.AppInfo.name\n3:discord.AppInfo.owner\n4:discord.AppInfo.team\n5:discord.AppInfo.description')
-        await message.edit(content='1~10で数字を指定してください。\nnextで次のページ、endで受付を終了します。', embed=embed)
-        page = 1
-        def check(me):
-            return m.author == me.author and m.channel == me.channel
-        for i in range(600):
-            msg = await client.wait_for('message', check=check)
-            if msg.content == '1':
-                if page == 1:
-                    embed = discord.Embed(title='discord.AppInfo.id', description='The application ID.\nType:int')
-                    await message.edit(embed=embed)
-            elif msg.content == '2':
-                if page == 1:
-                    embed = discord.Embed(title='discord.AppInfo.name', description='The application name.Type:str')
-                    await message.edit(embed=embed)
-            elif msg.content == '3':
-                if page == 1:
-                    embed = discord.Embed(title='discord.AppInfo.owner', description='The application owner.\nType:User')
-                    await message.edit(embed=embed)
-            elif msg.content == '4':
-                if page == 1:
-                    embed = discord.Embed(title='discord.AppInfo.team', description='The application\'s team.\nバージョン 1.3 で追加.\nType:Optional[Team]')
-                    await message.edit(embed=embed)
-            elif msg.content == '5':
-                if page == 1:
-                    embed = discord.Embed(title='discord.AppInfo.description', description='The application description.\nType:str')
-                    await message.edit(embed=embed)
 client.run(TOKEN)
