@@ -400,42 +400,108 @@ async def on_message(m):
                     if page == 1:
                         embed = discord.Embed(title='discord.AppInfo.id', description='The application ID.\nType:int')
                         await message.edit(embed=embed)
+                        break
                 elif msg.content == '2':
                     if page == 1:
                         embed = discord.Embed(title='discord.AppInfo.name', description='The application name.\nType:str')
                         await message.edit(embed=embed)
+                        break
                 elif msg.content == '3':
                     if page == 1:
                         embed = discord.Embed(title='discord.AppInfo.owner', description='The application owner.\nType:User')
                         await message.edit(embed=embed)
+                        break
                 elif msg.content == '4':
                     if page == 1:
                         embed = discord.Embed(title='discord.AppInfo.team', description='The application\'s team.\nバージョン 1.3 で追加.\nType:Optional[Team]')
                         await message.edit(embed=embed)
+                        break
                 elif msg.content == '5':
                     if page == 1:
                         embed = discord.Embed(title='discord.AppInfo.description', description='The application description.\nType:str')
                         await message.edit(embed=embed)
+                        break
                 elif msg.content == '6':
                     if page == 1:
                         embed = discord.Embed(title='discord.AppInfo.bot_public', description='Whether the bot can be invited by anyone or if it is locked to the application owner.\nType:bool')
                         await message.edit(embed=embed)
+                        break
                 elif msg.content == '7':
                     if page == 1:
                         embed = discord.Embed(title='discord.AppInfo.bot_require_code_grant', description='Whether the bot requires the completion of the full oauth2 code grant flow to join.\nType:bool')
                         await message.edit(embed=embed)
+                        break
                 elif msg.content == '8':
                     if page == 1:
                         embed = discord.Embed(title='discord.AppInfo.rpc_origins', description='A list of RPC origin URLs, if RPC is enabled.\nType:Optional[List[str]]')
                         await message.edit(embed=embed)
+                        break
                 elif msg.content == '9':
                     if page == 1:
                         embed = discord.Embed(title='discord.AppInfo.summary', description='If this application is a game sold on Discord, this field will be the summary field for the store page of its primary SKU.\nバージョン 1.3 で追加.\nType:str')
                         await message.edit(embed=embed)
+                        break
                 elif msg.content == '10':
                     if page == 1:
                         embed = discord.Embed(title='discord.Appinfo.verify_key', description='The hex encoded key for verification in interactions and the GameSDK\'s GetTicket.\nバージョン 1.3 で追加.\nType:str')
+                        await messae.edit(embed=embed)
+                        break
+                elif msg.content == '11':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.Appinfo.guild_id', description='If this application is a game sold on Discord, this field will be the guild to which it has been linked to.\nバージョン 1.3 で追加.\nType:Optional[int]')
                         await message.edit(embed=embed)
+                        break
+                elif msg.content == '12':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.Appinfo.primary_sku_id', description='If this application is a game sold on Discord, this field will be the id of the "Game SKU" that is created, if it exists.\nバージョン 1.3 で追加.\nType:Optional[int]')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '13':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.Appinfo.slug', description='If this application is a game sold on Discord, this field will be the URL slug that links to the store page.\nバージョン 1.3 で追加.\nType:Optional[str]')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '14':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.Appinfo.terms_of_service_url', description='The application\'s terms of service URL, if set.\nバージョン 2.0 で追加.\nType:Optional[str]')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '15':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.Appinfo.privacy_policy_url', description='The application\'s privacy policy URL, if set.\nバージョン 2.0 で追加.\nType:Optional[str]')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '16':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.Appinfo.icon', description='Retrieves the application\'s icon asset, if any.\nType:Optional[Asset]')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '17':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.Appinfo.cover_image', description='Retrieves the cover image on a store embed, if any.\nThis is only available if the application is a game sold on Discord.\nType:Optional[Asset]')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '18':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.Appinfo.guild', descrption='If this application is a game sold on Discord, this field will be the guild to which it has been linked\nバージョン 1.3 で追加.\nType:Optional[Guild]')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == 'next':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.Appinfo[2]', descritpion='11:discord.Appinfo.guild_id\n12:discord.Appinfo.primary_sku_id\n13:discord.Appinfo.slug\n14:discord.Appinfo.terms_of_service_url\n15:discord.Appinfo.privacy_policy_url\n16:discord.Appinfo.icon\n17:discord.Appinfo.cover_image\n18:discord.Appinfo.guild')
+                        await message.edit(content='11~20で数字を指定してください。\nnextで次のページ、backで前のページ、endで受付を終了します。', embed=embed)
+                        page = 2
+                elif msg.content == 'back':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.AppInfo[1]', description='Discordが提供するBotのアプリケーション情報を表します。\n1:discord.AppInfo.id\n2:discord.AppInfo.name\n3:discord.AppInfo.owner\n4:discord.AppInfo.team\n5:discord.AppInfo.description\n6:discord.AppInfo.bot_public\n7:discord.AppInfo.bot_require_code_grant\n8:discord.AppInfo.rpc_origins\n9:discord.AppInfo.summary\n10:discord.Appinfo.verify_key')
+                        await message.edit(content='1~10で数字を指定してください。\nnextで次のページ、endで受付を終了します。', embed=embed)
+                        page = 1
+                elif msg.content == 'end':
+                    await message.edit(content='ended')
+                    break
+                else:
+                    await msg.channel.send('!?!?!invalid index!?!?!')
+                i -= 1
         elif msg.content == 'end':
             await message.edit(content='ended')
         else:
