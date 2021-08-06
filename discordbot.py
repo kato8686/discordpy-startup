@@ -435,7 +435,7 @@ async def on_message(m):
                 elif msg.content == '10':
                     if page == 1:
                         embed = discord.Embed(title='discord.Appinfo.verify_key', description='The hex encoded key for verification in interactions and the GameSDK\'s GetTicket.\nバージョン 1.3 で追加.\nType:str')
-                        await messae.edit(embed=embed)
+                        await message.edit(embed=embed)
         elif msg.content == 'end':
             await message.edit(content='ended')
         else:
