@@ -413,7 +413,7 @@ async def on_message(m):
                     await message.edit(embed=embed)
             elif msg.content == '4':
                 if page == 1:
-                    embed = discord.Embed(title='discord.AppInfo.team', description='The application's team.\nバージョン 1.3 で追加.\nType:Optional[Team]')
+                    embed = discord.Embed(title='discord.AppInfo.team', description='The application\'s team.\nバージョン 1.3 で追加.\nType:Optional[Team]')
                     await message.edit(embed=embed)
             elif msg.content == '5':
                 if page == 1:
