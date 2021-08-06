@@ -12,7 +12,7 @@ async def on_message(m):
     if m.author.bot:
         return
     elif m.content == 'y.api':
-        embed = discord.Embed(title='APIリファレンス', description='__バージョン関連情報__\n1:discord.version_info\n2:discord.`___version__`\n__Clients__\n3:discord.Client\n4:discord.AutoShardedClient\n__Application Info__\n5:discord.AppInfo')
+        embed = discord.Embed(title='APIリファレンス', description='__バージョン関連情報__\n1:discord.version_info\n2:discord.`___version__`\n__Clients__\n3:discord.Client\n4:discord.AutoShardedClient\n__Application Info__\n5:discord.AppInfo\n6:discord.PartialAppInfo')
         message = await m.channel.send(content='1~5で数字を指定してください。\nendで受付を終了します。', embed=embed)
         msg = await client.wait_for('message', check=check)
         if msg.content == '1':
@@ -501,6 +501,56 @@ async def on_message(m):
                     break
                 else:
                     await msg.channel.send('!?!?!invalid index!?!?!')
+                i -= 1
+        elif msg.content == '6':
+            embed = discord.Embed(title='discord.PartialAppInfo', description='Represents a partial AppInfo given by create_invite()\nバージョン 2.0 で追加.\n\n1:discord.PartialAppInfo.id\n2:discord.PartialAppInfo.name\n3:discord.PartialAppInfo.description\n4:discord.PartialAppInfo.rpc_origins\n5:discord.PartialAppInfo.summary\n6:discord.PartialAppInfo.verify_key\n7:discord.PartialAppInfo.terms_of_service_url\n8:discord.PartialAppInfo.privacy_policy_url\n9:discord.PartialAppInfo.icon')
+            await message.edit(content='1~9の数字を指定してください。\nendで受付を終了します。', embed=embed)
+            def check(me):
+                return me.author == m.author and me.channel == m.channel
+            for i in range(2):
+                msg = await client.wait_for('message', check=check)
+                if msg.content == '1':
+                    embed = discord.Embed(title='discord.PartialAppInfo.id', description='The application ID.\nType:int')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == '2':
+                    embed = discord.Embed(title='discord.PartialAppInfo.name', description='The application name.\nType:str')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == '3':
+                    embed = discord.Embed(title='discord.PartialAppInfo.description', description='The application description.\nType:str')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == '4':
+                    embed = discord.Embed(title='discord.PartialAppInfo.rpc_origins', description='A list of RPC origin URLs, if RPC is enabled.\nType:Optional[List[str]]')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == '5':
+                    embed = discord.Embed(title='discord.PartialAppInfo.summary', description='If this application is a game sold on Discord, this field will be the summary field for the store page of its primary SKU.\nType:str')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == '6':
+                    embed = discord.Embed('discord.PartialAppInfo.verify_key', description='The hex encoded key for verification in interactions and the GameSDK\'s GetTicket.\nType:str')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == '7':
+                    embed = discord.Embed(title='discord.PartialAppInfo.terms_of_service_url', description='The application\'s terms of service URL, if set.\nType:Optional[str]')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == '8':
+                    embed = discord.Embed(title='discord.PartialAppInfo.privacy_policy_url', description='The application\'s privacy policy URL, if set.\nType:Optional[str]')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == '9':
+                    embed = discord.Embed(title='discord.PartialAppInfo.icon', description='Retrieves the application\'s icon asset, if any.\nType:Optional[Asset]')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == 'end':
+                    await message.edit(content='ended')
+                    break
+                else:
+                    await msg.channel.send('!?!?!invalid index!?!?!')
+                    break
                 i -= 1
         elif msg.content == 'end':
             await message.edit(content='ended')
