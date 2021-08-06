@@ -12,7 +12,7 @@ async def on_message(m):
     if m.author.bot:
         return
     elif m.content == 'y.api':
-        embed = discord.Embed(title='APIリファレンス', description='バージョン関連情報\n1:discord.version_info\n2:discord.`___version__`\nClients\n3:discord.Client\n4:discord.AutoShardedClient\nApplication Info\n5:discord.AppInfo')
+        embed = discord.Embed(title='APIリファレンス', description='__バージョン関連情報__\n1:discord.version_info\n2:discord.`___version__`\n__Clients__\n3:discord.Client\n4:discord.AutoShardedClient\n__Application Info__\n5:discord.AppInfo')
         message = await m.channel.send(content='1~5で数字を指定してください。\nendで受付を終了します。', embed=embed)
         msg = await client.wait_for('message', check=check)
         if msg.content == '1':
@@ -22,7 +22,7 @@ async def on_message(m):
             embed = discord.Embed(title='discord.`__version__`', description='\'1.0.0rc1\' のようなバージョンの文字列表現。これは PEP 440 に基づいています。')
             await message.edit(embed=embed)
         elif msg.content == '3':
-            embed = discord.Embed(title='discord.Client[1]', description='Discordに接続するクライアント接続を表します。このクラスは、DiscordのWebSocket、及びAPIとの対話に使用されます。\n多くのオプションを Client に渡すことが可能です。\n\n1:discord.Client.オプション\n2:discord.Client.activity\n3:discord.Client.allowed_mentions\n4:discord.Client.application_id\n5:discord.Client.cached_messages\n6:discord.Client.emojis\n7:discord.Client.guilds\n8:discord.Client.intents\n9:discord.Client.latency\n10:discord.Client.loop')
+            embed = discord.Embed(title='discord.Client[1]', description='Discordに接続するクライアント接続を表します。このクラスは、DiscordのWebSocket、及びAPIとの対話に使用されます。\n多くのオプションを Client に渡すことが可能です。\n\n1:discord.Client\n2:discord.Client.activity\n3:discord.Client.allowed_mentions\n4:discord.Client.application_id\n5:discord.Client.cached_messages\n6:discord.Client.emojis\n7:discord.Client.guilds\n8:discord.Client.intents\n9:discord.Client.latency\n10:discord.Client.loop')
             await message.edit(content='1~10で数字を指定してください。\nnextで次のページ、endで受付を終了します。', embed=embed)
             page = 1
             def check(me):
