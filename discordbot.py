@@ -392,7 +392,7 @@ async def on_message(m):
             await message.edit(content='ended')
         else:
             await msg.channel.send('!?!?!invalid index!?!?!')
-    elif msg.content == '4':
+    elif msg.content == '5':
         embed = discord.Embed(title='discord.AppInfo[1]', description='Discordが提供するBotのアプリケーション情報を表します。\n1:discord.AppInfo.id\n2:discord.AppInfo.name\n3:discord.AppInfo.owner\n4:discord.AppInfo.team\n5:discord.AppInfo.description')
         await message.edit(content='1~10で数字を指定してください。\nnextで次のページ、endで受付を終了します。', embed=embed)
         page = 1
