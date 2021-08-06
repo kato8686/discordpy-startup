@@ -673,9 +673,53 @@ async def on_message(m):
                         embed = discord.Embed(title='discord.VoiceClient.is_connected', description='ボイスチャンネルに接続しているかどうかを表します。')
                         await message.edit(embed=embed)
                         break
+                elif msg.content == '16':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.VoiceClient.play', description='AudioSource を再生します。\nファイナライザーである after はソースがなくなったか、エラーが発生した後に呼び出されます。\nIf an error happens while the audio player is running, the exception is caught and the audio player is then stopped. If no after callback is passed, any caught exception will be displayed as if it were raised.\n\nパラメータ\n・source (AudioSource) -- 読み込むオーディオソース。\n・after (Callable[[Optional[Exception]], Any]) -- The finalizer that is called after the stream is exhausted. This function must have a single parameter, error, that denotes an optional exception that was raised during playing.\n\n例外\n・ClientException -- Already playing audio or not connected.\n・TypeError -- Source is not a AudioSource or after is not a callable.\n・OpusNotLoaded -- Source is not opus encoded and opus is not loaded.')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '17':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.VoiceClient.is_playing', description='現在オーディオを再生しているかを表します。')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '18':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.VoiceClient.is_paused', description='再生中のオーディオを一時停止しているかを表します。')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '19':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.VoiceClient.stop', description='音声の再生を停止します。')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '20':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.VoiceClient.pause', description='音声の再生を一時的に停止します。')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '21':
+                    if page == 3:
+                        embed = discord.Embed(title='discord.VoiceClient.resume', description='音声の再生を再開します。')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '22':
+                    if page == 3:
+                        embed = discord.Embed(title='discord.VoiceClient.source', description='The audio source being played, if playing.\nこのプロパティは現在再生しているオーディオソースの変更にも使うことが出来ます。\nType:Optional[AudioSource]')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '23':
+                    if page == 3:
+                        embed = discord.Embed(title='discord.VoiceClient.send_audio_packet', description='データで構成されるオーディオパケットを送信します。\nオーディオを再生するには、ボイスチャンネルに接続している必要があります。\n\nパラメータ\n・data (bytes) -- PCM、またはOpusボイスデータを表す bytes-like object 。\n・encode (bool) -- data をOpusにエンコードする必要があるかを表します。\n\n例外\n・ClientException -- You are not connected.\n・opus.OpusError -- Encoding the data failed.')
+                        await message.edit(embed=embed)
+                        break
                 elif msg.content == 'next':
-                    if page == 1:
-                        embed = discord.Embed(title='discord.VoiceClient[2]', description='11:discord.VoiceClient.latency\n12:discord.VoiceClient.average_latency\n13:discord.VoiceClient.disconnect\n14:discord.VoiceClient.move_to\n15:discord.VoiceClient.is_connected')
+                    if page == 2:
+                        embed = discord.Embed(title='discord.VoiceClient[3]', description='21:discord.VoiceClient.resume\n22:discord.VoiceClient.source\n23:discord.VoiceClient.send_audio_packet')
+                        await message.edit(content='21~30の数字を指定してください。\nbackで前のページ、endで受付を終了します。', embed=embed)
+                        page = 3
+                    elif page == 1:
+                        embed = discord.Embed(title='discord.VoiceClient[2]', description='11:discord.VoiceClient.latency\n12:discord.VoiceClient.average_latency\n13:discord.VoiceClient.disconnect\n14:discord.VoiceClient.move_to\n15:discord.VoiceClient.is_connected\n16:discord.VoiceClient.play\n17:discord.VoiceClient.is_playing\n18:discord.VoiceClient.is_paused\n19:discord.VoiceClient.stop\n20:discord.VoiceClient.pause')
                         await message.edit(content='11~20の数字を指定してください。\nnextで次のページ、backで前のページ、endで受付を終了します。', embed=embed)
                         page = 2
                 elif msg.content == 'back':
@@ -683,6 +727,10 @@ async def on_message(m):
                         embed = discord.Embed(title='discord.VoiceClient[1]', description='Discordの音声接続を表します。\nこれを意図的に生成することはできません。通常、 VoiceChannel.connect() などを使用した際に、取得できます。\n\n警告\nIn order to use PCM based AudioSources, you must have the opus library installed on your system and loaded through opus.load_opus(). Otherwise, your AudioSources must be opus encoded (e.g. using FFmpegOpusAudio) or the library will not be able to transmit audio.\n\n1:discord.VoiceClient.session_id\n2:discord.VoiceClient.token\n3:discord.VoiceClient.endpoint\n4:discord.VoiceClient.channel\n5:discord.VoiceClient.loop\n6:discord.VoiceClient.guild\n7:discord.VoiceClient.user\n8:discord.VoiceClient.on_voice_state_update\n9:discord.VoiceClient.on_voice_server_update\n10:discord.VoiceClient.connect')
                         await message.edit(content='1~10の数字を指定してください。\nnextで次のページ、endで受付を終了します。', embed=embed)
                         page = 1
+                    elif page == 3:
+                        embed = discord.Embed(title='discord.VoiceClient[2]', description='11:discord.VoiceClient.latency\n12:discord.VoiceClient.average_latency\n13:discord.VoiceClient.disconnect\n14:discord.VoiceClient.move_to\n15:discord.VoiceClient.is_connected\n16:discord.VoiceClient.play\n17:discord.VoiceClient.is_playing\n18:discord.VoiceClient.is_paused\n19:discord.VoiceClient.stop\n20:discord.VoiceClient.pause')
+                        await message.edit(content='11~20の数字を指定してください。\nnextで次のページ、backで前のページ、endで受付を終了します。', embed=embed)
+                        page = 2
                 elif msg.content == 'end':
                     await message.edit(content='ended')
                     break
