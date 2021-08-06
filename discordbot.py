@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import discord
+import os
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
