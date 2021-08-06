@@ -596,7 +596,7 @@ async def on_message(m):
             page = 1
             def check(me):
                 return me.author == m.author and me.channel == m.channel
-            for i in range(2):
+            for i in range(20000):
                 msg = await client.wait_for('message', check=check)
                 if msg.content == '1':
                     if page == 1:
