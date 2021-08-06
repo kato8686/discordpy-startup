@@ -594,7 +594,7 @@ async def on_message(m):
             embed = discord.Embed(title='discord.VoiceClient[1]', description='Discordの音声接続を表します。\nこれを意図的に生成することはできません。通常、 VoiceChannel.connect() などを使用した際に、取得できます。\n\n警告\nIn order to use PCM based AudioSources, you must have the opus library installed on your system and loaded through opus.load_opus(). Otherwise, your AudioSources must be opus encoded (e.g. using FFmpegOpusAudio) or the library will not be able to transmit audio.\n\n1:discord.VoiceClient.session_id\n2:discord.VoiceClient.token\n3:discord.VoiceClient.endpoint\n4:discord.VoiceClient.channel\n5:discord.VoiceClient.loop\n6:discord.VoiceClient.guild\n7:discord.VoiceClient.user\n8:discord.VoiceClient.on_voice_state_update\n9:discord.VoiceClient.on_voice_server_update\n10:discord.VoiceClient.connect')
             await message.edit(content='1~10の数字を指定してください。\nnextで次のページ、endで受付を終了します。', embed=embed)
             page = 1
-            def check=(me):
+            def check(me):
                 return me.author == m.author and me.channel == m.channel
             for i in range(2):
                 msg = await client.wait_for('message', check=check)
