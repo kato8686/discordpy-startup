@@ -12,7 +12,7 @@ async def on_message(m):
     if m.author.bot:
         return
     elif m.content == 'y.api':
-        embed = discord.Embed(title='APIリファレンス', description='__バージョン関連情報__\n1:discord.version_info\n2:discord.`___version__`\n__Clients__\n3:discord.Client\n4:discord.AutoShardedClient\n__Application Info__\n5:discord.AppInfo\n6:discord.PartialAppInfo')
+        embed = discord.Embed(title='APIリファレンス', description='__バージョン関連情報__\n1:discord.version_info\n2:discord.`___version__`\n__Clients__\n3:discord.Client\n4:discord.AutoShardedClient\n__Application Info__\n5:discord.AppInfo\n6:discord.PartialAppInfo\n7:discord.Team')
         message = await m.channel.send(content='1~5で数字を指定してください。\nendで受付を終了します。', embed=embed)
         msg = await client.wait_for('message', check=check)
         if msg.content == '1':
@@ -543,6 +543,44 @@ async def on_message(m):
                     break
                 elif msg.content == '9':
                     embed = discord.Embed(title='discord.PartialAppInfo.icon', description='Retrieves the application\'s icon asset, if any.\nType:Optional[Asset]')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == 'end':
+                    await message.edit(content='ended')
+                    break
+                else:
+                    await msg.channel.send('!?!?!invalid index!?!?!')
+                    break
+                i -= 1
+        elif msg.content == '7':
+            embed = discord.Embed(title='discord.Team', description='Represents an application team for a bot provided by Discord.\n\n1:discord.Team.id\n2:discord.Team.name\n3:discord.Team.owner_id\n4:discord.Team.members\n5:discord.Team.icon\n6:discord.Team.owner')
+            await message.edit(content='1~6の数字を指定してください。\nendで受付を終了します。', embed=embed)
+            def check(me):
+                return me.author == m.author and me.channel == m.channel
+            for i in range(2):
+                msg = await client.wait_for('message', check=check)
+                if msg.content == '1':
+                    embed = discord.Embed(title='discord.Team.id', description='The team ID.\nType:int')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == '2':
+                    embed = discord.Embed(title='discord.Team.name', description='The team name\nType:str')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == '3':
+                    embed = discord.Embed(title='discord.Team.owner_id', description='The team\'s owner ID.\nType:int')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == '4':
+                    embed = discord.Embed(title='discord.Team.members', description='A list of the members in the team\nバージョン 1.3 で追加.\nType:List[TeamMember]')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == '5':
+                    embed = discord.Embed(title='discord.Team.icon', description='Retrieves the team\'s icon asset, if any.\nType:Optional[Asset]')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == '6':
+                    embed = discord.Embed(title='discord.Team.owner', description='The team\'s owner.\nType:Optional[TeamMember]')
                     await message.edit(embed=embed)
                     break
                 elif msg.content == 'end':
