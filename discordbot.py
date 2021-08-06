@@ -389,7 +389,7 @@ async def on_message(m):
             else:
                 await msg.channel.send('!?!?!invalid index!?!?!')
         elif msg.content == '5':
-            embed = discord.Embed(title='discord.AppInfo[1]', description='Discordが提供するBotのアプリケーション情報を表します。\n1:discord.AppInfo.id\n2:discord.AppInfo.name\n3:discord.AppInfo.owner\n4:discord.AppInfo.team\n5:discord.AppInfo.description')
+            embed = discord.Embed(title='discord.AppInfo[1]', description='Discordが提供するBotのアプリケーション情報を表します。\n1:discord.AppInfo.id\n2:discord.AppInfo.name\n3:discord.AppInfo.owner\n4:discord.AppInfo.team\n5:discord.AppInfo.description\n6:discord.AppInfo.bot_public\n7:discord.AppInfo.bot_require_code_grant\n8:discord.AppInfo.rpc_origins\n9:discord.AppInfo.summary\n10:discord.Appinfo.verify_key')
             await message.edit(content='1~10で数字を指定してください。\nnextで次のページ、endで受付を終了します。', embed=embed)
             page = 1
             def check(me):
@@ -416,6 +416,26 @@ async def on_message(m):
                     if page == 1:
                         embed = discord.Embed(title='discord.AppInfo.description', description='The application description.\nType:str')
                         await message.edit(embed=embed)
+                elif msg.content == '6':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.AppInfo.bot_public', description='Whether the bot can be invited by anyone or if it is locked to the application owner.\nType:bool')
+                        await message.edit(embed=embed)
+                elif msg.content == '7':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.AppInfo.bot_require_code_grant', description='Whether the bot requires the completion of the full oauth2 code grant flow to join.\nType:bool')
+                        await message.edit(embed=embed)
+                elif msg.content == '8':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.AppInfo.rpc_origins', description='A list of RPC origin URLs, if RPC is enabled.\nType:Optional[List[str]]')
+                        await message.edit(embed=embed)
+                elif msg.content == '9':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.AppInfo.summary', description='If this application is a game sold on Discord, this field will be the summary field for the store page of its primary SKU.\nバージョン 1.3 で追加.\nType:str')
+                        await message.edit(embed=embed)
+                elif msg.content == '10':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.Appinfo.verify_key', description='The hex encoded key for verification in interactions and the GameSDK\'s GetTicket.\nバージョン 1.3 で追加.\nType:str')
+                        await messae.edit(embed=embed)
         elif msg.content == 'end':
             await message.edit(content='ended')
         else:
