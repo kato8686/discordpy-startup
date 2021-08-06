@@ -488,8 +488,8 @@ async def on_message(m):
                         break
                 elif msg.content == 'next':
                     if page == 1:
-                        embed = discord.Embed(title='discord.Appinfo[2]', descripion='11:discord.Appinfo.guild_id\n12:discord.Appinfo.primary_sku_id\n13:discord.Appinfo.slug\n14:discord.Appinfo.terms_of_service_url\n15:discord.Appinfo.privacy_policy_url\n16:discord.Appinfo.icon\n17:discord.Appinfo.cover_image\n18:discord.Appinfo.guild')
-                        await message.edit(content='11~20で数字を指定してください。\nnextで次のページ、backで前のページ、endで受付を終了します。', embed=embed)
+                        embed = discord.Embed(title='discord.Appinfo[2]', description='11:discord.Appinfo.guild_id\n12:discord.Appinfo.primary_sku_id\n13:discord.Appinfo.slug\n14:discord.Appinfo.terms_of_service_url\n15:discord.Appinfo.privacy_policy_url\n16:discord.Appinfo.icon\n17:discord.Appinfo.cover_image\n18:discord.Appinfo.guild')
+                        await message.edit(content='11~20で数字を指定してください。\nbackで前のページ、endで受付を終了します。', embed=embed)
                         page = 2
                 elif msg.content == 'back':
                     if page == 2:
