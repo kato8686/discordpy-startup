@@ -12,7 +12,7 @@ async def on_message(m):
     if m.author.bot:
         return
     elif m.content == 'y.api':
-        embed = discord.Embed(title='APIリファレンス', description='__バージョン関連情報__\n1:discord.version_info\n2:discord.`___version__`\n__Clients__\n3:discord.Client\n4:discord.AutoShardedClient\n__Application Info__\n5:discord.AppInfo\n6:discord.PartialAppInfo\n7:discord.Team')
+        embed = discord.Embed(title='APIリファレンス', description='__バージョン関連情報__\n1:discord.version_info\n2:discord.`___version__`\n__Clients__\n3:discord.Client\n4:discord.AutoShardedClient\n__Application Info__\n5:discord.AppInfo\n6:discord.PartialAppInfo\n7:discord.Team\n__Voice Related__\n8:discord.VoiceClient')
         message = await m.channel.send(content='1~5で数字を指定してください。\nendで受付を終了します。', embed=embed)
         msg = await client.wait_for('message', check=check)
         if msg.content == '1':
@@ -583,6 +583,106 @@ async def on_message(m):
                     embed = discord.Embed(title='discord.Team.owner', description='The team\'s owner.\nType:Optional[TeamMember]')
                     await message.edit(embed=embed)
                     break
+                elif msg.content == 'end':
+                    await message.edit(content='ended')
+                    break
+                else:
+                    await msg.channel.send('!?!?!invalid index!?!?!')
+                    break
+                i -= 1
+        elif msg.content == '8':
+            embed = discord.Embed(title='discord.VoiceClient[1]', description='Discordの音声接続を表します。\nこれを意図的に生成することはできません。通常、 VoiceChannel.connect() などを使用した際に、取得できます。\n\n警告\nIn order to use PCM based AudioSources, you must have the opus library installed on your system and loaded through opus.load_opus(). Otherwise, your AudioSources must be opus encoded (e.g. using FFmpegOpusAudio) or the library will not be able to transmit audio.\n\n1:discord.VoiceClient.session_id\n2:discord.VoiceClient.token\n3:discord.VoiceClient.endpoint\n4:discord.VoiceClient.channel\n5:discord.VoiceClient.loop\n6:discord.VoiceClient.guild\n7:discord.VoiceClient.user\n8:discord.VoiceClient.on_voice_state_update\n9:discord.VoiceClient.on_voice_server_update\n10:discord.VoiceClient.connect')
+            await message.edit(content='1~10の数字を指定してください。\nnextで次のページ、endで受付を終了します。', embed=embed)
+            page = 1
+            def check=(me):
+                return me.author == m.author and me.channel == m.channel
+            for i in range(2):
+                msg = await client.wait_for('message', check=check)
+                if msg.content == '1':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.VoiceClient.session_id', description='The voice connection session ID.\nType:str')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '2':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.VoiceClient.token', description='The voice connection token.\nType:str')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '3':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.VoiceClient.endpoint', description='The endpoint we are connecting to.\nType:str')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '4':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.VoiceClient.channel', description='The voice channel connected to.\nType:abc.Connectable')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '5':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.VoiceClient.loop', description='The event loop that the voice client is running on.\nType:asyncio.AbstractEventLoop')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '6':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.VoiceClient.guild', description='The guild we\'re connected to, if applicable.\nType:Optional[Guild]')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '7':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.VoiceClient.user', description='The user connected to voice (i.e. ourselves).\nType:ClientUser')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '8':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.VoiceClient.on_voice_state_update', description='This function is a coroutine.\nAn abstract method that is called when the client\'s voice state has changed. This corresponds to VOICE_STATE_UPDATE.\n\nパラメータ\ndata (dict) --\nThe raw voice state payload.')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '9':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.VoiceClient.on_voice_server_update', description='This function is a coroutine.\nAn abstract method that is called when initially connecting to voice. This corresponds to VOICE_SERVER_UPDATE.\n\nパラメータ\ndata (dict) --\nThe raw voice server update payload.')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '10':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.VoiceClient.connect', description='This function is a coroutine.\nAn abstract method called when the client initiates the connection request.\nWhen a connection is requested initially, the library calls the constructor under __init__ and then calls connect(). If connect() fails at some point then disconnect() is called.\nWithin this method, to start the voice connection flow it is recommended to use Guild.change_voice_state() to start the flow. After which, on_voice_server_update() and on_voice_state_update() will be called. The order that these two are called is unspecified.\n\nパラメータ\n・timeout (float) -- The timeout for the connection.\n・reconnect (bool) -- Whether reconnection is expected.')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '11':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.VoiceClient.latency', description='Latency between a HEARTBEAT and a HEARTBEAT_ACK in seconds.\nThis could be referred to as the Discord Voice WebSocket latency and is an analogue of user\'s voice latencies as seen in the Discord client.\nバージョン 1.4 で追加.\nType:float')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '12':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.VoiceClient.average_latency', description='Average of most recent 20 HEARTBEAT latencies in seconds.\nバージョン 1.4 で追加.\nType:float')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '13':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.VoiceClient.disconnect', description='This function is a coroutine.\nボイスクライアントをボイスチャンネルから切断します。')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '14':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.VoiceClient.move_to', description='This function is a coroutine.\n別のボイスチャンネルへ移動させます。\n\nパラメータ\nchannel (abc.Snowflake) -- 移動先のチャンネル。ボイスチャンネルである必要があります。')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == '15':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.VoiceClient.is_connected', description='ボイスチャンネルに接続しているかどうかを表します。')
+                        await message.edit(embed=embed)
+                        break
+                elif msg.content == 'next':
+                    if page == 1:
+                        embed = discord.Embed(title='discord.VoiceClient[2]', description='11:discord.VoiceClient.latency\n12:discord.VoiceClient.average_latency\n13:discord.VoiceClient.disconnect\n14:discord.VoiceClient.move_to\n15:discord.VoiceClient.is_connected')
+                        await message.edit(content='11~20の数字を指定してください。\nnextで次のページ、backで前のページ、endで受付を終了します。', embed=embed)
+                        page = 2
+                elif msg.content == 'back':
+                    if page == 2:
+                        embed = discord.Embed(title='discord.VoiceClient[1]', description='Discordの音声接続を表します。\nこれを意図的に生成することはできません。通常、 VoiceChannel.connect() などを使用した際に、取得できます。\n\n警告\nIn order to use PCM based AudioSources, you must have the opus library installed on your system and loaded through opus.load_opus(). Otherwise, your AudioSources must be opus encoded (e.g. using FFmpegOpusAudio) or the library will not be able to transmit audio.\n\n1:discord.VoiceClient.session_id\n2:discord.VoiceClient.token\n3:discord.VoiceClient.endpoint\n4:discord.VoiceClient.channel\n5:discord.VoiceClient.loop\n6:discord.VoiceClient.guild\n7:discord.VoiceClient.user\n8:discord.VoiceClient.on_voice_state_update\n9:discord.VoiceClient.on_voice_server_update\n10:discord.VoiceClient.connect')
+                        await message.edit(content='1~10の数字を指定してください。\nnextで次のページ、endで受付を終了します。', embed=embed)
+                        page = 1
                 elif msg.content == 'end':
                     await message.edit(content='ended')
                     break
