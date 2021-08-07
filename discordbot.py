@@ -645,7 +645,7 @@ async def on_message(m):
                         break
                 elif msg.content == '10':
                     if page == 1:
-                        embed = discord.Embed(title='discord.VoiceClient.connect', description='This function is a coroutine.\nAn abstract method called when the client initiates the connection request.\nWhen a connection is requested initially, the library calls the constructor under __init__ and then calls connect(). If connect() fails at some point then disconnect() is called.\nWithin this method, to start the voice connection flow it is recommended to use Guild.change_voice_state() to start the flow. After which, on_voice_server_update() and on_voice_state_update() will be called. The order that these two are called is unspecified.\n\nパラメータ\n・timeout (float) -- The timeout for the connection.\n・reconnect (bool) -- Whether reconnection is expected.')
+                        embed = discord.Embed(title='discord.VoiceClient.connect', description='This function is a coroutine.\nAn abstract method called when the client initiates the connection request.\nWhen a connection is requested initially, the library calls the constructor under `__init__` and then calls connect(). If connect() fails at some point then disconnect() is called.\nWithin this method, to start the voice connection flow it is recommended to use Guild.change_voice_state() to start the flow. After which, on_voice_server_update() and on_voice_state_update() will be called. The order that these two are called is unspecified.\n\nパラメータ\n・timeout (float) -- The timeout for the connection.\n・reconnect (bool) -- Whether reconnection is expected.')
                         await message.edit(embed=embed)
                         break
                 elif msg.content == '11':
@@ -716,7 +716,7 @@ async def on_message(m):
                 elif msg.content == 'next':
                     if page == 2:
                         embed = discord.Embed(title='discord.VoiceClient[3]', description='21:discord.VoiceClient.resume\n22:discord.VoiceClient.source\n23:discord.VoiceClient.send_audio_packet')
-                        await message.edit(content='21~30の数字を指定してください。\nbackで前のページ、endで受付を終了します。', embed=embed)
+                        await message.edit(content='21~23の数字を指定してください。\nbackで前のページ、endで受付を終了します。', embed=embed)
                         page = 3
                     elif page == 1:
                         embed = discord.Embed(title='discord.VoiceClient[2]', description='11:discord.VoiceClient.latency\n12:discord.VoiceClient.average_latency\n13:discord.VoiceClient.disconnect\n14:discord.VoiceClient.move_to\n15:discord.VoiceClient.is_connected\n16:discord.VoiceClient.play\n17:discord.VoiceClient.is_playing\n18:discord.VoiceClient.is_paused\n19:discord.VoiceClient.stop\n20:discord.VoiceClient.pause')
