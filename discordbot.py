@@ -889,6 +889,6 @@ async def on_message(m):
             else:
                 await msg.channel.send('!?!?!invalid index!?!?!')
                 break
-    elif m.content.startswith('y.help'):
+    elif m.content == 'y.help':
         await m.channel.send('y.api, y.youtube, y.eval（オーナー以外は反応しません）, y.help')
 client.run(TOKEN)
