@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+#webhook test
+
 import discord
 import os
 intents = discord.Intents.all()
@@ -12,8 +14,8 @@ async def on_message(m):
     if m.author.bot:
         return
     elif m.content == 'y.api':
-        embed = discord.Embed(title='APIリファレンス', description='__バージョン関連情報__\n1:discord.version_info\n2:discord.`___version__`\n__Clients__\n3:discord.Client\n4:discord.AutoShardedClient\n__Application Info__\n5:discord.AppInfo\n6:discord.PartialAppInfo\n7:discord.Team\n__Voice Related__\n8:discord.VoiceClient')
-        message = await m.channel.send(content='1~5で数字を指定してください。\nendで受付を終了します。', embed=embed)
+        embed = discord.Embed(title='APIリファレンス', description='__バージョン関連情報__\n1:discord.version_info\n2:discord.`___version__`\n__Clients__\n3:discord.Client\n4:discord.AutoShardedClient\n__Application Info__\n5:discord.AppInfo\n6:discord.PartialAppInfo\n7:discord.Team\n__Voice Related__\n8:discord.VoiceClient\n9:discord.VoiceProtocol\n10:discord.AudioSource')
+        message = await m.channel.send(content='1~10で数字を指定してください。\nendで受付を終了します。', embed=embed)
         msg = await client.wait_for('message', check=check)
         if msg.content == '1':
             embed = discord.Embed(title='discord.version_info', description='sys.version_info に似た名前付きタプル。\nsys.version_info と同じように releaselevel の有効値は \'alpha\'、\'beta\'、\'candidate\'、そして \'final\' です。')
@@ -738,6 +740,59 @@ async def on_message(m):
                     await msg.channel.send('!?!?!invalid index!?!?!')
                     break
                 i -= 1
+        elif msg.content == '9':
+            embed = discord.Embed(title='discord.VoiceProtocol', description='A class that represents the Discord voice protocol.\nThis is an abstract class. The library provides a concrete implementation under VoiceClient.\nThis class allows you to implement a protocol to allow for an external method of sending voice, such as Lavalink or a native library implementation.\nThese classes are passed to abc.Connectable.connect.\n1:discord.VoiceProtocol\n2:discord.VoiceProtocol.on_voice_state_update\n3:discord.VoiceProtocol.on_voice_server_update\n4:discord.VoiceProtocol.connect\n5:discord.VoiceProtocol.disconnect\n6:discord.VoiceProtocol.cleanup')
+            await message.edit(content='1~6の数字を指定してください。\nendで受付を終了します。', embed=embed)
+            def check(me):
+                return me.author == m.author and me.channel == m.channel
+            msg = await client.wait_for('message', check=check)
+            if msg.content == '1':
+                embed = discord.Embed(title='discord.VoiceProtocol', description='・client (Client) -- The client (or its subclasses) that started the connection request.\n・channel (abc.Connectable) -- The voice channel that is being connected to.')
+                await message.edit(embed=embed)
+            elif mag.content == '2':
+                embed = discord.Embed(title='discord.VoiceProtocol.on_voice_state_update', description='This function is a coroutine.\nAn abstract method that is called when the client's voice state has changed. This corresponds to VOICE_STATE_UPDATE.\nパラメータ\ndata (dict) --\nThe raw voice state payload.')
+                await message.edit(embed=embed)
+            elif msg.content == '3':
+                embed = discord.Embed(title='discord.VoiceProtocol.on_voice_server_update', description='This function is a coroutine.\nAn abstract method that is called when initially connecting to voice. This corresponds to VOICE_SERVER_UPDATE.\n\nパラメータ\ndata (dict) --\nThe raw voice server update payload.')
+                await message.edit(embed=embed)
+            elif msg.content == '4':
+                embed = discord.Embed(title='discord.VoiceProtocol.connect', description='This function is a coroutine.\nAn abstract method called when the client initiates the connection request.\nWhen a connection is requested initially, the library calls the constructor under __init__ and then calls connect(). If connect() fails at some point then disconnect() is called.\nWithin this method, to start the voice connection flow it is recommended to use Guild.change_voice_state() to start the flow. After which, on_voice_server_update() and on_voice_state_update() will be called. The order that these two are called is unspecified.\n\nパラメータ\n・timeout (float) -- The timeout for the connection.\n・reconnect (bool) -- Whether reconnection is expected.')
+                await message.edit(embed=embed)
+            elif msg.content == '5':
+                embed = discord.Embed(title='discord.VoiceProtocol.disconnect', description='This function is a coroutine.\nAn abstract method called when the client terminates the connection.\nSee cleanup().\n\nパラメータ\nforce (bool) -- Whether the disconnection was forced.')
+                await message.edit(embed=embed)
+            elif msg.content == '6':
+                embed = discord.Embed(title='discord.VoiceProtocol.cleanup', description='This method must be called to ensure proper clean-up during a disconnect.\nIt is advisable to call this from within disconnect() when you are completely done with the voice protocol instance.\nThis method removes it from the internal state cache that keeps track of currently alive voice clients. Failure to clean-up will cause subsequent connections to report that it's still connected.')
+                await message.edit(embed=embed)
+            elif msg.content == 'end':
+                await message.edit(content='ended')
+            else:
+                await msg.channel.send('!?!?!invalid index!?!?!')
+        elif msg.content == '10':
+            embed= discord.Embed(title='discord.AudioSource', description='オーディオストリームを表します。\nオーディオストリームはOpusにエンコードされていなくても構いませんが、エンコードされていない場合、オーディオフォーマットは16ビットの48KHzステレオPCMである必要があります。\n\n警告\nオーディオソースの読み込みは別スレッドで行われます。\n1:discord.AudioSource.read\n2:discord.AudioSource.is_opus\n3:discord.AudioSource.cleanup')
+            await message.edit(content='1~6の数字を指定してください。\nendで受付を終了します。', embed=embed)
+            def check(me):
+                return me.author == m.author and me.channel == m.channel
+            for i in range(600):
+                msg = await client.wait_for('message', check=check)
+                if msg.content == '1':
+                    embed = discord.Embed(title='discord.AudioSource.read', description='20ms分のオーディオを読み込みます。\nサブクラスはこれを実装する必要があります。\nオーディオの読み取りが終了すると、空の bytes-like object を返してこれを通知します。\nIf is_opus() method returns True, then it must return 20ms worth of Opus encoded audio. Otherwise, it must be 20ms worth of 16-bit 48KHz stereo PCM, which is about 3,840 bytes per frame (20ms worth of audio).\n戻り値\nPCMまたはOpusデータを表すバイトライクオブジェクト。\n\n戻り値の型\nbytes')
+                    await message.edit(embed=embed)
+                    break
+                elif mag.content == '2':
+                    embed = discord.Embed(title='discord.AudioSource.is_opus', description='オーディオソースがOpusにエンコードされているかを表します。')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == '3':
+                    embed = discord.Embed(title='discord.AudioSource.cleanup', description='クリーンアップが必要な時に呼び出されます。\nオーディオの再生が終了した後にバッファデータやプロセスをクリアするのに便利です。')
+                    await message.edit(embed=embed)
+                    break
+                elif msg.content == 'end':
+                    await message.edit(content='ended')
+                    break
+                else:
+                    await msg.channel.send('!?!?!invalid index!?!?!')
+                    break
         elif msg.content == 'end':
             await message.edit(content='ended')
         else:
