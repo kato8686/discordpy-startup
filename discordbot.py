@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-#webhook test
-
 import discord
 import os
 intents = discord.Intents.all()
