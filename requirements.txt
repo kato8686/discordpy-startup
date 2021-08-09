@@ -1,1 +1,2 @@
 discord.py[voice]>=2.0.0a
+aiohttp>=3.6.0,<3.8.0
