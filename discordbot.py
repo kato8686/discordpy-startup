@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from pathlib import Path
 import discord
 import os
 intents = discord.Intents.all()
@@ -891,4 +892,13 @@ async def on_message(m):
                 break
     elif m.content == 'y.help':
         await m.channel.send('・y.api\n・y.youtube [検索ワード] [検索オプション（任意）]\n・y.eval（オーナー以外は反応しません）\n・y.help')
+    elif m.content == 'y.test':
+        path = Path('test.txt')
+        f = open(path, 'w')
+        f.write('test')
+        f.close()
+        f = open(path, 'r')
+        data = f.read()
+        f.close()
+        print(data)
 client.run(TOKEN)
