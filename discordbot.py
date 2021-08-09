@@ -894,9 +894,6 @@ async def on_message(m):
         await m.channel.send('・y.api\n・y.youtube [検索ワード] [検索オプション（任意）]\n・y.eval（オーナー以外は反応しません）\n・y.help')
     elif m.content == 'y.test':
         path = Path('test.txt')
-        f = open(path, 'w')
-        f.write('test')
-        f.close()
         f = open(path, 'r')
         data = f.read()
         f.close()
