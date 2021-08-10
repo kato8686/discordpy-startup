@@ -955,6 +955,9 @@ async def on_message(m):
         b = random.choice(list)
         c = random.choice(list)
         await m.reply(f'||{a}||||{b}||||{c}||', mention_author=False)
+    elif m.content == f'{prefix}now':
+        now = datetime.datetime.now()
+        await m.reply(f'{now.year}年{now.month}月{now.day}日{now.hour}時{now.minute}分{now.second}秒', mention_author=False)
     else:
         path = Path(f'u{m.author.id}.txt')
         if path.exists():
