@@ -9,6 +9,7 @@ import traceback
 from pathlib import Path
 import os
 import random
+import datetime
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
@@ -22,7 +23,8 @@ async def on_message(m):
     global count
     count += 1
     if count == 1:
-        await client.get_channel(kidou_id).send('起動しました！')
+        now = datetime.datetime.now()
+        await client.get_channel(kidou_id).send(embed=discord.Embed(title='起動！', description=f'{now.year}年{now.month}月{now.day}日{now.hour}時{now.minute}分{now.second}秒'))
         game = discord.Game(name=f'y.help|{len(client.guilds)}サーバー')
         await client.change_presence(activity=game)
     def check(me):
