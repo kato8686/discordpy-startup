@@ -14,7 +14,7 @@ TOKEN = os.environ['DISCORD_BOT_TOKEN']
 prefix = 'y.'
 owner_id = 802152878855684106
 kidou_id = 865364995008888842
-count = 0
+global count = 0
 @client.event
 async def on_message(m):
     if count == 0:
