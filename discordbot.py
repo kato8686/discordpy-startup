@@ -944,8 +944,6 @@ async def on_message(m):
             f.close()
             data = int(data)
             await m.channel.send(f'あなたの発言数は{data}です。')
-    elif m.content.startswith(prefix):
-        return
     elif m.content == f'{prefix}help':
         await m.channel.send(f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api')
     else:
