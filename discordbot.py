@@ -8,6 +8,7 @@ from contextlib import redirect_stdout
 import traceback
 from pathlib import Path
 import os
+import random
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
