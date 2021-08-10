@@ -19,9 +19,9 @@ count = 0
 @client.event
 async def on_message(m):
     global count
-    if count == 0:
+    count += 1
+    if count == 1:
         await client.get_channel(kidou_id).send('起動しました！')
-        count += 1
         game = discord.Game(name=f'y.help|{len(client.guilds)}サーバー')
         await client.change_presence(activity=game)
     def check(me):
@@ -945,7 +945,13 @@ async def on_message(m):
             data = int(data)
             await m.channel.send(f'あなたの発言数は{data}です。')
     elif m.content == f'{prefix}help':
-        await m.channel.send(f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api')
+        await m.channel.send(f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot')
+    elif m.content == f'{prefix}slot':
+        list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+        a = random.choice(list)
+        b = random.choice(list)
+        c = random.choice(list)
+        await m.reply(f'||{a}||||{b}||||{c}||', mention_author=False)
     else:
         path = Path(f'u{m.author.id}.txt')
         if path.exists():
