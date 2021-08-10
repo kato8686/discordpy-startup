@@ -14,6 +14,7 @@ TOKEN = os.environ['DISCORD_BOT_TOKEN']
 prefix = 'y.'
 owner_id = 802152878855684106
 kidou_id = 865364995008888842
+count = 0
 @client.event
 if count == 0:
     await client.get_channel(kidou_id).send('起動しました！')
