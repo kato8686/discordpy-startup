@@ -33,7 +33,7 @@ async def on_message(m):
         return
     elif m.content == f'{prefix}api':
         embed = discord.Embed(title='APIリファレンス[1]', description='__バージョン関連情報__\n1:discord.version_info\n2:discord.`__version__`\n__Clients__\n3:discord.Client\n4:discord.AutoShardedClient\n__Application Info__\n5:discord.AppInfo\n6:discord.PartialAppInfo\n7:discord.Team\n__Voice Related__\n8:discord.VoiceClient\n9:discord.VoiceProtocol\n10:discord.AudioSource')
-        message = await m.channel.send(content='1~10で数字を指定してください。\nnextで次のページ、endで受付を終了します。', embed=embed)
+        message = await m.reply(content='1~10で数字を指定してください。\nnextで次のページ、endで受付を終了します。', embed=embed, mention_author=False)
         page = 1
         def check(me):
             return me.author == m.author and me.channel == m.channel
@@ -379,7 +379,7 @@ async def on_message(m):
                             await message.edit(content='ended')
                             break
                         else:
-                            await msg.channel.send('!?!?!invalid index!?!?!')
+                            await msg.reply('!?!?!invalid index!?!?!', mention_author=False)
                             break
                         i -= 1
                     break
@@ -418,7 +418,7 @@ async def on_message(m):
                     elif msg.content == 'end':
                         await message.edit(content='ended')
                     else:
-                        await msg.channel.send('!?!?!invalid index!?!?!')
+                        await msg.reply('!?!?!invalid index!?!?!', mention_author=False)
                     break
             elif msg.content == '5':
                 if page == 1:
@@ -533,7 +533,7 @@ async def on_message(m):
                             await message.edit(content='ended')
                             break
                         else:
-                            await msg.channel.send('!?!?!invalid index!?!?!')
+                            await msg.reply('!?!?!invalid index!?!?!', mention_author=False)
                             break
                         i -= 1
                     break
@@ -585,7 +585,7 @@ async def on_message(m):
                             await message.edit(content='ended')
                             break
                         else:
-                            await msg.channel.send('!?!?!invalid index!?!?!')
+                            await msg.reply('!?!?!invalid index!?!?!', mention_author=False)
                             break
                         i -= 1
                     break
@@ -625,7 +625,7 @@ async def on_message(m):
                             await message.edit(content='ended')
                             break
                         else:
-                            await msg.channel.send('!?!?!invalid index!?!?!')
+                            await msg.reply('!?!?!invalid index!?!?!', mention_author=False)
                             break
                         i -= 1
                     break
@@ -775,7 +775,7 @@ async def on_message(m):
                             await message.edit(content='ended')
                             break
                         else:
-                            await msg.channel.send('!?!?!invalid index!?!?!')
+                            await msg.reply('!?!?!invalid index!?!?!', mention_author=False)
                             break
                         i -= 1
                     break
@@ -807,7 +807,7 @@ async def on_message(m):
                     elif msg.content == 'end':
                         await message.edit(content='ended')
                     else:
-                        await msg.channel.send('!?!?!invalid index!?!?!')
+                        await msg.reply('!?!?!invalid index!?!?!', mention_author=False)
                     break
             elif msg.content == '10':
                 if page == 1:
@@ -833,7 +833,7 @@ async def on_message(m):
                             await message.edit(content='ended')
                             break
                         else:
-                            await msg.channel.send('!?!?!invalid index!?!?!')
+                            await msg.reply('!?!?!invalid index!?!?!', mention_author=False)
                             break
                     break
             elif msg.content == '11':
@@ -852,7 +852,7 @@ async def on_message(m):
                     elif msg.content == 'end':
                         await message.edit(content='ended')
                     else:
-                        await msg.channel.send('!?!?!invalid index!?!?!')
+                        await msg.reply('!?!?!invalid index!?!?!', mention_author=False)
                     break
             elif msg.content == '12':
                 if page == 2:
@@ -867,7 +867,7 @@ async def on_message(m):
                     elif msg.content == 'end':
                         await message.edit(content='ended')
                     else:
-                        await msg.channel.send('!?!?!invalid index!?!?!')
+                        await msg.reply('!?!?!invalid index!?!?!', mention_author=False)
                     break
             elif msg.content == '13':
                 embed = discord.Embed(title='discord.FFmpegPCMAudio', description='FFmpeg（またはAVConv）のオーディオソース。\n与えられた特定の入力ファイルに対してサブプロセスを起動します。\n\n警告\n環境変数にffmpegまたはavconv実行可能ファイルがなければなりません。\n1:discord.FFmpegPCMAudio\n2:discord.FFmpegPCMAudio.read\n3:discord.FFmpegPCMAudio.is_opus')
@@ -887,7 +887,7 @@ async def on_message(m):
                 elif msg.content == 'end':
                     await message.edit(content='ended')
                 else:
-                    await msg.channel.send('!?!?!invalid index!?!?!')
+                    await msg.reply('!?!?!invalid index!?!?!', mention_author=False)
                 break
             elif msg.content == '14':
                 embed = discord.Embed(title='discord.FFmpegOpusAudio', description='FFmpeg（またはAVConv）のオーディオソース。\nThis launches a sub-process to a specific input file given. However, rather than producing PCM packets like FFmpegPCMAudio does that need to be encoded to Opus, this class produces Opus packets, skipping the encoding step done by the library.\nAlternatively, instead of instantiating this class directly, you can use FFmpegOpusAudio.from_probe() to probe for bitrate and codec information. This can be used to opportunistically skip pointless re-encoding of existing Opus audio data for a boost in performance at the cost of a short initial delay to gather the information. The same can be achieved by passing copy to the codec parameter, but only if you know that the input source is Opus encoded beforehand.\nバージョン 1.3 で追加.\n\n警告\n環境変数にffmpegまたはavconv実行可能ファイルがなければなりません。')
@@ -907,7 +907,7 @@ async def on_message(m):
                 await message.edit(content='ended')
                 break
             else:
-                await msg.channel.send('!?!?!invalid index!?!?!')
+                await msg.reply('!?!?!invalid index!?!?!', mention_author=False)
                 break
     elif m.content == f'{prefix}eval':
         if m.author.id == owner_id:
@@ -937,7 +937,7 @@ async def on_message(m):
             data = f.read()
             f.close()
             data = int(data)
-            await m.channel.send(f'あなたの発言数は{data}です。')
+            await m.reply(f'あなたの発言数は{data}です。', mention_author=False)
         else:
             f = open(rank_path, 'w')
             f.write('1')
@@ -946,9 +946,9 @@ async def on_message(m):
             data = f.read()
             f.close()
             data = int(data)
-            await m.channel.send(f'あなたの発言数は{data}です。')
+            await m.reply(f'あなたの発言数は{data}です。', mention_author=False)
     elif m.content == f'{prefix}help':
-        await m.channel.send(f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot')
+        await m.reply(f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot', mention_author=False)
     elif m.content == f'{prefix}slot':
         list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
         a = random.choice(list)
