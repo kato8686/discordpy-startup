@@ -16,10 +16,10 @@ owner_id = 802152878855684106
 kidou_id = 865364995008888842
 count = 0
 @client.event
-if count == 0:
-    await client.get_channel(kidou_id).send('起動しました！')
-count += 1
 async def on_message(m):
+    if count == 0:
+        await client.get_channel(kidou_id).send('起動しました！')
+        count += 1
     def check(me):
         return me.author == m.author and me.channel == m.channel
     if m.author.bot:
