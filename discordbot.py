@@ -23,7 +23,7 @@ async def on_message(m):
         await client.get_channel(kidou_id).send('起動しました！')
         count += 1
         game = discord.Game(name=f'y.help|{len(client.guilds)}サーバー')
-        await client.change_presense(activity=game)
+        await client.change_presence(activity=game)
     def check(me):
         return me.author == m.author and me.channel == m.channel
     if m.author.bot:
