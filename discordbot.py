@@ -18,6 +18,7 @@ global count
 count = 0
 @client.event
 async def on_message(m):
+    global count
     if count == 0:
         await client.get_channel(kidou_id).send('起動しました！')
         count += 1
