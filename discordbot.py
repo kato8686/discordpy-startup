@@ -13,10 +13,12 @@ client = discord.Client(intents=intents)
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
 prefix = 'y.'
 owner_id = 802152878855684106
+kidou_id = 865364995008888842
+async def kido(id):
+    await client.get_channel(id).send('起動しました！')
 @client.event
 async def on_ready():
-    channel = client.get_channel(865364995008888842)
-    await channel.send('起動！')
+    await kido(kidou_id)
 async def on_message(m):
     def check(me):
         return me.author == m.author and me.channel == m.channel
