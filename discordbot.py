@@ -1,19 +1,25 @@
 # -*- coding: utf-8 -*-
 
-from pathlib import Path
+#webhook test
+
 import discord
+import io
+from contextlib import redirect_stdout
+import traceback
+from pathlib import Path
 import os
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
+prefix = 'y.'
+owner_id = 802152878855684106
 @client.event
 async def on_message(m):
     def check(me):
         return me.author == m.author and me.channel == m.channel
     if m.author.bot:
         return
-    elif m.content == 'y.api':
-        await m.channel.send(discord.__version__)
+    elif m.content == f'{prefix}api':
         embed = discord.Embed(title='APIリファレンス[1]', description='__バージョン関連情報__\n1:discord.version_info\n2:discord.`__version__`\n__Clients__\n3:discord.Client\n4:discord.AutoShardedClient\n__Application Info__\n5:discord.AppInfo\n6:discord.PartialAppInfo\n7:discord.Team\n__Voice Related__\n8:discord.VoiceClient\n9:discord.VoiceProtocol\n10:discord.AudioSource')
         message = await m.channel.send(content='1~10で数字を指定してください。\nnextで次のページ、endで受付を終了します。', embed=embed)
         page = 1
@@ -891,12 +897,62 @@ async def on_message(m):
             else:
                 await msg.channel.send('!?!?!invalid index!?!?!')
                 break
-    elif m.content == 'y.help':
-        await m.channel.send('・y.api\n・y.youtube [検索ワード] [検索オプション（任意）]\n・y.eval（オーナー以外は反応しません）\n・y.help')
-    elif m.content == 'y.test':
-        path = Path('test.txt')
-        f = open(path, 'r')
-        data = f.read()
-        f.close()
-        print(data)
+    elif m.content == f'{prefix}eval':
+        if m.author.id == owner_id:
+            await m.reply('実行するコードをどうぞ\nコードブロックでもokです', mention_author=False)
+            def check(me):
+                return me.channel == m.channel and me.author == m.author
+            msg = await client.wait_for('message', check=check)
+            code = msg.content.replace('```', '').replace('py', '')
+            try:
+                f = io.StringIO()
+                with redirect_stdout(f):
+                    exec(
+                    f'async def __ex(m): ' +
+                        ''.join(f'\n {l}' for l in code.split('\n'))
+                    )
+                    await locals()['__ex'](msg)
+                s = f.getvalue()
+                if s:
+                    await msg.reply(s or 'Done!', mention_author=False)
+            except Exception as e:
+                t = ''.join(traceback.format_exception(type(e), e, e.__traceback__))
+                await msg.reply(f'```powershell\n{t}\n```', mention_author=False)
+    elif m.content == f'{prefix}rank':
+        rank_path = Path(f'u{m.author.id}.txt')
+        if rank_path.exists():
+            f = open(rank_path, 'r')
+            data = f.read()
+            f.close()
+            data = int(data)
+            await m.channel.send(f'あなたの発言数は{data}です。')
+        else:
+            f = open(rank_path, 'w')
+            f.write('1')
+            f.close()
+            f = open(rank_path, 'r')
+            data = f.read()
+            f.close()
+            data = int(data)
+            await m.channel.send(f'あなたの発言数は{data}です。')
+    elif m.content.startswith(prefix):
+        return
+    elif m.content == f'{prefix}help':
+        await m.channel.send(f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api')
+    else:
+        path = Path(f'u{m.author.id}.txt')
+        if path.exists():
+            f = open(path, 'r')
+            data = f.read()
+            f.close()
+            data = int(data)
+            data += 1
+            f.close()
+            f = open(path, 'w')
+            f.write(f'{data}')
+            f.close()
+        else:
+            f = open(path, 'w')
+            f.write('1')
+            f.close()
 client.run(TOKEN)
