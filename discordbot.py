@@ -1036,7 +1036,7 @@ async def on_message(m):
         if len(list_msg) != 2:
             await m.reply('y.say [description]の形で入力してください', mention_author=False)
         else:
-            await m.channel.send(embed=discord.Embed(title=f'{m.author.name}のsay!', description=f'{list_msg[1]}')
+            await m.channel.send(embed=discord.Embed(title=f'{m.author.name}のsay!', description=f'{list_msg[1]}'))
     else:
         path = Path(f'u{m.author.id}.txt')
         if path.exists():
