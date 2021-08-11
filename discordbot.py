@@ -995,7 +995,7 @@ async def on_message(m):
                         else:
                             await m.reply('ピン留めしました', mention_author=False)
         else:
-            await m.reply('あなたは権限がないため使用できません', mention_author)
+            await m.reply('あなたは権限がないため使用できません', mention_author=False)
     else:
         path = Path(f'u{m.author.id}.txt')
         if path.exists():
