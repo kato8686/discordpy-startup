@@ -948,7 +948,7 @@ async def on_message(m):
             data = int(data)
             await m.reply(f'あなたの発言数は{data}です。', mention_author=False)
     elif m.content == f'{prefix}help':
-        await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now'), mention_author=False)
+        await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin'), mention_author=False)
     elif m.content == f'{prefix}slot':
         list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
         a = random.choice(list)
@@ -958,6 +958,44 @@ async def on_message(m):
     elif m.content == f'{prefix}now':
         now_2 = datetime.datetime.now()
         await m.reply(f'{now_2.year}年{now_2.month}月{now_2.day}日{now_2.hour + 9}時{now_2.minute}分{now_2.second}.{now_2.microsecond}秒', mention_author=False)
+    elif m.conten.startswith(f'{prefix}pin'):
+        if m.author.guild_permissions.manage_messages:
+            list_msg = list(map(str, m.content.split()))
+            link = list(map(str, list_msg[1].split('/')))
+            if link[4] == '@me':
+                channel = client.get_channel(int(link[5]))
+                if channel == None:
+                    await m.reply('チャンネルが見つかりませんでした', mention_author=False)
+                else:
+                    try:
+                        msg = await channel.fetch_message(int(link[6]))
+                    except:
+                        await m.reply('存在しないメッセージです', mention_author=False)
+                    else:
+                        try:
+                            await msg.pin()
+                        except:
+                            await m.reply('権限がありません', mention_author=False)
+                        else:
+                            await m.reply('ピン留めしました', mention_author=False)
+            else:
+                channel = client.get_channel(int(link[5]))
+                if channel == None:
+                    await m.reply('チャンネルが見つかりませんでした', mention_author=False)
+                else:
+                    try:
+                        msg = await channel.fetch_message(int(link[6]))
+                    except:
+                        await m.reply('存在しないメッセージです', mention_author=False)
+                    else:
+                        try:
+                            await msg.pin()
+                        except:
+                            await m.reply('権限がありません', mention_author=False)
+                        else:
+                            await m.reply('ピン留めしました', mention_author=False)
+        else:
+            await m.reply('あなたは権限がないため使用できません', mention_author)
     else:
         path = Path(f'u{m.author.id}.txt')
         if path.exists():
