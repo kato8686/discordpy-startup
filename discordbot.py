@@ -32,6 +32,8 @@ async def on_message(m):
     if m.author.bot:
         return
     elif m.content == f'{prefix}api':
+        channel = client.get_channel(kidou_id)
+        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}apiを使用しました')
         embed = discord.Embed(title='APIリファレンス[1]', description='__バージョン関連情報__\n1:discord.version_info\n2:discord.`__version__`\n__Clients__\n3:discord.Client\n4:discord.AutoShardedClient\n__Application Info__\n5:discord.AppInfo\n6:discord.PartialAppInfo\n7:discord.Team\n__Voice Related__\n8:discord.VoiceClient\n9:discord.VoiceProtocol\n10:discord.AudioSource')
         message = await m.reply(content='1~10で数字を指定してください。\nnextで次のページ、endで受付を終了します。', embed=embed, mention_author=False)
         page = 1
@@ -910,6 +912,8 @@ async def on_message(m):
                 await msg.reply('!?!?!invalid index!?!?!', mention_author=False)
                 break
     elif m.content == f'{prefix}eval':
+        channel = client.get_channel(kidou_id)
+        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}evalを使用しました')
         if m.author.id == owner_id:
             await m.reply('実行するコードをどうぞ\nコードブロックでもokです', mention_author=False)
             def check(me):
@@ -931,6 +935,8 @@ async def on_message(m):
                 t = ''.join(traceback.format_exception(type(e), e, e.__traceback__))
                 await msg.reply(f'```powershell\n{t}\n```', mention_author=False)
     elif m.content == f'{prefix}rank':
+        channel = client.get_channel(kidou_id)
+        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}rankを使用しました')
         rank_path = Path(f'u{m.author.id}.txt')
         if rank_path.exists():
             f = open(rank_path, 'r')
@@ -948,44 +954,36 @@ async def on_message(m):
             data = int(data)
             await m.reply(f'あなたの発言数は{data}です。', mention_author=False)
     elif m.content == f'{prefix}help':
+        channel = client.get_channel(kidou_id)
+        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}helpを使用しました')
         await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]'), mention_author=False)
     elif m.content == f'{prefix}slot':
+        channel = client.get_channel(kidou_id)
+        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}slotを使用しました')
         list_A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
         a = random.choice(list_A)
         b = random.choice(list_a)
         c = random.choice(list_A)
         await m.reply(f'||{a}||||{b}||||{c}||', mention_author=False)
     elif m.content == f'{prefix}now':
+        channel = client.get_channel(kidou_id)
+        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}now使用しました')
         now_2 = datetime.datetime.now()
         await m.reply(f'{now_2.year}年{now_2.month}月{now_2.day}日{now_2.hour + 9}時{now_2.minute}分{now_2.second}.{now_2.microsecond}秒', mention_author=False)
     elif m.content.startswith(f'{prefix}pin'):
+        channel = client.get_channel(kidou_id)
+        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}pinを使用しました')
         if m.guild != None:
             if m.author.guild_permissions.manage_messages:
                 list_msg = list(map(str, m.content.split()))
-                link = list(map(str, list_msg[1].split('/')))
-                if link[4] == '@me':
-                    channel = client.get_channel(int(link[5]))
-                    if channel == None:
-                        await m.reply('チャンネルが見つかりませんでした', mention_author=False)
-                    else:
-                        try:
-                            msg = await channel.fetch_message(int(link[6]))
-                        except:
-                            await m.reply('存在しないメッセージです', mention_author=False)
-                        else:
-                            try:
-                                await msg.pin()
-                            except:
-                                await m.reply('権限がありません', mention_author=False)
-                            else:
-                                await m.reply('ピン留めしました', mention_author=False)
+                if len(list_msg) != 2:
+                    await m.reply('y.pin [messagelink]で実行してください', mention_author=False)
                 else:
-                    id = int(link[4])
-                    guild = client.get_guild(id)
-                    id = m.author.id
-                    member = guild.get_member(id)
-                    if guild != None:
-                        if member.guild_permissions.manage_messages:
+                    link = list(map(str, list_msg[1].split('/')))
+                    if len(link) != 7 or link[2] != 'discord.com':
+                        await m.reply('正しいリンクを指定してください', mention_author=False)
+                    else:
+                        if link[4] == '@me':
                             channel = client.get_channel(int(link[5]))
                             if channel == None:
                                 await m.reply('チャンネルが見つかりませんでした', mention_author=False)
@@ -1002,9 +1000,31 @@ async def on_message(m):
                                     else:
                                         await m.reply('ピン留めしました', mention_author=False)
                         else:
-                            await m.reply('あなたは権限がないため使用できません', mention_author=False)
-                    else:
-                        await m.reply('サーバーが見つかりませんでした', mention_author=False)
+                            id = int(link[4])
+                            guild = client.get_guild(id)
+                            id = m.author.id
+                            member = guild.get_member(id)
+                            if guild != None:
+                                if member.guild_permissions.manage_messages:
+                                    channel = client.get_channel(int(link[5]))
+                                    if channel == None:
+                                        await m.reply('チャンネルが見つかりませんでした', mention_author=False)
+                                    else:
+                                        try:
+                                            msg = await channel.fetch_message(int(link[6]))
+                                        except:
+                                            await m.reply('存在しないメッセージです', mention_author=False)
+                                        else:
+                                            try:
+                                                await msg.pin()
+                                            except:
+                                                await m.reply('権限がありません', mention_author=False)
+                                            else:
+                                                await m.reply('ピン留めしました', mention_author=False)
+                                else:
+                                    await m.reply('あなたは権限がないため使用できません', mention_author=False)
+                            else:
+                                await m.reply('サーバーが見つかりませんでした', mention_author=False)
             else:
                 await m.reply('あなたは権限がないため使用できません', mention_author=False)
         else:
