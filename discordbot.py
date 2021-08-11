@@ -980,21 +980,31 @@ async def on_message(m):
                             else:
                                 await m.reply('ピン留めしました', mention_author=False)
                 else:
-                    channel = client.get_channel(int(link[5]))
-                    if channel == None:
-                        await m.reply('チャンネルが見つかりませんでした', mention_author=False)
-                    else:
-                        try:
-                            msg = await channel.fetch_message(int(link[6]))
-                        except:
-                            await m.reply('存在しないメッセージです', mention_author=False)
-                        else:
-                            try:
-                                await msg.pin()
-                            except:
-                                await m.reply('権限がありません', mention_author=False)
+                    id = int(link[3])
+                    guild = client.get_guild(id)
+                    id = m.author.id
+                    member = guild.get_member(id)
+                    if guild != None:
+                        if member.guild_permissions.manage_messages:
+                            channel = client.get_channel(int(link[5]))
+                            if channel == None:
+                                await m.reply('チャンネルが見つかりませんでした', mention_author=False)
                             else:
-                                await m.reply('ピン留めしました', mention_author=False)
+                                try:
+                                    msg = await channel.fetch_message(int(link[6]))
+                                except:
+                                    await m.reply('存在しないメッセージです', mention_author=False)
+                                else:
+                                    try:
+                                        await msg.pin()
+                                    except:
+                                        await m.reply('権限がありません', mention_author=False)
+                                    else:
+                                        await m.reply('ピン留めしました', mention_author=False)
+                        else:
+                            await m.reply('あなたは権限がないため使用できません', mention_author=False)
+                    else:
+                        await m.reply('サーバーが見つかりませんでした', mention_author=False)
             else:
                 await m.reply('あなたは権限がないため使用できません', mention_author=False)
         else:
