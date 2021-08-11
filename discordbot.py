@@ -958,7 +958,7 @@ async def on_message(m):
     elif m.content == f'{prefix}now':
         now_2 = datetime.datetime.now()
         await m.reply(f'{now_2.year}年{now_2.month}月{now_2.day}日{now_2.hour + 9}時{now_2.minute}分{now_2.second}.{now_2.microsecond}秒', mention_author=False)
-    elif m.conten.startswith(f'{prefix}pin'):
+    elif m.content.startswith(f'{prefix}pin'):
         if m.author.guild_permissions.manage_messages:
             list_msg = list(map(str, m.content.split()))
             link = list(map(str, list_msg[1].split('/')))
