@@ -948,7 +948,7 @@ async def on_message(m):
             data = int(data)
             await m.reply(f'あなたの発言数は{data}です。', mention_author=False)
     elif m.content == f'{prefix}help':
-        await m.reply(f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now', mention_author=False)
+        await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now'), mention_author=False)
     elif m.content == f'{prefix}slot':
         list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
         a = random.choice(list)
