@@ -956,7 +956,7 @@ async def on_message(m):
     elif m.content == f'{prefix}help':
         channel = client.get_channel(kidou_id)
         await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}helpを使用しました')
-        await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]'), mention_author=False)
+        await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n{prefix}say [description]'), mention_author=False)
     elif m.content == f'{prefix}slot':
         channel = client.get_channel(kidou_id)
         await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}slotを使用しました')
@@ -1029,6 +1029,18 @@ async def on_message(m):
                 await m.reply('あなたは権限がないため使用できません', mention_author=False)
         else:
             await m.reply('DMではできません', mention_author=False)
+    elif m.content.startswith(f'{prefix}say'):
+        channel = client.get_channel(kidou_id)
+        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}sayを使用しました')
+        list_msg = list(map(str, m.content.split()))
+        if len(list_msg) != 2:
+            await m.reply('y.say [description]の形で入力してください', mention_author=False)
+        else:
+            await m.channel.send(embed=discord.Embed(title=f'{m.author.name}のsay!', description=f'{list_msg[1]}')
+            try:
+                await m.delete()
+            except:
+                return
     else:
         path = Path(f'u{m.author.id}.txt')
         if path.exists():
