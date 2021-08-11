@@ -23,8 +23,8 @@ async def on_message(m):
     global count
     count += 1
     if count == 1:
-        now = datetime.datetime.now(datetime.timezone.utc)
-        await client.get_channel(kidou_id).send(embed=discord.Embed(title='起動！', description=f'{now.year}年{now.month}月{now.day}日{now.hour}時{now.minute}分{now.second}秒'))
+        now = datetime.datetime.now()
+        await client.get_channel(kidou_id).send(embed=discord.Embed(title='起動！', description=f'{now.year}年{now.month}月{now.day}日{now.hour + 9}時{now.minute}分{now.second}秒'))
         game = discord.Game(name=f'y.help|{len(client.guilds)}サーバー')
         await client.change_presence(activity=game)
     def check(me):
@@ -956,8 +956,8 @@ async def on_message(m):
         c = random.choice(list)
         await m.reply(f'||{a}||||{b}||||{c}||', mention_author=False)
     elif m.content == f'{prefix}now':
-        now_2 = datetime.datetime.now(datetime.timezone.utc)
-        await m.reply(f'{now_2.year}年{now_2.month}月{now_2.day}日{now_2.hour}時{now_2.minute}分{now_2.second}.{now_2.microsecond}秒', mention_author=False)
+        now_2 = datetime.datetime.now()
+        await m.reply(f'{now_2.year}年{now_2.month}月{now_2.day}日{now_2.hour + 9}時{now_2.minute}分{now_2.second}.{now_2.microsecond}秒', mention_author=False)
     else:
         path = Path(f'u{m.author.id}.txt')
         if path.exists():
