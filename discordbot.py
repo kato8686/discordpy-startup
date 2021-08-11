@@ -980,7 +980,7 @@ async def on_message(m):
                             else:
                                 await m.reply('ピン留めしました', mention_author=False)
                 else:
-                    id = int(link[3])
+                    id = int(link[4])
                     guild = client.get_guild(id)
                     id = m.author.id
                     member = guild.get_member(id)
