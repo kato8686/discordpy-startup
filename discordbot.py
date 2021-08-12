@@ -956,7 +956,7 @@ async def on_message(m):
     elif m.content == f'{prefix}help':
         channel = client.get_channel(kidou_id)
         await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}helpを使用しました')
-        await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n{prefix}say [description]'), mention_author=False)
+        await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}say [description]'), mention_author=False)
     elif m.content == f'{prefix}slot':
         channel = client.get_channel(kidou_id)
         await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}slotを使用しました')
@@ -1041,6 +1041,12 @@ async def on_message(m):
                 await m.delete()
             except:
                 return
+    elif m.content == f'{prefix}invites':
+        list_ = await m.guild.invites()
+        s = ''
+        for i in list_:
+            s += f'{i.url}\n作成者{i.inviter}, 使用回数{i.uses}\n'
+        await m.reply(embed=discord.Embed(title=f'{m.guild.name}の招待リンク一覧', description=s), mention_author=False)
     else:
         path = Path(f'u{m.author.id}.txt')
         if path.exists():
