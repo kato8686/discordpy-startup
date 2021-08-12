@@ -953,10 +953,6 @@ async def on_message(m):
             f.close()
             data = int(data)
             await m.reply(f'あなたの発言数は{data}です。', mention_author=False)
-    elif m.content == f'{prefix}help':
-        channel = client.get_channel(kidou_id)
-        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}helpを使用しました')
-        await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}say [description]\n・{prefix}invites'), mention_author=False)
     elif m.content == f'{prefix}slot':
         channel = client.get_channel(kidou_id)
         await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}slotを使用しました')
@@ -1052,6 +1048,35 @@ async def on_message(m):
             await m.reply(embed=discord.Embed(title=f'{m.guild.name}の招待リンク一覧', description=s), mention_author=False)
         except:
             await m.reply('多すぎます！これもう管理に影響してるんじゃないんですか…？', mention_author=False)
+    elif m.content.startswith(f'{prefix}rename'):
+        channel = client.get_channel(kidou_id)
+        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}renameを使用しました')
+        member = m.guild.get_member(m.author.id)
+        if m.guild == None:
+            await m.reply('DMでは使用できません', mention_author=False)
+        else:
+            if member.guild_permissions.manage_nicknames:
+                list_msg = list(map(str, m.content.split()))
+                if len(list_msg) != 3:
+                    await m.reply(f'{prefix}rename [targetid] [name]の形で実行してください。', mention_author=False)
+                else:
+                    try:
+                        target = m.guild.get_member(int(list_msg[1]))
+                    except:
+                        await m.reply('invalid id', mention_author=False)
+                    else:
+                        try:
+                            await target.edit(nick=list_msg[2])
+                        except:
+                            await m.reply('i dont have permission', mention_author=False)
+                        else:
+                            await m.reply('done', mention_author=False)
+            else:
+                await m.reply('あなたは権限を持っていません。', mention_author=False)
+    elif m.content == f'{prefix}help':
+        channel = client.get_channel(kidou_id)
+        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}helpを使用しました')
+        await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}say [description]\n・{prefix}invites\n・{prefix}[targetid] [name]'), mention_author=False)
     else:
         path = Path(f'u{m.author.id}.txt')
         if path.exists():
