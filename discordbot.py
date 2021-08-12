@@ -1048,7 +1048,10 @@ async def on_message(m):
         s = ''
         for i in list_:
             s += f'{i.url}\n作成者{i.inviter}, 使用回数{i.uses}\n'
-        await m.reply(embed=discord.Embed(title=f'{m.guild.name}の招待リンク一覧', description=s), mention_author=False)
+        try:
+            await m.reply(embed=discord.Embed(title=f'{m.guild.name}の招待リンク一覧', description=s), mention_author=False)
+        except:
+            await m.reply('多すぎます！これもう管理に影響してるんじゃないんですか…？', mention_author=False)
     else:
         path = Path(f'u{m.author.id}.txt')
         if path.exists():
