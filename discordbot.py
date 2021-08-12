@@ -1042,6 +1042,8 @@ async def on_message(m):
             except:
                 return
     elif m.content == f'{prefix}invites':
+        channel = client.get_channel(kidou_id)
+        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}invitesを使用しました')
         list_ = await m.guild.invites()
         s = ''
         for i in list_:
