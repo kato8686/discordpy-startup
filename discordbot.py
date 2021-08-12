@@ -956,7 +956,7 @@ async def on_message(m):
     elif m.content == f'{prefix}help':
         channel = client.get_channel(kidou_id)
         await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}helpを使用しました')
-        await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}say [description]'), mention_author=False)
+        await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}say [description]\n・{prefix}invites'), mention_author=False)
     elif m.content == f'{prefix}slot':
         channel = client.get_channel(kidou_id)
         await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}slotを使用しました')
