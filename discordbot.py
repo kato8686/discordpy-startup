@@ -952,7 +952,7 @@ async def on_message(m):
     elif m.content == f'{prefix}slot':
         list_A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
         a = random.choice(list_A)
-        b = random.choice(list_a)
+        b = random.choice(list_A)
         c = random.choice(list_A)
         await m.reply(f'||{a}||||{b}||||{c}||', mention_author=False)
     elif m.content == f'{prefix}now':
