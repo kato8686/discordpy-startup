@@ -1,7 +1,7 @@
 import MySQLdb
 
 # 接続する
-conn = MySQLdb.connect(
+con = MySQLdb.connect(
 user='root',
 passwd='root',
 host='localhost',
