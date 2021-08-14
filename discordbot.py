@@ -32,8 +32,6 @@ async def on_message(m):
     if m.author.bot:
         return
     elif m.content == f'{prefix}api':
-        channel = client.get_channel(kidou_id)
-        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}apiを使用しました')
         embed = discord.Embed(title='APIリファレンス[1]', description='__バージョン関連情報__\n1:discord.version_info\n2:discord.`__version__`\n__Clients__\n3:discord.Client\n4:discord.AutoShardedClient\n__Application Info__\n5:discord.AppInfo\n6:discord.PartialAppInfo\n7:discord.Team\n__Voice Related__\n8:discord.VoiceClient\n9:discord.VoiceProtocol\n10:discord.AudioSource')
         message = await m.reply(content='1~10で数字を指定してください。\nnextで次のページ、endで受付を終了します。', embed=embed, mention_author=False)
         page = 1
