@@ -1055,8 +1055,10 @@ async def on_message(m):
                             await m.reply('done', mention_author=False)
             else:
                 await m.reply('あなたは権限を持っていません。', mention_author=False)
+    elif m.content == f'{prefix}reimu':
+        await m.reply('https://media.discordapp.net/attachments/873162873453576202/875918520985215076/67c21681.jpg', mention_author=False)
     elif m.content == f'{prefix}help':
-        await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}say [description]\n・{prefix}invites\n・{prefix}rename [targetid] [name]'), mention_author=False)
+        await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}say [description]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}reimu'), mention_author=False)
     else:
         path = Path(f'u{m.author.id}.txt')
         if path.exists():
