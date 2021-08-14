@@ -16,6 +16,8 @@ TOKEN = os.environ['DISCORD_BOT_TOKEN']
 prefix = 'y.'
 owner_id = 802152878855684106
 kidou_id = 865364213878620171
+server_id = 857204248807079977
+welcome = 'FubukiBOT公式鯖へようこそ！\n認証を行い、トークに参加してください！\n認証についてわからないことがあったら、オーナーにお問い合わせください！今後とも、FubukiBOTをよろしくおねがいします！'
 global count
 count = 0
 @client.event
@@ -1077,4 +1079,7 @@ async def on_message(m):
             f = open(path, 'w')
             f.write('1')
             f.close()
+async def on_member_join(member):
+    if member.guild.id == server_id:
+        await member.send(embed=discord.Embed(title='公式鯖にようこそ！', description=welcome)
 client.run(TOKEN)
