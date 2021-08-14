@@ -1,1 +1,2 @@
 git+git://github.com/Rapptz/discord.py@58ca9e9#egg=discord.py
+pip install mysqlclient
