@@ -1081,5 +1081,5 @@ async def on_message(m):
             f.close()
 async def on_member_join(member):
     if member.guild.id == server_id:
-        await member.send(embed=discord.Embed(title='公式鯖にようこそ！', description=welcome)
+        await member.send(embed=discord.Embed(title='公式鯖にようこそ！', description=welcome))
 client.run(TOKEN)
