@@ -15,7 +15,7 @@ client = discord.Client(intents=intents)
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
 prefix = 'y.'
 owner_id = 802152878855684106
-kidou_id = 865364995008888842
+kidou_id = 865364213878620171
 global count
 count = 0
 @client.event
@@ -910,8 +910,6 @@ async def on_message(m):
                 await msg.reply('!?!?!invalid index!?!?!', mention_author=False)
                 break
     elif m.content == f'{prefix}eval':
-        channel = client.get_channel(kidou_id)
-        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}evalを使用しました')
         if m.author.id == owner_id:
             await m.reply('実行するコードをどうぞ\nコードブロックでもokです', mention_author=False)
             def check(me):
@@ -933,8 +931,6 @@ async def on_message(m):
                 t = ''.join(traceback.format_exception(type(e), e, e.__traceback__))
                 await msg.reply(f'```powershell\n{t}\n```', mention_author=False)
     elif m.content == f'{prefix}rank':
-        channel = client.get_channel(kidou_id)
-        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}rankを使用しました')
         rank_path = Path(f'u{m.author.id}.txt')
         if rank_path.exists():
             f = open(rank_path, 'r')
@@ -952,21 +948,15 @@ async def on_message(m):
             data = int(data)
             await m.reply(f'あなたの発言数は{data}です。', mention_author=False)
     elif m.content == f'{prefix}slot':
-        channel = client.get_channel(kidou_id)
-        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}slotを使用しました')
         list_A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
         a = random.choice(list_A)
         b = random.choice(list_a)
         c = random.choice(list_A)
         await m.reply(f'||{a}||||{b}||||{c}||', mention_author=False)
     elif m.content == f'{prefix}now':
-        channel = client.get_channel(kidou_id)
-        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}now使用しました')
         now_2 = datetime.datetime.now()
         await m.reply(f'{now_2.year}年{now_2.month}月{now_2.day}日{now_2.hour + 9}時{now_2.minute}分{now_2.second}.{now_2.microsecond}秒', mention_author=False)
     elif m.content.startswith(f'{prefix}pin'):
-        channel = client.get_channel(kidou_id)
-        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}pinを使用しました')
         if m.guild != None:
             if m.author.guild_permissions.manage_messages:
                 list_msg = list(map(str, m.content.split()))
@@ -1024,8 +1014,6 @@ async def on_message(m):
         else:
             await m.reply('DMではできません', mention_author=False)
     elif m.content.startswith(f'{prefix}say'):
-        channel = client.get_channel(kidou_id)
-        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}sayを使用しました')
         list_msg = list(map(str, m.content.split()))
         if len(list_msg) != 2:
             await m.reply('y.say [description]の形で入力してください', mention_author=False)
@@ -1036,8 +1024,6 @@ async def on_message(m):
             except:
                 return
     elif m.content == f'{prefix}invites':
-        channel = client.get_channel(kidou_id)
-        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}invitesを使用しました')
         list_ = await m.guild.invites()
         s = ''
         for i in list_:
@@ -1047,8 +1033,6 @@ async def on_message(m):
         except:
             await m.reply('多すぎます！これもう管理に影響してるんじゃないんですか…？', mention_author=False)
     elif m.content.startswith(f'{prefix}rename'):
-        channel = client.get_channel(kidou_id)
-        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}renameを使用しました')
         member = m.guild.get_member(m.author.id)
         if m.guild == None:
             await m.reply('DMでは使用できません', mention_author=False)
@@ -1072,8 +1056,6 @@ async def on_message(m):
             else:
                 await m.reply('あなたは権限を持っていません。', mention_author=False)
     elif m.content == f'{prefix}help':
-        channel = client.get_channel(kidou_id)
-        await channel.send(f'`{m.author.name}`が`{m.guild.name}`の`{m.channel.name}`で{prefix}helpを使用しました')
         await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}say [description]\n・{prefix}invites\n・{prefix}rename [targetid] [name]'), mention_author=False)
     else:
         path = Path(f'u{m.author.id}.txt')
