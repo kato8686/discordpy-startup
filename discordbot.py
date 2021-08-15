@@ -1064,7 +1064,7 @@ async def on_message(m):
     elif m.content == f'{prefix}emoji':
         await m.reply(random.choice(client.emojis), mention_author=False)
     elif m.content == f'{prefix}help':
-        await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}say [description]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}reimu\n・{prefix}otofu'), mention_author=False)
+        await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}say [description]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}reimu\n・{prefix}otofu\n・{prefix}emoji'), mention_author=False)
     else:
         path = Path(f'u{m.author.id}.txt')
         if path.exists():
