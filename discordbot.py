@@ -1065,6 +1065,13 @@ async def on_message(m):
         await m.reply(random.choice(client.emojis), mention_author=False)
     elif m.content == f'{prefix}art':
         await m.reply('```\n██████╗░░█████╗░  ███╗░░██╗░█████╗░████████╗  ███████╗██╗██████╗░███████╗  ████████╗░█████╗░\n██╔══██╗██╔══██╗  ████╗░██║██╔══██╗╚══██╔══╝  ██╔════╝██║██╔══██╗██╔════╝  ╚══██╔══╝██╔══██╗\n██║░░██║██║░░██║  ██╔██╗██║██║░░██║░░░██║░░░  █████╗░░██║██████╔╝█████╗░░  ░░░██║░░░██║░░██║\n██║░░██║██║░░██║  ██║╚████║██║░░██║░░░██║░░░  ██╔══╝░░██║██╔══██╗██╔══╝░░  ░░░██║░░░██║░░██║\n██████╔╝╚█████╔╝  ██║░╚███║╚█████╔╝░░░██║░░░  ██║░░░░░██║██║░░██║███████╗  ░░░██║░░░╚█████╔╝\n╚═════╝░░╚════╝░  ╚═╝░░╚══╝░╚════╝░░░░╚═╝░░░  ╚═╝░░░░░╚═╝╚═╝░░╚═╝╚══════╝  ░░░╚═╝░░░░╚════╝░\n\n███╗░░░███╗███████╗\n████╗░████║██╔════╝\n██╔████╔██║█████╗░░\n██║╚██╔╝██║██╔══╝░░\n██║░╚═╝░██║███████╗\n╚═╝░░░░░╚═╝╚══════╝\n```', mention_author=False)
+    elif m.channel.id == 876355240625057822:
+        try:
+            await m.author.edit(nick=m.content)
+        except discord.Forbidden:
+            await m.reply('権限がありません。ロールの位置などを確認してください。', mention_author=False)
+        except discord.HTTPException:
+            await m.reply('長すぎます。（多分）', mention_author=False)
     elif m.content == f'{prefix}help':
         await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}say [description]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}reimu\n・{prefix}otofu\n・{prefix}emoji\n・{prefix}art'), mention_author=False)
     else:
