@@ -938,24 +938,32 @@ async def on_message(m):
             except Exception as e:
                 t = ''.join(traceback.format_exception(type(e), e, e.__traceback__))
                 await msg.reply(f'```powershell\n{t}\n```', mention_author=False)
-    elif m.content == f'{prefix}rank':
+    elif m.content == f'{prefix}ui':
         cur.execute('SELECT * FROM user_data;')
+        talk_dic = {}
+        slot_dic = {}
+        slot = 0
+        talk = 0
         boo = False
-        dic = {}
-        rank = []
-        user_id = 0
         for i in cur:
-            if i[0] == str(m.author.id):
+            if str(m.author.id) == i[0]:
                 boo = True
-                await m.reply(f'あなたの発言数は{i[2]}です。', mention_author=False)
-            dic[int(i[0])] = int(i[2])
+                slot = int(i[1])
+                talk = int(i[2])
+            talk_dic[int(i[0])] = int(i[2])
+            slot_dic[int(i[0])] = int(i[1])
+        talk_dic = sorted(talk_dic.items(), key=lambda x:x[1], reverse=True)
+        slot_dic = sorted(slot_dic.items(), key=lambda x:x[1], reverse=True)
+        talk_rank = []
+        slot_rank = []
+        for i in talk_dic:
+            talk_rank.append(i[0])
+        for i in slot_dic:
+            slot_rank.append(i[0])
         if boo:
-            dic = sorted(dic.items(), key=lambda x:x[1], reverse=True)
-            for i in dic:
-                rank.append(i[0])
-            await m.reply(f'{rank.index(m.author.id) + 1}位です', mention_author=False)
+            await m.reply(embed=discord.Embed(title=f'<@{m.author.id}>のデータ', description=f'～会話～\n回数：{talk}\n順位：{talk_rank.index(m.author.id) + 1}位\n\n～スロット～\n当選回数：{slot}\n順位：{slot_rank.index(m.author.id) + 1}位'), mention_author=False)
         else:
-            await m.reply('あなたはまだ発言数のデータがありません。', mention_author=False)
+            await m.reply('your date is not find.', mention_author=False)
     elif m.content == f'{prefix}slot':
         list_A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
         a = random.choice(list_A)
