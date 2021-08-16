@@ -953,7 +953,6 @@ async def on_message(m):
             dic = sorted(dic.items(), key=lambda x:x[1], reverse=True)
             for i in dic:
                 rank.append(i[0])
-            print(rank)
             await m.reply(f'{rank.index(m.author.id) + 1}位です', mention_author=False)
         else:
             await m.reply('あなたはまだ発言数のデータがありません。', mention_author=False)
