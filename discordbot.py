@@ -961,7 +961,7 @@ async def on_message(m):
         b = random.choice(list_A)
         c = random.choice(list_A)
         await m.reply(f'||{a}||||{b}||||{c}||', mention_author=False)
-        if a == b and b == c:
+        if True:
             cur.execute('CREATE TABLE IF NOT EXISTS user_data (\
                         id text,\
                         slotcount text\
