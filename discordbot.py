@@ -1094,8 +1094,8 @@ async def on_message(m):
         for i in cur:
             if i[0] == str(m.author.id):
                 boo = True
-                slot = i[1]
-                talk = i[2]
+                slot = int(i[1])
+                talk = int(i[2])
         if boo:
             talk += 1
             cur.execute(f'DELETE FROM user_data WHERE id = \'{m.author.id}\';\
