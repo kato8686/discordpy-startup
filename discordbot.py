@@ -1088,8 +1088,8 @@ async def on_message(m):
                     slot text,\
                     talk text\
                     );\
-                    SELECT * FROM user_data;\
-                    COMMIT;')
+                    COMMIT;\
+                    SELECT * FROM user_data;')
         boo = False
         for i in cur:
             if i[0] == str(m.author.id):
