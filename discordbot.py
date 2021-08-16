@@ -24,6 +24,14 @@ count = 0
 def get_connection():
     dsn = os.environ['DATABASE_URL']
     return psycopg2.connect(dsn)
+con = get_connection()
+cur = con.cursor()
+cur.execute('CREATE TABLE test (\
+            name text,\
+            id text\
+            );')
+cur.close()
+con.close()
 @client.event
 async def on_message(m):
     global count
@@ -1081,11 +1089,7 @@ async def on_message(m):
     elif m.content == f'{prefix}test':
         con = get_connection()
         cur = con.cursor()
-        cur.execute(f'CREATE TABLE test (\
-                    name text,\
-                    id text\
-                    );\
-                    INSERT INTO test (name, id) VALUES (\'{m.author.name}\', \'{m.author.id}\');\
+        cur.execute(f'INSERT INTO test (name, id) VALUES (\'{m.author.name}\', \'{m.author.id}\');\
                     SELECT * FROM test;')
         for i in cur:
             await m.reply(i)
