@@ -981,6 +981,8 @@ async def on_message(m):
             else:
                 cur.execute(f'INSERT INTO user_data VALUES (\'{m.author.id}\', \'1\');\
                             COMMIT;')
+                num = 1
+            await m.reply(f'当たりました！{num}回目です！', mention_author=False)
     elif m.content == f'{prefix}now':
         now_2 = datetime.datetime.now()
         await m.reply(f'{now_2.year}年{now_2.month}月{now_2.day}日{now_2.hour + 9}時{now_2.minute}分{now_2.second}.{now_2.microsecond}秒', mention_author=False)
