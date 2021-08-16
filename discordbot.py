@@ -1081,7 +1081,7 @@ async def on_message(m):
         except discord.HTTPException:
             await m.reply('長すぎます。（多分）', mention_author=False)
     elif m.content == f'{prefix}test':
-        cur.execute(f'CREATE TABLE [ IF NOT EXISTS ] test (\
+        cur.execute(f'CREATE TABLE IF NOT EXISTS test (\
                     name text,\
                     id text\
                     );\
