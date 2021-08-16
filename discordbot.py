@@ -961,28 +961,6 @@ async def on_message(m):
         b = random.choice(list_A)
         c = random.choice(list_A)
         await m.reply(f'||{a}||||{b}||||{c}||', mention_author=False)
-        if a == b and b == c:
-            cur.execute('CREATE TABLE IF NOT EXISTS user_data (\
-                        id text,\
-                        slotcount text\
-                        );\
-                        COMMIT;\
-                        SELECT * FROM user_data;')
-            boo = False
-            for i in cur:
-                if i[0] == str(m.author.id):
-                    boo = True
-                    num = int(i[1])
-            if boo:
-                num += 1
-                cur.execute(f'DELETE FROM user_data WHERE id = \'{m.author.id}\';\
-                            INSERT INTO user_data VALUES (\'{m.author.id}\', \'{num}\');\
-                            COMMIT;')
-            else:
-                cur.execute(f'INSERT INTO user_data VALUES (\'{m.author.id}\', \'1\');\
-                            COMMIT;')
-                num = 1
-            await m.reply(f'当たりました！{num}回目です！', mention_author=False)
     elif m.content == f'{prefix}now':
         now_2 = datetime.datetime.now()
         await m.reply(f'{now_2.year}年{now_2.month}月{now_2.day}日{now_2.hour + 9}時{now_2.minute}分{now_2.second}.{now_2.microsecond}秒', mention_author=False)
@@ -1104,6 +1082,32 @@ async def on_message(m):
             await m.reply('長すぎます。（多分）', mention_author=False)
     elif m.content == f'{prefix}help':
         await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}say [description]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}reimu\n・{prefix}otofu\n・{prefix}emoji\n・{prefix}art\n・{prefix}omikuji'), mention_author=False)
+    else:
+        cur.execute('CREAET TABLE IF NOT EXISTS user_data (\
+                    id text,\
+                    slot text,\
+                    talk text\
+                    );\
+                    SELECT * FROM user_data;\
+                    COMMIT;')
+        boo = False
+        for i in cur:
+            if i[0] == str(m.author.id):
+                boo = True
+        if boo:
+            slot = 0
+            talk = 0
+            for i in cur:
+                if i[0] == str(m.author.id):
+                    slot = int(i[1])
+                    talk = int(i[2])
+            talk += 1
+            cur.execute(f'DELETE FROM user_data WHERE id = \'{m.author.id}\';\
+                        INSERT INTO user_data VALUES (\'{m.author.id}\', \'{slot}\', \'{talk}\');\
+                        COMMIT;')
+        else:
+            cur.execute(f'INSERT INTO user_data VALUES (\'{m.author.id}\', \'0\', \'1\');\
+                        COMMIT;')
 async def on_member_join(member):
     if member.guild.id == server_id:
         await member.send(embed=discord.Embed(title='公式鯖にようこそ！', description=welcome))
