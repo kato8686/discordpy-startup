@@ -1081,11 +1081,11 @@ async def on_message(m):
     elif m.content == f'{prefix}test':
         con = get_connection()
         cur = con.cursor()
-        cur.execute('CREATE TABLE test (\
+        cur.execute(f'CREATE TABLE test (\
                     name text,\
                     id int\
                     );\
-                    INSERT INTO test VALUES (m.author.name, m.author.id);\
+                    INSERT INTO test VALUES ({m.author.name}, {m.author.id});\
                     SELECT * FROM test;')
         for i in cur:
             await m.reply(i)
