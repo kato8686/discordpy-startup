@@ -1099,10 +1099,10 @@ async def on_message(m):
         if boo:
             talk += 1
             cur.execute(f'DELETE FROM user_data WHERE id = \'{m.author.id}\';\
-                        INSERT INTO user_data VALUES (\'{m.author.id}\', \'{slot}\', \'{talk}\');\
+                        INSERT INTO user_data (id, slot, talk) VALUES (\'{m.author.id}\', \'{slot}\', \'{talk}\');\
                         COMMIT;')
         else:
-            cur.execute(f'INSERT INTO user_data VALUES (\'{m.author.id}\', \'0\', \'1\');\
+            cur.execute(f'INSERT INTO user_data (id, slot, talk) VALUES (\'{m.author.id}\', \'0\', \'1\');\
                         COMMIT;')
 async def on_member_join(member):
     if member.guild.id == server_id:
