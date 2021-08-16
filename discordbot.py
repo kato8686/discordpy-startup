@@ -955,6 +955,29 @@ async def on_message(m):
         b = random.choice(list_A)
         c = random.choice(list_A)
         await m.reply(f'||{a}||||{b}||||{c}||', mention_author=False)
+        if a == b and b == c:
+            cur.execute('CREATE TABLE IF NOT EXISTS user_data (\
+                        id text,\
+                        slot text,\
+                        talk text\
+                        );\
+                        COMMIT;\
+                        SELECT * FROM user_data;')
+            boo = False
+            for i in cur:
+                if i[0] == str(m.author.id):
+                    boo = True
+                    slot = int(i[1])
+                    talk = int(i[2])
+            if boo:
+                slot += 1
+                cur.execute(f'DELETE FROM user_data WHERE id = \'{m.author.id}\';\
+                            INSERT INTO user_data VALUES (\'{m.author.id}\', \'{slot}\', \'{talk}\');\
+                            COMMIT;')
+            else:
+                cur.execute(f'INSERT INTO user_data VALUES (\'{m.author.id}\', \'1'\, \'0\');\
+                            COMMIT;')
+            await m.reply(f'当選しました！あなたの当選回数は合計で{slot}回です！', mention_author=False)
     elif m.content == f'{prefix}now':
         now_2 = datetime.datetime.now()
         await m.reply(f'{now_2.year}年{now_2.month}月{now_2.day}日{now_2.hour + 9}時{now_2.minute}分{now_2.second}.{now_2.microsecond}秒', mention_author=False)
