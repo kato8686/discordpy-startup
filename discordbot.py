@@ -1080,34 +1080,13 @@ async def on_message(m):
             await m.reply('権限がありません。ロールの位置などを確認してください。', mention_author=False)
         except discord.HTTPException:
             await m.reply('長すぎます。（多分）', mention_author=False)
-    elif m.content == f'{prefix}test':
-        cur.execute(f'CREATE TABLE IF NOT EXISTS test (\
-                    name text,\
-                    id text\
-                    );\
-                    INSERT INTO test (name, id) VALUES (\'{m.author.name}\', \'{m.author.id}\');\
-                    COMMIT;\
-                    SELECT * FROM test;')
-        for i in cur:
-            await m.reply(i)
     elif m.content == f'{prefix}help':
         await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}rank\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}say [description]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}reimu\n・{prefix}otofu\n・{prefix}emoji\n・{prefix}art\n・{prefix}omikuji'), mention_author=False)
     else:
-        path = Path(f'u{m.author.id}.txt')
-        if path.exists():
-            f = open(path, 'r')
-            data = f.read()
-            f.close()
-            data = int(data)
-            data += 1
-            f.close()
-            f = open(path, 'w')
-            f.write(f'{data}')
-            f.close()
-        else:
-            f = open(path, 'w')
-            f.write('1')
-            f.close()
+        cur.execute(f'CREATE TABLE IF NOT EXISTS userdeta (\
+                    id text,\
+                    count text\
+                    );')
 async def on_member_join(member):
     if member.guild.id == server_id:
         await member.send(embed=discord.Embed(title='公式鯖にようこそ！', description=welcome))
