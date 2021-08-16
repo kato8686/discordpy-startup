@@ -28,7 +28,7 @@ con = get_connection()
 cur = con.cursor()
 cur.execute('CREATE TABLE test (\
             author string,\
-           id int,\
+           id int\
            );')
 cur.close()
 con.close()
