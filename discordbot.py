@@ -27,7 +27,7 @@ def get_connection():
 con = get_connection()
 cur = con.cursor()
 cur.execute('CREATE TABLE test (\
-            author string,\
+            author text,\
            id int\
            );')
 cur.close()
