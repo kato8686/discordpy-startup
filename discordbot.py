@@ -961,6 +961,26 @@ async def on_message(m):
         b = random.choice(list_A)
         c = random.choice(list_A)
         await m.reply(f'||{a}||||{b}||||{c}||', mention_author=False)
+        if a == b and b == c:
+            cur.execute('CREATE TABLE IF NOT EXISTS user_data (\
+                        id text,\
+                        slotcount text\
+                        );\
+                        COMMIT;\
+                        SELECT * FROM user_data;')
+            boo = False
+            for i in cur:
+                if i[0] == str(m.author.id):
+                    boo = True
+                    num = int(i[1])
+            if boo:
+                num += 1
+                cur.execute(f'DELETE FROM user_data WHERE id = '{m.author.id}';\
+                            INSERT INTO user_data VALUES (\'{m.author.id}\', \'{num}\');\
+                            COMMIT;')
+            else:
+                cur.execute(f'INSERT INTO user_data VALUES (\'{m.author.id}\', \'1\');\
+                            COMMIT;')
     elif m.content == f'{prefix}now':
         now_2 = datetime.datetime.now()
         await m.reply(f'{now_2.year}年{now_2.month}月{now_2.day}日{now_2.hour + 9}時{now_2.minute}分{now_2.second}.{now_2.microsecond}秒', mention_author=False)
