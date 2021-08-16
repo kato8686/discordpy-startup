@@ -939,22 +939,16 @@ async def on_message(m):
                 t = ''.join(traceback.format_exception(type(e), e, e.__traceback__))
                 await msg.reply(f'```powershell\n{t}\n```', mention_author=False)
     elif m.content == f'{prefix}rank':
-        rank_path = Path(f'u{m.author.id}.txt')
-        if rank_path.exists():
-            f = open(rank_path, 'r')
-            data = f.read()
-            f.close()
-            data = int(data)
-            await m.reply(f'あなたの発言数は{data}です。', mention_author=False)
+        cur.execute('SELECT * FROM user_data;')
+        boo = False
+        for i in cur:
+            if i[0] == str(m.author.id):
+                boo = True
+                await m.reply(f'あなたの発言数は{i[2]}です。', mention_author=False)
+        if boo:
+            return
         else:
-            f = open(rank_path, 'w')
-            f.write('1')
-            f.close()
-            f = open(rank_path, 'r')
-            data = f.read()
-            f.close()
-            data = int(data)
-            await m.reply(f'あなたの発言数は{data}です。', mention_author=False)
+            await m.reply('あなたはまだ発言数のデータがありません。', mention_author=False)
     elif m.content == f'{prefix}slot':
         list_A = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
         a = random.choice(list_A)
