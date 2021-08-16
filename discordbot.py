@@ -6,9 +6,7 @@ def get_connection():
     return psycopg2.connect(dsn)
 conn = get_connection()
 cur = conn.cursor()
-cur.execute('CREATE TABLE test (id int);\
-            INSERT INTO test VALUES (1);\
-            SELECT * FROM test;')
+cur.execute('SELECT * FROM test;')
 for i in cur:
     print(i)
 cur.close()
