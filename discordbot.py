@@ -975,7 +975,7 @@ async def on_message(m):
                     num = int(i[1])
             if boo:
                 num += 1
-                cur.execute(f'DELETE FROM user_data WHERE id = '{m.author.id}';\
+                cur.execute(f'DELETE FROM user_data WHERE id = \'{m.author.id}\';\
                             INSERT INTO user_data VALUES (\'{m.author.id}\', \'{num}\');\
                             COMMIT;')
             else:
