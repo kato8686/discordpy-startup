@@ -985,6 +985,15 @@ async def on_message(m):
                 cur.execute(f'INSERT INTO user_data VALUES (\'{m.author.id}\', \'1\', \'0\');\
                             COMMIT;')
             await m.reply(f'当選しました！あなたの当選回数は合計で{slot}回です！', mention_author=False)
+            cur.execute('SELECT * FROM user_data;')
+            dic = {}
+            for i in cur:
+                dic[int(i[0])] = int(i[1])
+            dic = sorted(dic.items(), key=lambda x:x[1], reverse=True)
+            rank = []
+            for i in dic:
+                rank.append(i[0])
+            await m.reply(f'{rank.index(m.author.id) + 1}位です。', mention_author=False)
     elif m.content == f'{prefix}now':
         now_2 = datetime.datetime.now()
         await m.reply(f'{now_2.year}年{now_2.month}月{now_2.day}日{now_2.hour + 9}時{now_2.minute}分{now_2.second}.{now_2.microsecond}秒', mention_author=False)
