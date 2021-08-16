@@ -7,7 +7,7 @@ def get_connection():
 conn = get_connection()
 cur = conn.cursor()
 cur.execute('CREATE TABLE test (id int);\
-            INSERT INTO VALUES (1);\
+            INSERT INTO test VALUES (1);\
             SELECT * FROM test;')
 print(cur)
 cur.close()
