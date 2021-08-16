@@ -950,7 +950,7 @@ async def on_message(m):
                 await m.reply(f'あなたの発言数は{i[2]}です。', mention_author=False)
             dic[int(i[0])] = int(i[2])
         if boo:
-                    dic = sorted(dic.items(), key=lambda x:x[1], reverse=True)
+            dic = sorted(dic.items(), key=lambda x:x[1], reverse=True)
             for i in dic:
                 rank.append(i)
             await m.reply(f'{rank.index(m.author.id) + 1}位です', mention_author=False)
