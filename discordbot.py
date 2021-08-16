@@ -975,7 +975,7 @@ async def on_message(m):
                             INSERT INTO user_data VALUES (\'{m.author.id}\', \'{slot}\', \'{talk}\');\
                             COMMIT;')
             else:
-                cur.execute(f'INSERT INTO user_data VALUES (\'{m.author.id}\', \'1'\, \'0\');\
+                cur.execute(f'INSERT INTO user_data VALUES (\'{m.author.id}\', \'1\', \'0\');\
                             COMMIT;')
             await m.reply(f'当選しました！あなたの当選回数は合計で{slot}回です！', mention_author=False)
     elif m.content == f'{prefix}now':
