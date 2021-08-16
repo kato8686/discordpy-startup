@@ -1086,6 +1086,7 @@ async def on_message(m):
                     id text\
                     );\
                     INSERT INTO test (name, id) VALUES (\'{m.author.name}\', \'{m.author.id}\');\
+                    COMMIT;\
                     SELECT * FROM test;')
         for i in cur:
             await m.reply(i)
