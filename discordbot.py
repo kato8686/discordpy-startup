@@ -9,6 +9,7 @@ cur = conn.cursor()
 cur.execute('CREATE TABLE test (id int);\
             INSERT INTO test VALUES (1);\
             SELECT * FROM test;')
-print(cur)
+for i in cur:
+    print(i)
 cur.close()
 conn.close()
