@@ -22,6 +22,7 @@ server_id = 857204248807079977
 welcome = 'FubukiBOT公式鯖へようこそ！\nこの鯖ではニトロ抽選や最新情報のお知らせを行っています！\nぜひ抜けずにこのまま残っていてください！\n今後ともFubukiBOTをよろしくお願いします！'
 global count
 count = 0
+bump = True
 def get_connection():
     dsn = os.environ['DATABASE_URL']
     return psycopg2.connect(dsn)
@@ -1187,6 +1188,13 @@ async def on_message(m):
                 await m.reply(f'{prefix}remind [time]で入力してください。\ntimeには次の単位が使えます\nh:時間, m:分, s:秒\nまた、BOTが再起動すると途切れますがご了承ください。', mention_author=False)
         else:
             await m.reply(f'{prefix}remind [time]で入力してください。\ntimeには次の単位が使えます\nh:時間, m:分, s:秒\nまた、BOTが再起動すると途切れますがご了承ください。', mention_author=False)
+    elif m.content == '!d bump' and m.channel.id == 863679483521138698:
+        if bump:
+            bump = False
+            await m.reply('Bumpを検知、2時間後に通知します。', mention_author=False)
+            await asyncio.sleep(7200)
+            await m.channel.send(f'{client.get_guild(796546441702932481).get_role(873158106354434048).mention}Bumpできます！')
+            bump = True
     elif m.content == f'{prefix}help':
         await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}ui\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}say [description]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}reimu\n・{prefix}otofu\n・{prefix}emoji\n・{prefix}art\n・{prefix}omikuji'), mention_author=False)
     else:
