@@ -1,3 +1,4 @@
 git+git://github.com/Rapptz/discord.py@58ca9e9#egg=discord.py
 mysqlclient
 psycopg2
+discord-py-slash-command
