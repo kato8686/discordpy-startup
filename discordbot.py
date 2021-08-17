@@ -31,7 +31,7 @@ def get_connection():
 con = get_connection()
 cur = con.cursor()
 @slashclient.slash(name='member')
-_slash_member(ctx: SlashContext):
+async def _slash_member(ctx: SlashContext):
     await ctx.send(ctx.guild.member_count)
 @client.event
 async def on_message(m):
