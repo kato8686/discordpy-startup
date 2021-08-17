@@ -15,7 +15,7 @@ import datetime
 from discord_slash import SlashCommand, SlashContext
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
-slashclient = SlashCommand(client)
+slashclient = SlashCommand(client, sync_commands=True)
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
 prefix = 'y.'
 owner_id = 802152878855684106
