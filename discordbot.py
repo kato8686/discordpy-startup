@@ -965,7 +965,7 @@ async def on_message(m):
             for i in slot_dic:
                 slot_rank.append(i[0])
             if boo:
-                await m.reply(embed=discord.Embed(title=f'<@{m.author.id}>のデータ', description=f'～会話～\n回数：{talk}\n順位：{talk_rank.index(m.author.id) + 1}位\n\n～スロット～\n当選回数：{slot}\n順位：{slot_rank.index(m.author.id) + 1}位'), mention_author=False)
+                await m.reply(embed=discord.Embed(title=f'{m.author.name}のデータ', description=f'～会話～\n回数：{talk}\n順位：{talk_rank.index(m.author.id) + 1}位\n\n～スロット～\n当選回数：{slot}\n順位：{slot_rank.index(m.author.id) + 1}位'), mention_author=False)
             else:
                 await m.reply('your data is not find.', mention_author=False)
         elif len(list_msg) == 2:
@@ -991,7 +991,7 @@ async def on_message(m):
             for i in slot_dic:
                 slot_rank.append(i[0])
             if boo:
-                await m.reply(embed=discord.Embed(title=f'<@{list_msg[1]}>のデータ', description=f'～会話～\n回数：{talk}\n順位：{talk_rank.index(int(list_msg[1])) + 1}位\n\n～スロット～\n当選回数：{slot}\n順位：{slot_rank.index(int(list_msg[1])) + 1}位'), mention_author=False)
+                await m.reply(embed=discord.Embed(title=f'{client.get_user(int(list_msg[1])).name}のデータ', description=f'～会話～\n回数：{talk}\n順位：{talk_rank.index(int(list_msg[1])) + 1}位\n\n～スロット～\n当選回数：{slot}\n順位：{slot_rank.index(int(list_msg[1])) + 1}位'), mention_author=False)
             else:
                 await m.reply('data is not find.', mention_author=False)
     elif m.content == f'{prefix}slot':
