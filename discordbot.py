@@ -30,9 +30,9 @@ def get_connection():
     return psycopg2.connect(dsn)
 con = get_connection()
 cur = con.cursor()
-@slashclient.slash(name='member')
+@slashclient.slash(name='test')
 async def _slash_member(ctx: SlashContext):
-    await ctx.send(ctx.guild.member_count)
+    await ctx.send('test')
 @client.event
 async def on_message(m):
     global count
