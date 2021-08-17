@@ -3,6 +3,7 @@
 #webhook test
 
 import psycopg2
+import asyncio
 import discord
 import io
 from contextlib import redirect_stdout
