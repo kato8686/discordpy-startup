@@ -1150,11 +1150,45 @@ async def on_message(m):
             await m.reply('権限がありません。ロールの位置などを確認してください。', mention_author=False)
         except discord.HTTPException:
             await m.reply('長すぎます。（多分）', mention_author=False)
+    elif m.content.startswith(f'{prefix}remind'):
+        list_msg = list(map(str, m.content.split()))
+        if len(list_msg) == 2:
+            if list_msg[1][-1] == 'h':
+                list_msg[1] = list_msg[1].replace('h', '')
+                try:
+                    list_msg[1] = int(list_msg[1])
+                except:
+                    await m.reply('単位の前は半角数字にしてください。', mention_author=False)
+                else:
+                    await m.reply(f'{list_msg[1]}時間後に{m.channel.name}でお知らせします。', mention_author=False)
+                    await asyncio.sleep(list_msg[1] * 3600)
+                    await m.reply(f'<@{m.author.id}>お時間です！', mention_author=False)
+            elif list_msg[1][-1] == 'm':
+                list_msg[1] = list_msg[1].replace('m', '')
+                try:
+                    list_msg[1] = int(list_msg[1])
+                except:
+                    await m.reply('単位の前は半角数字にしてください。', mention_author=False)
+                else:
+                    await m.reply(f'{list_msg[1]}分後に{m.channel.name}でお知らせします。', mention_author=False)
+                    await asyncio.sleep(list_msg[1] * 60)
+                    await m.reply(f'<@{m.author.id}>お時間です！', mention_author=False)
+            elif list_msg[1][-1] == 's':
+                list_msg[1] = list_msg[1].replace('s', '')
+                try:
+                    list_msg[1] = int(list_msg[1])
+                except:
+                    await m.reply('単位の前は半角数字にしてください。', mention_author=False)
+                else:
+                    await m.reply(f'{list_msg[1]}秒後に{m.channel.name}でお知らせします。', mention_author=False)
+                    await asyncio.sleep(list_msg[1])
+                    await m.reply(f'<@{m.author.id}>お時間です！', mention_author=False)
+            else:
+                await m.reply(f'{prefix}remind [time]で入力してください。\ntimeには次の単位が使えます\nh:時間, m:分, s:秒\nまた、BOTが再起動すると途切れますがご了承ください。', mention_author=False)
+        else:
+            await m.reply(f'{prefix}remind [time]で入力してください。\ntimeには次の単位が使えます\nh:時間, m:分, s:秒\nまた、BOTが再起動すると途切れますがご了承ください。', mention_author=False)
     elif m.content == f'{prefix}help':
         await m.reply(embed=discord.Embed(title='help', description=f'・{prefix}help\n・{prefix}eval\n・{prefix}ui\n・{prefix}api\n・{prefix}slot\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}say [description]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}reimu\n・{prefix}otofu\n・{prefix}emoji\n・{prefix}art\n・{prefix}omikuji'), mention_author=False)
-    elif m.content == f'{prefix}test':
-        await asyncio.sleep(30)
-        await m.channel.send('done')
     else:
         cur.execute('CREATE TABLE IF NOT EXISTS user_data (\
                     id text,\
