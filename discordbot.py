@@ -324,7 +324,7 @@ async def on_message(m):
                            SELECT * FROM rpg_user;')
                 data = {}
                 for i in cur:
-                    if i[0] == str(m.author.id)
+                    if i[0] == str(m.author.id):
                         data['id'] = int(i[0])
                         data['level'] = int(i[1])
                         data['exp'] = int(i[2])
