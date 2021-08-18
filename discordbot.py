@@ -10,6 +10,6 @@ slash_client = SlashCommand(bot)
 @slash_client.slash(name="test", options=[{'name':'description', 'type':1}])
 async def _slash_hello(ctx: SlashContext):
     await ctx.send('hello')
-    print(ctx)
+    print(ctx.content)
 
 bot.run(os.environ['DISCORD_BOT_TOKEN'])
