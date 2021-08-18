@@ -345,7 +345,7 @@ async def on_message(m):
                     embed = embed_list[4]
             else:
                 break
-            await message.edit(content='nextで次のページ、backで前のページに移動できます。', embed=embed, mention_author=False)
+            await message.edit(content='nextで次のページ、backで前のページに移動できます。', embed=embed)
             try:
                 await msg.delete()
             except:
