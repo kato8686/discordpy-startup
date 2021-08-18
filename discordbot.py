@@ -52,7 +52,7 @@ json = {
 }
 
 headers = {
-    "Authorization": "Bot <BOT TOKEN>"
+    "Authorization": f"Bot {os.environ['DISCORD_BOT_TOKEN']}"
 }
 
 r = requests.post(url, headers=headers, json=json)
