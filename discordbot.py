@@ -1,7 +1,8 @@
 import discord
 from discord_slash import SlashCommand # Importing the newly installed library.
 import os
-from discord_slash.utils.manage_commands import create_option, create_choice
+from discord_slash.utils.manage_commands import create_option, create_choice, create_permission
+from discord_slash.model import SlashCommandPermissionType
 
 client = discord.Client(intents=discord.Intents.all())
 slash = SlashCommand(client, sync_commands=True) # Declares slash commands through the client.
@@ -31,6 +32,9 @@ guild_ids = [796546441702932481] # Put your server ID in this array.
                          )
                      ]
                  )
+             ],
+             permissions=[
+                 create_permission(802152878855684106, SlashCommandPermissionType.USER, True)
              ])
 async def test(ctx, option: str): # Defines a new "context" (ctx) command called "ping."
     await ctx.send(content=option)
