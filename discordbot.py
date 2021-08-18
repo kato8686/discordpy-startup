@@ -309,6 +309,46 @@ async def on_message(m):
                 await m.reply(f'{prefix}remind [time]で入力してください。\ntimeには次の単位が使えます\nh:時間, m:分, s:秒\nまた、BOTが再起動すると途切れますがご了承ください。', mention_author=False)
         else:
             await m.reply(f'{prefix}remind [time]で入力してください。\ntimeには次の単位が使えます\nh:時間, m:分, s:秒\nまた、BOTが再起動すると途切れますがご了承ください。', mention_author=False)
+    elif m.content.startswith(f'{prefix}st'):
+        try:
+            list_msg = list(map(str, m.content.split()))
+            if len(list_msg) == 1:
+                cur.execute('CREATE TABLE IF NOT EXISTS rpg_user (\
+                           id text,\
+                           level text,\
+                           exp text,\
+                           hp text,\
+                           now int\
+                           );\
+                           COMMIT;\
+                           SELECT * FROM rpg_user;')
+                data = {}
+                for i in cur:
+                    if i[0] == str(m.author.id)
+                        data['id'] = int(i[0])
+                        data['level'] = int(i[1])
+                        data['exp'] = int(i[2])
+                        data['hp'] = int(i[3])
+                        data['now'] = i[4]
+                        if data['now'] == 0:
+                            data['now'] = 'no'
+                        else:
+                            data['now'] = 'yes'
+                if data == {}:
+                    data['id'] = m.author.id
+                    data['level'] = 1
+                    data['exp'] = 1
+                    data['hp'] = 60
+                    data['now'] = 'no'
+                    cur.execute(f'INSERT INTO rpg_user VALUES (\'{data['id']}\', \'{data['exp']}\', \'{data['hp']}\', 0);\
+                               COMMIT;')
+                await m.reply(embed=discord.Embed(title=f'{m.author.name}\'s data', description=f'level:{data['level']}\nexp:{data['exp']}\nhp:{data['hp']}\nfighting?:{data['now']}', mention_author=False)
+            else:
+                await m.reply('argument error\nif you are not understand you can contact to me\nplease send a email to this email adress\nyuiyuinagaming864649@gmail.com')
+        except:
+            id = 
+            user = client.get_user(id)
+            await user.send('error.\nfrom st command\nplease check to log.')
     elif m.content == f'{prefix}help':
         embed_list=[discord.Embed(title='BOT系コマンド', description=f'・{prefix}help\n・{prefix}ui'), discord.Embed(title='遊び系コマンド', description=f'・{prefix}slot\n・{prefix}say [description]\n・{prefix}reimu\n・{prefix}otofu\n・{prefix}emoji\n・{prefix}art\n・{prefix}omikuji'), discord.Embed(title='便利系コマンド', description=f'・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}remind [time]'), discord.Embed(title='スラッシュコマンド', description=f'/avatar [user]'), discord.Embed(title='（めっちゃ）特殊コマンド', description=f'ユーザー系：\nHow to use:ユーザーを右クリックしたアプリという項目の中にあります。（PC限定）\navatar'), discord.Embed(title='特殊コマンド', description=f'・{prefix}eval')]
         embed=embed_list[0]
