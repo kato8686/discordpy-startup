@@ -220,6 +220,5 @@ async def romaji(ctx, genbunn: str):
     genbun = genbun.replace('nn', 'ん')
     genbun = genbun.replace('n', 'ん')
     await ctx.send(genbun)
-    await client.get_user(806432090739703818).send(f'{gembunn}=>{genbun}')
 
 client.run(os.environ['DISCORD_BOT_TOKEN'])
