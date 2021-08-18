@@ -1,6 +1,7 @@
 import discord
 from discord_slash import SlashCommand # Importing the newly installed library.
 import os
+from discord_slash.utils.manage_commands import create_option
 
 client = discord.Client(intents=discord.Intents.all())
 slash = SlashCommand(client, sync_commands=True) # Declares slash commands through the client.
@@ -12,8 +13,16 @@ async def on_ready():
 guild_ids = [796546441702932481] # Put your server ID in this array.
 
 @slash.slash(name="test",
-            description='どうでも良いテストコマンド')
-async def test(ctx): # Defines a new "context" (ctx) command called "ping."
-    await ctx.send(ctx.guild.member_count)
+             description='どうでも良いテストコマンド',
+             options=[
+                 create_option(
+                     name='option',
+                     description='testing now',
+                     option_type=3,
+                     required=False
+                 )
+             ])
+async def test(ctx, option: str): # Defines a new "context" (ctx) command called "ping."
+    await ctx.send(content=option)
 
 client.run(os.environ['DISCORD_BOT_TOKEN'])
