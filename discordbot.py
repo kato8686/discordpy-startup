@@ -8,8 +8,8 @@ bot = commands.Bot(command_prefix='@', intents=discord.Intents.all())
 
 slash_client = SlashCommand(bot)
 
-@slash_client.slash(name='test', description='test', options=[create_option(name='testoption', description='めっちゃテスト', option_type=3, required=False)]))])
-async def test(ctx, option: str):
-    await ctx.send(option)
+@slash_client.slash(name="test", description="This is just a test command, nothing more.", options=[create_option(name="optone", description="This is the first option we have.", option_type=3, required=False)])
+async def test(ctx, optone: str):
+    await ctx.send(content=f"I got you, you said {optone}!")
 
 bot.run(os.environ['DISCORD_BOT_TOKEN'])
