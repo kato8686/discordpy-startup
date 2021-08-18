@@ -11,8 +11,9 @@ async def on_ready():
     
 guild_ids = [796546441702932481] # Put your server ID in this array.
 
-@slash.slash(name="ping", guild_ids=guild_ids)
-async def _ping(ctx): # Defines a new "context" (ctx) command called "ping."
-    await ctx.send(f"Pong! ({client.latency*1000}ms)")
+@slash.slash(name="test",
+            description='どうでも良いテストコマンド')
+async def test(ctx): # Defines a new "context" (ctx) command called "ping."
+    await ctx.send('Hello World!!')
 
 client.run(os.environ['DISCORD_BOT_TOKEN'])
