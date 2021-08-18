@@ -29,14 +29,14 @@ async def commandname(ctx: MenuContext):
              description='ユーザーのアイコンを表示します。',
              options=[
                  create_option(name='user_id',
-                               description='ユーザーのidを指定します。',
-                               option_type=4,
+                               description='ユーザーのメンションを指定してください。',
+                               option_type=3,
                                required=False
                               )
              ])
-async def avatar(ctx, user_id: int):
+async def avatar(ctx, user_id: str):
     try:
-        await ctx.send(client.get_user(user_id).avatar_url)
+        await ctx.send(client.get_user(int(user_id[2:21])).avatar_url)
     except:
         await ctx.send(client.get_user(ctx.author.id).avatar_url)
 
