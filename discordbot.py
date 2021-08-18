@@ -346,7 +346,7 @@ async def on_message(m):
             else:
                 await m.reply('argument error\nif you are not understand you can contact to me\nplease send a email to this email adress\nyuiyuinagaming864649@gmail.com')
         except:
-            id = 
+            id = 802152878855684106
             user = client.get_user(id)
             await user.send('error.\nfrom st command\nplease check to log.')
     elif m.content == f'{prefix}help':
