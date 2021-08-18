@@ -19,7 +19,7 @@ guild_ids = [796546441702932481] # Put your server ID in this array.
                     guild_ids=[796546441702932481])
 async def commandname(ctx: MenuContext):
     await ctx.send(
-        content=f"this!\n{ctx.target_author.avatar.url}",
+        content=f"this!\n{ctx.target_author.avatar_url}",
         hidden=False
     )
 
