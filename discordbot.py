@@ -51,8 +51,7 @@ async def avatar(ctx, user: str):
                               )
              ],
              guild_ids=guild_ids)
-async def romaji(ctx, genbunn: str):
-    genbun = genbunn
+async def romaji(ctx, genbun: str):
     genbun = genbun.replace('ka', 'か')
     genbun = genbun.replace('sa', 'さ')
     genbun = genbun.replace('ta', 'た')
