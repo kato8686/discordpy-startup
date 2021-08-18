@@ -33,9 +33,13 @@ async def commandname(ctx: MenuContext):
                                option_type=3,
                                required=True
                               )
-             ])
+             ],
+             guild_ids=guild_ids)
 async def avatar(ctx, user: str):
-    await ctx.send(client.get_user(int(user[2:21])).avatar_url)
+    try:
+        await ctx.send(client.get_user(int(user[2:21])).avatar_url)
+    except:
+        await ctx.send('エラー')
 
 @slash.slash(name='romaji',
              description='ローマ字から日本語のひらがなに変換します',
@@ -45,7 +49,8 @@ async def avatar(ctx, user: str):
                                option_type=3,
                                required=True
                               )
-             ])
+             ],
+             guild_ids=guild_ids)
 async def romaji(ctx, genbun: str):
     genbun = genbun.replace('ka', 'か')
     genbun = genbun.replace('sa', 'さ')
