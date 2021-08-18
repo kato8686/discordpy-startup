@@ -1,21 +1,14 @@
+import discord
 from discord.ext import commands
-from os import getenv
-import traceback
+from discord_slash import SlashCommand, SlashContext
+import os
 
-bot = commands.Bot(command_prefix='/')
+bot = commands.Bot(command_prefix='@', intents=discord.Intents.all())
 
+slash_client = SlashCommand(bot)
 
-@bot.event
-async def on_command_error(ctx, error):
-    orig_error = getattr(error, "original", error)
-    error_msg = ''.join(traceback.TracebackException.from_exception(orig_error).format())
-    await ctx.send(error_msg)
+@slash_client.slash(name="test")
+async def _slash_hello(ctx: SlashContext):
+    await ctx.send(content="Hello!")
 
-
-@bot.command()
-async def ping(ctx):
-    await ctx.send('pong')
-
-
-token = getenv('DISCORD_BOT_TOKEN')
-bot.run(token)
+bot.run(os.environ['DISCORD_BOT_TOKEN'])
