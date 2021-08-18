@@ -6,17 +6,19 @@ from discord_slash.model import SlashCommandPermissionType, ContextMenuType
 from discord_slash.context import MenuContext
 
 client = discord.Client(intents=discord.Intents.all())
-slash = SlashCommand(client, sync_commands=True) # Declares slash commands through the client.
+slash = SlashCommand(client, sync_commands=True) # Declares slash commands through the client.list
+
+guild_ids = []
+for i in client.guilds:
+    guild_ids.append(i.id)
 
 @client.event
 async def on_ready():
     print("Ready!")
-    
-guild_ids = [796546441702932481] # Put your server ID in this array.
 
 @slash.context_menu(target=ContextMenuType.USER,
                     name="avatar",
-                    guild_ids=[796546441702932481])
+                    guild_ids=guild_ids)
 async def commandname(ctx: MenuContext):
     await ctx.send(
         content=f"this!\n{ctx.target_author.avatar_url}",
