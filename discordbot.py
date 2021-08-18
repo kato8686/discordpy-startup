@@ -310,7 +310,7 @@ async def on_message(m):
         else:
             await m.reply(f'{prefix}remind [time]で入力してください。\ntimeには次の単位が使えます\nh:時間, m:分, s:秒\nまた、BOTが再起動すると途切れますがご了承ください。', mention_author=False)
     elif m.content == f'{prefix}help':
-        await m.reply(embed=discord.Embed(title='help', description=f'～BOT系コマンド～\n・{prefix}help\n・{prefix}ui\n～遊び系コマンド～\n・{prefix}slot\n・{prefix}say [description]\n・{prefix}reimu\n・{prefix}otofu\n・{prefix}emoji\n・{prefix}art\n・{prefix}omikuji\n～便利系コマンド～\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}remind [time]\n～スラッシュコマンド～\n/avatar [user]\n～（めっちゃ）特殊コマンド～\nユーザー系：\nHow to use:ゆーーざーを右クリックしたアプリという項目の中にあります。（PC限定）\navatar\n～特殊コマンド～・{prefix}eval'), mention_author=False)
+        await m.reply(embed=discord.Embed(title='help', description=f'～BOT系コマンド～\n・{prefix}help\n・{prefix}ui\n～遊び系コマンド～\n・{prefix}slot\n・{prefix}say [description]\n・{prefix}reimu\n・{prefix}otofu\n・{prefix}emoji\n・{prefix}art\n・{prefix}omikuji\n～便利系コマンド～\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}remind [time]\n～スラッシュコマンド～\n/avatar [user]\n～（めっちゃ）特殊コマンド～\nユーザー系：\nHow to use:ユーザーを右クリックしたアプリという項目の中にあります。（PC限定）\navatar\n～特殊コマンド～\n・{prefix}eval'), mention_author=False)
     else:
         cur.execute('CREATE TABLE IF NOT EXISTS user_data (\
                     id text,\
