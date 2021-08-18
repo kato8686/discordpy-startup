@@ -341,7 +341,7 @@ async def on_message(m):
                     data['hp'] = 60
                     data['now'] = 'no'
                     cur.execute(f'INSERT INTO rpg_user VALUES (\'{data['id']}\', \'{data['exp']}\', \'{data['hp']}\', 0);\
-                               COMMIT;')
+                                COMMIT;')
                 await m.reply(embed=discord.Embed(title=f'{m.author.name}\'s data', description=f'level:{data['level']}\nexp:{data['exp']}\nhp:{data['hp']}\nfighting?:{data['now']}', mention_author=False)
             else:
                 await m.reply('argument error\nif you are not understand you can contact to me\nplease send a email to this email adress\nyuiyuinagaming864649@gmail.com')
