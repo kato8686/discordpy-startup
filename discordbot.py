@@ -90,7 +90,7 @@ async def romaji(ctx, genbun: str):
     genbunn = genbunn.replace('pya', 'ぴゃ')
     genbunn = genbunn.replace('va', 'ゔぁ')
     genbunn = genbunn.replace('fa', 'ふぁ')
-    genbunn = genbunn.replace('la', 'あ')
+    genbunn = genbunn.replace('a', 'あ')
     genbunn = genbunn.replace('ki', 'き')
     genbunn = genbunn.replace('si', 'し')
     genbunn = genbunn.replace('ti', 'ち')
