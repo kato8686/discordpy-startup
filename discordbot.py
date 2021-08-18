@@ -312,7 +312,7 @@ async def on_message(m):
     elif m.content == f'{prefix}help':
         embed_list=[discord.Embed(title='BOT系コマンド', description=f'・{prefix}help\n・{prefix}ui'), discord.Embed(title='遊び系コマンド', description=f'・{prefix}slot\n・{prefix}say [description]\n・{prefix}reimu\n・{prefix}otofu\n・{prefix}emoji\n・{prefix}art\n・{prefix}omikuji'), discord.Embed(title='便利系コマンド', description=f'・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}remind [time]'), discord.Embed(title='スラッシュコマンド', description=f'/avatar [user]'), discord.Embed(title='（めっちゃ）特殊コマンド', description=f'ユーザー系：\nHow to use:ユーザーを右クリックしたアプリという項目の中にあります。（PC限定）\navatar'), discord.Embed(title='特殊コマンド', description=f'・{prefix}eval')]
         embed=embed_list[0]
-        await m.reply(content='nextで次のページ、backで前のページに移動できます。', embed=embed, mention_author=False)
+        message = await m.reply(content='nextで次のページ、backで前のページに移動できます。', embed=embed, mention_author=False)
         for i in range(29346709723849760):
             def check(me):
                 return me.author == m.author and me.channel == m.channel
@@ -345,7 +345,11 @@ async def on_message(m):
                     embed = embed_list[4]
             else:
                 break
-            await m.reply(content='nextで次のページ、backで前のページに移動できます。', embed=embed, mention_author=False)
+            await message.edit(content='nextで次のページ、backで前のページに移動できます。', embed=embed, mention_author=False)
+            try:
+                await msg.delete()
+            except:
+                continue
     else:
         cur.execute('CREATE TABLE IF NOT EXISTS user_data (\
                     id text,\
