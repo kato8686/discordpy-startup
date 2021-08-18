@@ -14,12 +14,12 @@ async def on_ready():
     
 guild_ids = [796546441702932481] # Put your server ID in this array.
 
-@slash.context_menu(target=ContextMenuType.MESSAGE,
-                    name="commandname",
+@slash.context_menu(target=ContextMenuType.USER,
+                    name="avatar",
                     guild_ids=[796546441702932481])
 async def commandname(ctx: MenuContext):
     await ctx.send(
-        content=f"Responded! The content of the message targeted: {ctx.target_message.content}",
+        content=f"this!\n{ctx.target_user.avatar}",
         hidden=False
     )
 
