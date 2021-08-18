@@ -31,7 +31,7 @@ async def commandname(ctx: MenuContext):
                  create_option(name='user_id',
                                description='ユーザーのidを指定します。',
                                option_type=3,
-                               reauired=False
+                               required=False
                               )
              ])
 async def avatar(ctx, user_id: int):
