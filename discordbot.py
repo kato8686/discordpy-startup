@@ -1,5 +1,6 @@
 import discord
 from discord_slash import SlashCommand # Importing the newly installed library.
+import os
 
 client = discord.Client(intents=discord.Intents.all())
 slash = SlashCommand(client, sync_commands=True) # Declares slash commands through the client.
