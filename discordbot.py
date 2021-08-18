@@ -12,10 +12,8 @@ from pathlib import Path
 import os
 import random
 import datetime
-from discord_slash import SlashCommand, SlashContext
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
-slashclient = SlashCommand(client, sync_commands=True)
 TOKEN = os.environ['DISCORD_BOT_TOKEN']
 prefix = 'y.'
 owner_id = 802152878855684106
@@ -29,9 +27,6 @@ def get_connection():
     return psycopg2.connect(dsn)
 con = get_connection()
 cur = con.cursor()
-@slashclient.slash(name='test')
-async def _slash_member(ctx: SlashContext):
-    await ctx.send('test')
 @client.event
 async def on_message(m):
     global count
