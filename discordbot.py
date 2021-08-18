@@ -30,7 +30,7 @@ async def commandname(ctx: MenuContext):
              options=[
                  create_option(name='user_id',
                                description='ユーザーのidを指定します。',
-                               option_type=3,
+                               option_type=4,
                                required=False
                               )
              ])
@@ -38,6 +38,6 @@ async def avatar(ctx, user_id: int):
     try:
         await ctx.send(client.get_user(user_id).avatar_url)
     except:
-        await ctx.send(client.get_user(ctx.target_author.id).avatar_url)
+        await ctx.send(client.get_user(ctx.author.id).avatar_url)
 
 client.run(os.environ['DISCORD_BOT_TOKEN'])
