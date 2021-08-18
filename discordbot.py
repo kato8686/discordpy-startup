@@ -15,6 +15,7 @@ async def _slash_hello(ctx: SlashContext):
 bot.run(os.environ['DISCORD_BOT_TOKEN'])
 """
 import requests
+import os
 
 url = "https://discord.com/api/v8/applications/<APPLICATION ID>/guilds/<GUILD ID>/commands"
 
