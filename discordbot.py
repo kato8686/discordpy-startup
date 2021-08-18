@@ -25,4 +25,19 @@ async def commandname(ctx: MenuContext):
         hidden=False
     )
 
+@slash.slash(name='avatar',
+             description='ユーザーのアイコンを表示します。',
+             options=[
+                 create_option(name='user_id',
+                               description='ユーザーのidを指定します。',
+                               option_type=3,
+                               reauired=False
+                              )
+             ])
+async def avatar(ctx, user_id: int):
+    try:
+        await ctx.send(client.get_user(user_id).avatar_url)
+    except:
+        await ctx.send(client.get_user(ctx.target_author.id).avatar_url)
+
 client.run(os.environ['DISCORD_BOT_TOKEN'])
