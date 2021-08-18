@@ -28,7 +28,8 @@ guild_ids = [796546441702932481] # Put your server ID in this array.
                          create_choice(
                              name='no',
                              value='false'
-                         )]
+                         )
+                     ]
                  )
              ])
 async def test(ctx, option: str): # Defines a new "context" (ctx) command called "ping."
