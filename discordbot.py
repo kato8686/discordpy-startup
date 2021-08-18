@@ -33,9 +33,11 @@ guild_ids = [796546441702932481] # Put your server ID in this array.
                      ]
                  )
              ],
-             permissions=[
-                 create_permission(802152878855684106, SlashCommandPermissionType.USER, True)
-             ])
+             permissions={
+                 796546441702932481: [
+                     create_permission(802152878855684106, SlashCommandPermissionType.USER, False)
+                 ]
+             })
 async def test(ctx, option: str): # Defines a new "context" (ctx) command called "ping."
     await ctx.send(content=option)
 
