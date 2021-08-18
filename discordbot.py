@@ -310,7 +310,42 @@ async def on_message(m):
         else:
             await m.reply(f'{prefix}remind [time]で入力してください。\ntimeには次の単位が使えます\nh:時間, m:分, s:秒\nまた、BOTが再起動すると途切れますがご了承ください。', mention_author=False)
     elif m.content == f'{prefix}help':
-        await m.reply(embed=discord.Embed(title='help', description=f'～BOT系コマンド～\n・{prefix}help\n・{prefix}ui\n～遊び系コマンド～\n・{prefix}slot\n・{prefix}say [description]\n・{prefix}reimu\n・{prefix}otofu\n・{prefix}emoji\n・{prefix}art\n・{prefix}omikuji\n～便利系コマンド～\n・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}remind [time]\n～スラッシュコマンド～\n/avatar [user]\n～（めっちゃ）特殊コマンド～\nユーザー系：\nHow to use:ユーザーを右クリックしたアプリという項目の中にあります。（PC限定）\navatar\n～特殊コマンド～\n・{prefix}eval'), mention_author=False)
+        embed_list=[discord.Embed(title='BOT系コマンド', description=f'・{prefix}help\n・{prefix}ui'), discord.Embed(title='遊び系コマンド', description=f'・{prefix}slot\n・{prefix}say [description]\n・{prefix}reimu\n・{prefix}otofu\n・{prefix}emoji\n・{prefix}art\n・{prefix}omikuji'), discord.Embed(title='便利系コマンド', description=f'・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}remind [time]'), discord.Embed(title='スラッシュコマンド', description=f'/avatar [user]'), discord.Embed(title='（めっちゃ）特殊コマンド', description=f'ユーザー系：\nHow to use:ユーザーを右クリックしたアプリという項目の中にあります。（PC限定）\navatar'), discord.Embed(title='特殊コマンド', description=f'・{prefix}eval')]
+        embed=embed_list[0]
+        for i in range(29346709723849760):
+            await m.reply(content='nextで次のページ、backで前のページに移動できます。', embed=embed, mention_author=False)
+            def check(me):
+                return me.author == m.author and me.channel == m.channel
+            msg = await client.wait_for('message', check=check)
+            if msg.content == 'next':
+                if embed_list.index(embed) == 0:
+                    embed = embed_list[1]
+                elif embed_list.index(embed) == 1:
+                    embed = embed_list[2]
+                elif embed_list.index(embed) == 2:
+                    embed = embed_list[3]
+                elif embed_list.index(embed) == 3:
+                    embed = embed_list[4]
+                elif embed_list.index(embed) == 4:
+                    embed = embed_list[5]
+                elif embed_list.index(embed) == 5:
+                    embed = embed_list[0]
+            elif msg.content == 'back':
+                if embed_list.index(embed) == 0:
+                    embed = embed_list[5]
+                elif embed_list.index(embed) == 1:
+                    embed = embed_list[0]
+                elif embed_list.index(embed) == 2:
+                    embed = embed_list[1]
+                elif embed_list.index(embed) == 3:
+                    embed = embed_list[2]
+                elif embed_list.index(embed) == 4:
+                    embed = embed_list[3]
+                elif embed_list.index(embed) == 5:
+                    embed = embed_list[4]
+            else:
+                break
+            await m.reply(content='nextで次のページ、backで前のページに移動できます。', embed=embed, mention_author=False)
     else:
         cur.execute('CREATE TABLE IF NOT EXISTS user_data (\
                     id text,\
