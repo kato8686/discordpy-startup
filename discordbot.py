@@ -40,7 +40,7 @@ async def avatar(ctx, user: str):
 @slash.slash(name='romaji',
              description='ローマ字から日本語のひらがなに変換します',
              options=[
-                 create_option(name='原文',
+                 create_option(name='genbun',
                                description='原文です',
                                option_type=3,
                                required=True
