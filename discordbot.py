@@ -35,6 +35,6 @@ async def commandname(ctx: MenuContext):
                               )
              ])
 async def avatar(ctx, user: str):
-    await ctx.send(client.get_user(int(user_id[2:21])).avatar_url)
+    await ctx.send(client.get_user(int(user[2:21])).avatar_url)
 
 client.run(os.environ['DISCORD_BOT_TOKEN'])
