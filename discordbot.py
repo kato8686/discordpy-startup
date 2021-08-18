@@ -20,7 +20,7 @@ guild_ids = [796546441702932481] # Put your server ID in this array.
 async def commandname(ctx: MenuContext):
     await ctx.send(
         content=f"Responded! The content of the message targeted: {ctx.target_message.content}",
-        hidden=True
+        hidden=False
     )
 
 client.run(os.environ['DISCORD_BOT_TOKEN'])
