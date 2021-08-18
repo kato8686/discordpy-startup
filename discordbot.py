@@ -340,7 +340,7 @@ async def on_message(m):
                     data['exp'] = 1
                     data['hp'] = 60
                     data['now'] = 'no'
-                    cur.execute(f'INSERT INTO rpg_user VALUES (\'{data['id']}\', \'{data['exp']}\', \'{data['hp']}\', 0);\
+                    cur.execute(f'INSERT INTO rpg_user VALUES (\'{data['id']}\', \'{data['level']}\', \'{data['exp']}\', \'{data['hp']}\', 0);\
                                 COMMIT;')
                 await m.reply(embed=discord.Embed(title=f'{m.author.name}\'s data', description=f'level:{data['level']}\nexp:{data['exp']}\nhp:{data['hp']}\nfighting?:{data['now']}', mention_author=False)
             else:
