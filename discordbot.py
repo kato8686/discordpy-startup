@@ -309,7 +309,7 @@ async def on_message(m):
                 await m.reply(f'{prefix}remind [time]で入力してください。\ntimeには次の単位が使えます\nh:時間, m:分, s:秒\nまた、BOTが再起動すると途切れますがご了承ください。', mention_author=False)
         else:
             await m.reply(f'{prefix}remind [time]で入力してください。\ntimeには次の単位が使えます\nh:時間, m:分, s:秒\nまた、BOTが再起動すると途切れますがご了承ください。', mention_author=False)
-    elif m.content.startswith(f'{prefix}st'):
+    elif m.content.startswith('{}st'.format(prefix)):
         try:
             list_msg = list(map(str, m.content.split()))
             if len(list_msg) == 1:
@@ -318,39 +318,75 @@ async def on_message(m):
                            level text,\
                            exp text,\
                            hp text,\
-                           now int\
+                           now text\
                            );\
                            COMMIT;\
                            SELECT * FROM rpg_user;')
                 data = {}
                 for i in cur:
-                    if i[0] == str(m.author.id):
+                    if i[0] == str(m.author.id)
                         data['id'] = int(i[0])
                         data['level'] = int(i[1])
                         data['exp'] = int(i[2])
                         data['hp'] = int(i[3])
                         data['now'] = i[4]
-                        if data['now'] == 0:
+                        if data['now'] == 'no':
                             data['now'] = 'no'
                         else:
-                            data['now'] = 'yes'
+                            data['now'] = client.get_channel(int(data['now'])).name
                 if data == {}:
                     data['id'] = m.author.id
                     data['level'] = 1
                     data['exp'] = 1
                     data['hp'] = 60
                     data['now'] = 'no'
-                    cur.execute(f'INSERT INTO rpg_user VALUES (\'{m.author.id}\', \'1\', \'1\', \'60\', 0);\
-                               COMMIT;')
-                await m.reply(embed=discord.Embed(title='{}\'s data'.format(m.author.name), description='level:{}\nexp:{}\nhp:{}\nfighting?:{}'.format(data['level'], data['exp'], data['hp'], data['now'])), mention_author=False)
+                    cur.execute('INSERT INTO rpg_user VALUES (\'{}\', \'{}\', \'{}\', \'{}\', \'no\');\
+                               COMMIT;'.format(data['id'], data['level'], data['exp'], data['hp']))
+                await m.reply(embed=discord.Embed(title='{}\'s data'.format(m.author.name), description='level:{}\nexp:{}\nhp:{}\nfighting?:{}'.format(data['level'], data['exp'], data['hp'], data['now']), mention_author=False)
             else:
                 await m.reply('argument error\nif you are not understand you can contact to me\nplease send a email to this email adress\nyuiyuinagaming864649@gmail.com')
         except:
             id = 802152878855684106
             user = client.get_user(id)
             await user.send('error.\nfrom st command\nplease check to log.')
+    elif m.content.startswith('{}clist'.format(prefix)):
+        try:
+            list_msg = list(map(str, m.content.split()))
+            if len(list_msg) == 1:
+                cur.execute('CREATE TABLE IF NOT EXISTS rpg_channel (\
+                           id text,\
+                           serverid text,\
+                           level text,\
+                           fight text\
+                           );\
+                           COMMIT;\
+                           SELECT * FROM rpg_channel;')
+                data = {}
+                data_list = []
+                for i in cur:
+                    i[1] == str(m.guild.id):
+                        data['id'] = int(i[0])
+                        data['serverid'] = int(i[1])
+                        data['level'] = int(i[2])
+                        if i[3] == 'no':
+                            data['fight'] = i[3]
+                        else:
+                            data['fight'] = client.get_user(int(i[3])).name
+                        data_list.append(data)
+                        data = {}
+                if data_list == []:
+                    await m.reply('this server\s data is not found.', mention_author=False)
+                else:
+                    s = ''
+                    for i in data_list:
+                        s = s + f'{client.get_channel(i[0]).name} level:{i[2]} fight:{i[3]}\n'
+                    await m.reply(embed=discord.Embed(title='{}\'s channel list'.format(m.guild.name), descirption=s), mention_author=False)
+        except:
+            id = 802152878855684106
+            user = client.get_user(id)
+	    await user.send('error.\nfrom clist command.\nplease check to log.')
     elif m.content == f'{prefix}help':
-        embed_list=[discord.Embed(title='BOT系コマンド', description=f'・{prefix}help\n・{prefix}ui'), discord.Embed(title='遊び系コマンド', description=f'・{prefix}slot\n・{prefix}say [description]\n・{prefix}reimu\n・{prefix}otofu\n・{prefix}emoji\n・{prefix}art\n・{prefix}omikuji\n・{prefix}st'), discord.Embed(title='便利系コマンド', description=f'・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}remind [time]'), discord.Embed(title='スラッシュコマンド', description=f'/avatar [user]'), discord.Embed(title='（めっちゃ）特殊コマンド', description=f'ユーザー系：\nHow to use:ユーザーを右クリックしたアプリという項目の中にあります。（PC限定）\navatar'), discord.Embed(title='特殊コマンド', description=f'・{prefix}eval')]
+        embed_list=[discord.Embed(title='BOT系コマンド', description=f'・{prefix}help\n・{prefix}ui'), discord.Embed(title='遊び系コマンド', description=f'・{prefix}slot\n・{prefix}say [description]\n・{prefix}reimu\n・{prefix}otofu\n・{prefix}emoji\n・{prefix}art\n・{prefix}omikuji\n・{prefix}st\n・{prefix}clist'), discord.Embed(title='便利系コマンド', description=f'・{prefix}now\n・{prefix}pin [messagelink]\n・{prefix}invites\n・{prefix}rename [targetid] [name]\n・{prefix}remind [time]'), discord.Embed(title='スラッシュコマンド', description=f'/avatar [user]\n/romaji [genbun]'), discord.Embed(title='（めっちゃ）特殊コマンド', description=f'ユーザー系：\nHow to use:ユーザーを右クリックしたアプリという項目の中にあります。（PC限定）\navatar'), discord.Embed(title='特殊コマンド', description=f'・{prefix}eval')]
         embed=embed_list[0]
         message = await m.reply(content='nextで次のページ、backで前のページに移動できます。', embed=embed, mention_author=False)
         for i in range(29346709723849760):
