@@ -25,7 +25,7 @@ async def commandname(ctx: MenuContext):
         hidden=False
     )
 
-@slash.slash(name='avatar',
+@slash.slash(name='avatar_get',
              description='ユーザーのアイコンを表示します。',
              options=[
                  create_option(name='user_mention',
@@ -35,8 +35,8 @@ async def commandname(ctx: MenuContext):
                               )
              ],
              guild_ids=guild_ids)
-async def avatar(ctx, user: str):
-    await ctx.send(client.get_user(int(user[2:21])).avatar_url)
+async def avatar(ctx, user_mention: str):
+    await ctx.send(client.get_user(int(user_mention[2:21])).avatar_url)
 
 @slash.slash(name='romaji',
              description='ローマ字から日本語のひらがなに変換します',
