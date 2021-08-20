@@ -29,12 +29,15 @@ async def commandname(ctx: MenuContext):
              options=[
                  create_option(name='user_id',
                                description='ユーザーのidを指定してください。',
-                               option_type=4,
+                               option_type=3,
                                required=True
                               )
              ])
-async def avatar(ctx, user_id: int):
-    await ctx.send(client.get_user(user_id).avatar_url)
+async def avatar(ctx, user_id: str):
+    try:
+        await ctx.send(client.get_user(int(user_id)).avatar_url)
+    except:
+        await ctx.send('Error')
 
 @slash.slash(name='romaji',
              description='ローマ字から日本語のひらがなに変換します',
