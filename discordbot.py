@@ -278,7 +278,12 @@ async def dm(ctx, id: str, description: str, embed_title: str, embed_description
                  required=False
                )
              ])
+async def testt(ctx):
+  await ctx.send('test')
 async def test(ctx, optone: str):
-  await ctx.send(content=f"I got you, you said {optone}!")
+  try:
+    await ctx.send(content=f"I got you, you said {optone}!")
+  except:
+    return
 
 client.run(os.environ['DISCORD_BOT_TOKEN'])
