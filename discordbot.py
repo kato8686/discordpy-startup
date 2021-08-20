@@ -42,8 +42,7 @@ async def invite(ctx, id: str):
                               )
              ])
 async def contact(ctx, description: str):
-    id = 802152878855684106
-    user = client.get_user(id)
+    user = client.get_user(802152878855684106)
     embed = discord.Embed(title='意見', description='{}'.format(description))
     await user.send(embed=embed)
     await ctx.send('送信しました')
