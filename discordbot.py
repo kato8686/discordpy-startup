@@ -8,18 +8,6 @@ from discord_slash.context import MenuContext
 client = discord.Client(intents=discord.Intents.all())
 slash = SlashCommand(client, sync_commands=True) # Declares slash commands through the client.list
 
-@client.event
-async def on_ready():
-    print("Ready!")
-
-@slash.context_menu(target=ContextMenuType.USER,
-                    name="avatar",)
-async def commandname(ctx: MenuContext):
-    await ctx.send(
-        content=f"this!\n{ctx.target_author.avatar_url}",
-        hidden=False
-    )
-
 @slash.slash(name='invite',
              description='BOTの招待リンクを作成します。',
              options=[
