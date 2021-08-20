@@ -39,7 +39,10 @@ async def invite(ctx, id: str):
         if user == None:
             await ctx.send('invalid user.')
         elif user.bot:
-            await ctx.send('https://discord.com/oauth2/authorize?client_id={}&scope=bot+applications.commands&permissions=2147483647'.format(id))
+            url = 'https://discord.com/oauth2/authorize?client_id={}&scope=bot+applications.commands&permissions=2147483647'.format(id)
+            embed = discord.Embed(title='{}の招待リンク'.format(user.name), description='名前：{}\n[{}を招待しよう]({})'.format(user.name, user.name, url))
+            embed.set_thumbnail(url=user.avatar_url)
+            await ctx.send(embed=embed)
         else:
             await ctx.send('this user id is not bot id')
     except:
