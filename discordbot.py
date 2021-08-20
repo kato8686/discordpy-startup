@@ -32,7 +32,8 @@ async def commandname(ctx: MenuContext):
                                option_type=3,
                                required=True
                               )
-             ])
+             ],
+             guild_ids=guild_ids)
 async def invite(ctx, id: str):
     try:
         user = client.get_user(int(id))
@@ -56,7 +57,8 @@ async def invite(ctx, id: str):
                                option_type=3,
                                required=True
                               )
-             ])
+             ],
+             guild_ids=guild_ids)
 async def contact(ctx, description: str):
     id = 802152878855684106
     user = client.get_user(id)
@@ -72,7 +74,8 @@ async def contact(ctx, description: str):
                                option_type=3,
                                required=True
                               )
-             ])
+             ],
+             guild_ids=guild_ids)
 async def romaji(ctx, genbun: str):
     genbunn = genbun
     genbunn = genbunn.replace('ka', 'か')
