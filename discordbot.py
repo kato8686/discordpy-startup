@@ -261,7 +261,7 @@ async def romaji(ctx, genbun: str):
                              required=False
                             )
              ])
-async def dm(ctx, id, description, embed_title, embed_description):
+async def dm(ctx, id: str, description: str, embed_title: str, embed_description: str):
   print(id)
   print(description)
   print(embed_title)
