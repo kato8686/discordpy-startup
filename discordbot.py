@@ -48,6 +48,21 @@ async def invite(ctx, id: str):
     except:
         await ctx.send('Error.')
 
+@slash.slash(name='contact',
+             description='開発者に意見を提出できます。',
+             options=[
+                 create_option(name='description',
+                               description='内容',
+                               option_type=3,
+                               required=True
+                              )
+             ])
+async def contact(ctx, description: str):
+    id = 802152878855684106
+    user = client.get_user(id)
+    embed = discord.Embed(title='意見', description='{}'.format(description))
+    await user.send(embed=embed)
+
 @slash.slash(name='romaji',
              description='ローマ字から日本語のひらがなに変換します',
              options=[
