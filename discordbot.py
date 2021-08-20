@@ -27,14 +27,14 @@ async def commandname(ctx: MenuContext):
 @slash.slash(name='avatar_get',
              description='ユーザーのアイコンを表示します。',
              options=[
-                 create_option(name='user_mention',
-                               description='ユーザーのメンションを指定してください。',
-                               option_type=3,
+                 create_option(name='user_id',
+                               description='ユーザーのidを指定してください。',
+                               option_type=4,
                                required=True
                               )
              ])
-async def avatar(ctx, user_mention: str):
-    await ctx.send(client.get_user(int(user_mention[2:-1])).avatar_url)
+async def avatar(ctx, user_id: int):
+    await ctx.send(client.get_user(user_id).avatar_url)
 
 @slash.slash(name='romaji',
              description='ローマ字から日本語のひらがなに変換します',
