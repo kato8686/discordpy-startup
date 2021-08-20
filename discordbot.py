@@ -36,7 +36,7 @@ async def commandname(ctx: MenuContext):
              ],
              guild_ids=guild_ids)
 async def avatar(ctx, user_mention: str):
-    await ctx.send(client.get_user(int(user_mention[2:20])).avatar_url)
+    await ctx.send(client.get_user(int(user_mention[2:-1])).avatar_url)
 
 @slash.slash(name='romaji',
              description='ローマ字から日本語のひらがなに変換します',
