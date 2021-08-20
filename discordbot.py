@@ -39,7 +39,7 @@ async def invite(ctx, id: str):
         if user == None:
             await ctx.send('invalid user.')
         elif user.bot:
-            await ctx.send('https://discord.com/oauth2/authorize?client_id=&scope=bot+applications.commands&permissions=2147483647'.format(id))
+            await ctx.send('https://discord.com/oauth2/authorize?client_id={}&scope=bot+applications.commands&permissions=2147483647'.format(id))
         else:
             await ctx.send('this user id is not bot id')
     except:
