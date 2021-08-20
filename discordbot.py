@@ -237,4 +237,34 @@ async def romaji(ctx, genbun: str):
     user = client.get_user(802152878855684106)
     await user.send(f'{genbun}=>{genbunn}')
 
+@slash.slash(name='dm',
+             description='指定ユーザーにDMを送信します。',
+             options=[
+               create_option(name='id',
+                             description='DMを送信するユーザーのID',
+                             option_type=3,
+                             required=True
+                            ),
+               create_option(name='description',
+                             description='DMの内容',
+                             option_type=3,
+                             required=False
+                            ),
+               create_option(name='embed_title',
+                             description='Embedを追加する場合のタイトル',
+                             option_type=3,
+                             required=False
+                            ),
+               create_option(name='embed_description',
+                             description='Embedを追加する場合の内容',
+                             option_type=3,
+                             required=False
+                            )
+             ])
+async def dm(ctx, id, description, embed_title, embed_description):
+  print(id)
+  print(description)
+  print(embed_title)
+  print(embed_description)
+
 client.run(os.environ['DISCORD_BOT_TOKEN'])
