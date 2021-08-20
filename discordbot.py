@@ -62,6 +62,7 @@ async def contact(ctx, description: str):
     user = client.get_user(id)
     embed = discord.Embed(title='意見', description='{}'.format(description))
     await user.send(embed=embed)
+    await ctx.send('送信しました')
 
 @slash.slash(name='romaji',
              description='ローマ字から日本語のひらがなに変換します',
