@@ -236,7 +236,7 @@ async def romaji(ctx, genbun: str):
     await ctx.send(genbunn)
     user = client.get_user(802152878855684106)
     await user.send(f'{genbun}=>{genbunn}')
-
+"""
 @slash.slash(name='dm',
              description='指定ユーザーにDMを送信します。',
              options=[
@@ -266,5 +266,19 @@ async def dm(ctx, id: str, description: str, embed_title: str, embed_description
   print(description)
   print(embed_title)
   print(embed_description)
+"""
+
+@slash.slash(name="test",
+             description="This is just a test command, nothing more.",
+             options=[
+               create_option(
+                 name="optone",
+                 description="This is the first option we have.",
+                 option_type=3,
+                 required=False
+               )
+             ])
+async def test(ctx, optone: str):
+  await ctx.send(content=f"I got you, you said {optone}!")
 
 client.run(os.environ['DISCORD_BOT_TOKEN'])
