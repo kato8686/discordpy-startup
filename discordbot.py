@@ -24,6 +24,27 @@ async def commandname(ctx: MenuContext):
         hidden=False
     )
 
+@slash.slash(name='invite',
+             description='BOTの招待リンクを作成します。',
+             options=[
+                 create_option(name='id',
+                               description='BOTのIDを指定してください。',
+                               option_type=3,
+                               required=True
+                              )
+             ])
+async def invite(ctx, id: str):
+    try:
+        user = client.get_user(int(id))
+        if user == None:
+            await ctx.send('invalid user.')
+        elif user.bot:
+            await ctx.send('https://discord.com/api/oauth2/authorize?client_id={}&permissions=0&redirect_uri=http%3A%2F%2F118.241.14.73%3A12358%2Fcallback&scope=bot'.format(id))
+        else:
+            await ctx.send('this user id is not bot id')
+    except:
+        await ctx.send('Error.')
+
 @slash.slash(name='romaji',
              description='ローマ字から日本語のひらがなに変換します',
              options=[
