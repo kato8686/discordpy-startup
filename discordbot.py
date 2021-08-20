@@ -17,8 +17,7 @@ async def on_ready():
     print("Ready!")
 
 @slash.context_menu(target=ContextMenuType.USER,
-                    name="avatar",
-                    guild_ids=guild_ids)
+                    name="avatar",)
 async def commandname(ctx: MenuContext):
     await ctx.send(
         content=f"this!\n{ctx.target_author.avatar_url}",
@@ -33,8 +32,7 @@ async def commandname(ctx: MenuContext):
                                option_type=3,
                                required=True
                               )
-             ],
-             guild_ids=guild_ids)
+             ])
 async def avatar(ctx, user_mention: str):
     await ctx.send(client.get_user(int(user_mention[2:-1])).avatar_url)
 
@@ -46,8 +44,7 @@ async def avatar(ctx, user_mention: str):
                                option_type=3,
                                required=True
                               )
-             ],
-             guild_ids=guild_ids)
+             ])
 async def romaji(ctx, genbun: str):
     genbunn = genbun
     genbunn = genbunn.replace('ka', 'か')
