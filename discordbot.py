@@ -28,7 +28,7 @@ async def commandname(ctx: MenuContext):
 @slash.slash(name='avatar',
              description='ユーザーのアイコンを表示します。',
              options=[
-                 create_option(name='user',
+                 create_option(name='user_mention',
                                description='ユーザーのメンションを指定してください。',
                                option_type=3,
                                required=True
